@@ -1,11 +1,11 @@
 {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "emmet.includeLanguages": {
-      "ejs": "html",
-    },
-    "[html]": {
-      "editor.defaultFormatter": "j69.ejs-beautify",
-    }
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "emmet.includeLanguages": {
+    "ejs": "html",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "j69.ejs-beautify",
   }
+}
   
