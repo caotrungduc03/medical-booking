@@ -23,6 +23,9 @@ const mongoURI =
 
 app.use(express.json());
 
+// Static files
+app.use('/static/', express.static(path.join(__dirname, 'public')));
+
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
