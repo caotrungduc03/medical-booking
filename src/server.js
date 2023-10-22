@@ -4,7 +4,8 @@ const path = require('path');
 require('dotenv').config();
 const router = require('./routers/v1');
 const errorMiddleware = require('./middlewares/error.middleware');
-const viewAdminRouter = require('./routers/v1/viewAdmin.route');
+const viewAdminRouter = require('./routers/viewAdmin.route');
+const viewClientRouter = require('./routers/viewClient.route');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use('/api/v1/', router);
 app.use('/admin', viewAdminRouter);
+app.use('/', viewClientRouter);
 
 // Handle error
 app.use(errorMiddleware);
