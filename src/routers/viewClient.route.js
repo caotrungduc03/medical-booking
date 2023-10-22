@@ -8,5 +8,6 @@ viewClientRouter.get('/login', viewClientController.login);
 viewClientRouter.get('/forgot-password', viewClientController.forgotPassword);
 viewClientRouter.get('/dashboard', viewClientController.dashboard);
 viewClientRouter.get('/form', viewClientController.form);
+viewClientRouter.get('/about-us', viewClientController.aboutUs);
 
 module.exports = viewClientRouter;
