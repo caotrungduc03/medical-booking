@@ -12,8 +12,13 @@ const forgotPassword = catchAsync(async (req, res) => {
   res.render('client/forgotPassword');
 });
 
+const dashboard = catchAsync(async (req, res) => {
+  res.render('client/dashboard');
+});
+
 module.exports = {
   register,
   login,
   forgotPassword,
+  dashboard,
 };
