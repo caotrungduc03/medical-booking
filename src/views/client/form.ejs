@@ -5,9 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    @import url('https://fonts.googleapis.com/css?family=Tangerine');
-
     * {
       margin: 0;
       padding: 0;
@@ -19,8 +18,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      background-position: center;
+      /* min-height: 100vh;
+            background-position: center; */
     }
 
     .wrapper {
@@ -35,58 +34,72 @@
     }
 
 
-    .h2 {
-      margin: 30px 0;
-      color: rgb(20, 20, 255);
-    }
-
-
     .wrapper .form-box-register {
       width: 100%;
       padding: 20px;
     }
 
-    .form-box-register {
-      font-size: 2em;
-      color: #162938;
+    .form-box-register h2 {
+      font-size: 50px;
+      color: rgb(20, 20, 255);
       text-align: center;
     }
 
-    .input-box {
+    .input-box-1 {
       display: flex;
       float: left;
       position: relative;
       width: 40%;
-      height: 50px;
-      margin: 20px 30px;
+      height: 30px;
+      margin: 30px 30px 0 30px;
+    }
+
+    .input-box-1 label {
+      position: absolute;
+      top: 40%;
+      left: 5px;
+      transform: translateY(-165%);
+      font-size: 20px;
+      color: #162938;
+      font-weight: 500;
+      pointer-events: none;
+    }
+
+    .input-box-1 input {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      font-size: 24px;
+      color: #162938;
+      font-weight: 600;
+      padding: 0 35px 0 5px;
     }
 
     .input-box-2 {
       display: flex;
       float: left;
       position: relative;
-      width: 100%;
-      height: 50px;
-      margin: 20px 30px;
+      width: 90%;
+      height: 30px;
+      margin: 30px 30px 30px 30px;
     }
 
-
-    .input-box label {
+    .input-box-2 label {
       position: absolute;
-      top: 50%;
+      top: 40%;
       left: 5px;
       transform: translateY(-165%);
-      font-size: 1em;
+      font-size: 20px;
       color: #162938;
       font-weight: 500;
       pointer-events: none;
     }
 
-    .input-box input {
+    .input-box-2 input {
       width: 100%;
       height: 100%;
       border-radius: 10px;
-      font-size: 1em;
+      font-size: 24px;
       color: #162938;
       font-weight: 600;
       padding: 0 35px 0 5px;
@@ -100,7 +113,7 @@
       outline: none;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 1em;
+      font-size: 30px;
       color: #fff;
     }
   </style>
@@ -109,50 +122,62 @@
 <body>
   <div class="wrapper">
     <div class="form-box-register">
-      <h2>Đặt khám</h2>
+      <h2>Đặt lịch khám</h2>
       <form action="#">
-        <div class="row">
-          <div class="input-box">
-            <input type="text" name="name" required>
-            <label>Họ tên(*)</label>
-          </div>
-          <div class="input-box">
-            <input type="text" name="sex" required>
-            <label>Giới tính(*)</label>
-          </div>
+        <div class="input-box-1">
+          <input type="text" name="name" required>
+          <label>Họ tên(*)</label>
         </div>
-        <div class="row">
-          <div class="input-box">
-            <input type="text" name="address" required>
-            <label>Địa chỉ(*)</label>
-          </div>
-          <div class="input-box">
-            <input type="text" name="date_of_birth" required>
-            <label>Ngày sinh(*)</label>
-          </div>
+        <div class="input-box-1">
+          <input type="text" name="sex" required>
+          <label>Giới tính(*)</label>
         </div>
-        <div class="row">
-          <div class="input-box">
-            <input type="text" name="phone_number">
-            <label>Email</label>
-          </div>
-          <div class="input-box">
-            <input type="datetime" name="email">
-            <label>Email(*)</label>
-          </div>
+        <div class="input-box-1">
+          <input type="text" name="address" required>
+          <label>Địa chỉ(*)</label>
         </div>
-        <div class="row2">
-          <div class="input-box-2">
-            <input type="text" name="email">
-            <label>Email</label>
-          </div>
+        <div class="input-box-1">
+          <input type="date" name="date-of-birth" required>
+          <label>Ngày sinh(*)</label>
         </div>
+        <div class="input-box-1">
+          <input type="text" name="phone_number" required>
+          <label>Điện thoại(*)</label>
+        </div>
+        <div class="input-box-1">
+          <input type="datetime" name="email">
+          <label>Email</label>
+        </div>
+        <div class="input-box-1">
+          <input type="text" name="id-number" required>
+          <label>Số CMND / CCCD(*)</label>
+        </div>
+        <div class="input-box-1">
+          <input type="date" name="date-range" required>
+          <label>Ngày cấp(*)</label>
+        </div>
+        <div class="input-box-1">
+          <input type="text" name="department" required>
+          <label>Khoa(*)</label>
+        </div>
+        <div class="input-box-1">
+          <input type="text" name="date" required>
+          <label>Giờ hẹn(*)</label>
+        </div>
+
+        <div class="input-box-2">
+          <input type="text" name="reason" required>
+          <label>Lý do khám(*)</label>
+        </div>
+        <div class="input-box-2">
+          <input type="text" name="note">
+          <label>Ghi chú</label>
+        </div>
+
         <button type="submit" class="btn">Đăng ký</button>
       </form>
     </div>
   </div>
-
-  <script src="https://kit.fontawesome.com/ba62b18a98.js" crossorigin="anonymous"></script>
 </body>
 
 </body>
