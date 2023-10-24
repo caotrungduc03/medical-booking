@@ -120,7 +120,7 @@
 }
 
 .footer_infor {
-  /* flex: 1; */
+  margin-left: 32px;
 }
 
 .footer_infor span {
