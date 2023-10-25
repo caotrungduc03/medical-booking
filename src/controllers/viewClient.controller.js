@@ -20,10 +20,15 @@ const aboutUs = catchAsync(async (req, res) => {
   res.render('client/aboutUs');
 });
 
+const home = catchAsync(async (req, res) => {
+  res.render('client/home');
+});
+
 module.exports = {
   register,
   login,
   forgotPassword,
   form,
   aboutUs,
+  home,
 };
