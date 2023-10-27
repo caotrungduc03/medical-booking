@@ -5,128 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Đặt lịch khám</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .wrapper {
-      position: relative;
-      width: 80%;
-      height: 700px;
-      border: 5px solid rgba(20, 20, 255, .5);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-
-    .wrapper .form-box-register {
-      width: 100%;
-      padding: 20px;
-    }
-
-    .form-box-register h2 {
-      font-size: 50px;
-      color: rgb(20, 20, 255);
-      text-align: center;
-    }
-
-    .form-box-register .row {
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      text-align: center;
-    }
-
-    .input-box-1 {
-      float: left;
-      position: relative;
-      width: 40%;
-      height: 30px;
-      margin: 30px 0 0 0;
-    }
-
-    .input-box-1 label {
-      position: absolute;
-      top: 40%;
-      left: 5px;
-      transform: translateY(-165%);
-      font-size: 20px;
-      color: #162938;
-      font-weight: 500;
-      pointer-events: none;
-    }
-
-    .input-box-1 input {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-      font-size: 24px;
-      color: #162938;
-      font-weight: 600;
-      padding: 0 35px 0 5px;
-    }
-
-    .input-box-2 {
-      width: 90%;
-      height: 30px;
-      float: left;
-      display: flex;
-      position: relative;
-      margin: 30px 0;
-
-    }
-
-    .input-box-2 label {
-      position: absolute;
-      top: 40%;
-      left: 5px;
-      transform: translateY(-165%);
-      font-size: 20px;
-      color: #162938;
-      font-weight: 500;
-      pointer-events: none;
-    }
-
-    .input-box-2 input {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-      font-size: 24px;
-      color: #162938;
-      font-weight: 600;
-      padding: 0 35px 0 5px;
-    }
-
-    .btn {
-      width: 30%;
-      height: 45px;
-      background: rgb(20, 20, 255);
-      border: none;
-      outline: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 30px;
-      color: #fff;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
+  <link rel="stylesheet" href="/static/client/css/partials.css">
+  <link rel="stylesheet" href="/static/client/css/home.css">
+  <link rel="stylesheet" href="/static/client/css/form.css">
 
 </head>
 
 <body>
 
   <%- include('../partials/client/header') %>
+
 
   <div class="wrapper">
     <div class="form-box-register">
@@ -202,7 +94,6 @@
     </div>
   </div>
 
-  <script src="https://kit.fontawesome.com/ba62b18a98.js" crossorigin="anonymous"></script>
 
 </body>
 
