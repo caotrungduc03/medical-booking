@@ -4,64 +4,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Đặt lịch khám</title>
+
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
   <link rel="stylesheet" href="/static/client/css/partials.css">
+  <link rel="stylesheet" href="/static/client/css/home.css">
   <link rel="stylesheet" href="/static/client/css/form.css">
+
 </head>
 
 <body>
+
   <%- include('../partials/client/header') %>
+
 
   <div class="wrapper">
     <div class="form-box-register">
-      <h2>Đặt khám</h2>
+      <h2>Đặt lịch khám</h2>
       <form action="#">
         <div class="row">
-          <div class="input-box">
+          <div class="input-box-1">
             <input type="text" name="name" required>
             <label>Họ tên(*)</label>
           </div>
-          <div class="input-box">
+          <div class="input-box-1">
             <input type="text" name="sex" required>
             <label>Giới tính(*)</label>
           </div>
         </div>
+
         <div class="row">
-          <div class="input-box">
+          <div class="input-box-1">
             <input type="text" name="address" required>
             <label>Địa chỉ(*)</label>
           </div>
-          <div class="input-box">
-            <input type="text" name="date_of_birth" required>
+          <div class="input-box-1">
+            <input type="date" name="date-of-birth" required>
             <label>Ngày sinh(*)</label>
           </div>
         </div>
         <div class="row">
-          <div class="input-box">
-            <input type="text" name="phone_number">
-            <label>Email</label>
+          <div class="input-box-1">
+            <input type="text" name="phone_number" required>
+            <label>Điện thoại(*)</label>
           </div>
-          <div class="input-box">
+          <div class="input-box-1">
             <input type="datetime" name="email">
-            <label>Email(*)</label>
-          </div>
-        </div>
-        <div class="row2">
-          <div class="input-box-2">
-            <input type="text" name="email">
             <label>Email</label>
           </div>
         </div>
-        <button type="submit" class="btn">Đăng ký</button>
+        <div class="row">
+          <div class="input-box-1">
+            <input type="text" name="id-number" required>
+            <label>Số CMND / CCCD(*)</label>
+          </div>
+          <div class="input-box-1">
+            <input type="date" name="date-range" required>
+            <label>Ngày cấp(*)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-box-1">
+            <input type="text" name="department" required>
+            <label>Khoa(*)</label>
+          </div>
+          <div class="input-box-1">
+            <input type="text" name="date" required>
+            <label>Giờ hẹn(*)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-box-2">
+            <input type="text" name="reason" required>
+            <label>Lý do khám(*)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-box-2">
+            <input type="text" name="note">
+            <label>Ghi chú</label>
+          </div>
+        </div>
+        <div class="row">
+          <button type="submit" class="btn">Đăng ký</button>
+        </div>
       </form>
     </div>
   </div>
 
-  <%- include('../partials/client/footer') %>
-
-
-  <script src="https://kit.fontawesome.com/ba62b18a98.js" crossorigin="anonymous"></script>
-</body>
 
 </body>
 
