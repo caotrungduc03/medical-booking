@@ -19,81 +19,83 @@
 
   <%- include('../partials/client/header') %>
 
+  <div class="container">
+    <div class="wrapper">
+      <div class="form-box-register">
+        <h2>Đặt lịch khám</h2>
+        <form action="#">
+          <div class="row">
+            <div class="input-box-1">
+              <input type="text" name="name" required>
+              <label>Họ tên(*)</label>
+            </div>
+            <div class="input-box-1">
+              <input type="text" name="sex" required>
+              <label>Giới tính(*)</label>
+            </div>
+          </div>
 
-  <div class="wrapper">
-    <div class="form-box-register">
-      <h2>Đặt lịch khám</h2>
-      <form action="#">
-        <div class="row">
-          <div class="input-box-1">
-            <input type="text" name="name" required>
-            <label>Họ tên(*)</label>
+          <div class="row">
+            <div class="input-box-1">
+              <input type="text" name="address" required>
+              <label>Địa chỉ(*)</label>
+            </div>
+            <div class="input-box-1">
+              <input type="date" name="date-of-birth" required>
+              <label>Ngày sinh(*)</label>
+            </div>
           </div>
-          <div class="input-box-1">
-            <input type="text" name="sex" required>
-            <label>Giới tính(*)</label>
+          <div class="row">
+            <div class="input-box-1">
+              <input type="text" name="phone_number" required>
+              <label>Điện thoại(*)</label>
+            </div>
+            <div class="input-box-1">
+              <input type="datetime" name="email">
+              <label>Email</label>
+            </div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="input-box-1">
-            <input type="text" name="address" required>
-            <label>Địa chỉ(*)</label>
+          <div class="row">
+            <div class="input-box-1">
+              <input type="text" name="id-number" required>
+              <label>Số CMND / CCCD(*)</label>
+            </div>
+            <div class="input-box-1">
+              <input type="date" name="date-range" required>
+              <label>Ngày cấp(*)</label>
+            </div>
           </div>
-          <div class="input-box-1">
-            <input type="date" name="date-of-birth" required>
-            <label>Ngày sinh(*)</label>
+          <div class="row">
+            <div class="input-box-1">
+              <input type="text" name="department" required>
+              <label>Khoa(*)</label>
+            </div>
+            <div class="input-box-1">
+              <input type="text" name="date" required>
+              <label>Giờ hẹn(*)</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-box-1">
-            <input type="text" name="phone_number" required>
-            <label>Điện thoại(*)</label>
+          <div class="row">
+            <div class="input-box-2">
+              <input type="text" name="reason" required>
+              <label>Lý do khám(*)</label>
+            </div>
           </div>
-          <div class="input-box-1">
-            <input type="datetime" name="email">
-            <label>Email</label>
+          <div class="row">
+            <div class="input-box-2">
+              <input type="text" name="note">
+              <label>Ghi chú</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-box-1">
-            <input type="text" name="id-number" required>
-            <label>Số CMND / CCCD(*)</label>
+          <div class="row">
+            <button type="submit" class="btn">Đăng ký</button>
           </div>
-          <div class="input-box-1">
-            <input type="date" name="date-range" required>
-            <label>Ngày cấp(*)</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-box-1">
-            <input type="text" name="department" required>
-            <label>Khoa(*)</label>
-          </div>
-          <div class="input-box-1">
-            <input type="text" name="date" required>
-            <label>Giờ hẹn(*)</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-box-2">
-            <input type="text" name="reason" required>
-            <label>Lý do khám(*)</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-box-2">
-            <input type="text" name="note">
-            <label>Ghi chú</label>
-          </div>
-        </div>
-        <div class="row">
-          <button type="submit" class="btn">Đăng ký</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 
+  <%- include('../partials/client/footer') %>
 
 </body>
 
