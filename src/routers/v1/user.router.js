@@ -5,8 +5,8 @@ const { userController } = require('../../controllers');
 
 const userRouter = express.Router();
 
-userRouter.use(authMiddleware);
-userRouter.use(roleMiddleware(['admin']));
+// userRouter.use(authMiddleware);
+// userRouter.use(roleMiddleware(['admin']));
 
 userRouter
   .route('/')
