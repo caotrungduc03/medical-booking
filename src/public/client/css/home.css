@@ -11,7 +11,189 @@ li {
   list-style: none;
 }
 
-.doctor-items {
+/* intro */
+.intro_hospital {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 600px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: url(https://cdn-pkh.longvan.net/prod-partner/877df3a6-926a-4146-8123-936a79e1eaa7-background_banner.webp);
+  text-align: center;
+}
+
+.intro_wrapper {
+  height: 100%;
+  display: flex; /* Sử dụng flexbox để căn giữa the nội dung bên trong */
+  flex-direction: column; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa the theo chiều dọc (nếu cần) */
+  justify-content: center;
+}
+
+.intro_tag {
+  font-family: Roboto, sans-serif !important;
+  color: var(--text-blue, #11a2f3);
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 8px;
+}
+
+.intro_title {
+  line-height: 42px;
+  font-size: 26px;
+}
+
+.intro_line {
+  font-family: Roboto, sans-serif !important;
+  color: #003553;
+  text-shadow: 0 4px 4px rgba(104, 125, 199, 0.2);
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.intro_register {
+  margin-bottom: 20px;
+}
+
+.intro_btn {
+  background-color: orange;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+}
+
+.intro_desc {
+  font-family: Roboto, sans-serif !important;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #003553;
+}
+
+/* intro sub desc */
+.intro_subdesc {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.subdesc_text_1 {
+  font-family: sans-serif;
+  color: #003553;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.subdesc_text_2 {
+  opacity: 0.8;
+  font-size: 20px;
+}
+
+/* intro */
+.intro_hospital {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 600px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-image: url(https://cdn-pkh.longvan.net/prod-partner/877df3a6-926a-4146-8123-936a79e1eaa7-background_banner.webp);
+  text-align: center;
+}
+
+.intro_wrapper {
+  height: 100%;
+  display: flex; /* Sử dụng flexbox để căn giữa the nội dung bên trong */
+  flex-direction: column; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa the theo chiều dọc (nếu cần) */
+  justify-content: center;
+}
+
+.intro_tag {
+  font-family: Roboto, sans-serif !important;
+  color: var(--text-blue, #11a2f3);
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 8px;
+}
+
+.intro_title {
+  line-height: 42px;
+  font-size: 26px;
+}
+
+.intro_line {
+  font-family: Roboto, sans-serif !important;
+  color: #003553;
+  text-shadow: 0 4px 4px rgba(104, 125, 199, 0.2);
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.intro_register {
+  margin-bottom: 20px;
+}
+
+.intro_btn {
+  background-color: orange;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+}
+
+.intro_desc {
+  font-family: Roboto, sans-serif !important;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #003553;
+}
+
+/* intro sub desc */
+.intro_subdesc {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.subdesc_text_1 {
+  font-family: sans-serif;
+  color: #003553;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.subdesc_text_2 {
+  opacity: 0.8;
+  font-size: 20px;
+}
+
+.doctor-items,
+.specialist-items {
+  display: flex;
   position: relative;
   margin: 0 1rem;
   padding-top: 2rem;
@@ -25,7 +207,8 @@ li {
   margin-right: 1rem;
 }
 
-.nav-doctor {
+.nav-doctor,
+.nav-specialist {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,7 +217,8 @@ li {
   gap: 1rem;
 }
 
-.doctor-info {
+.doctor-info,
+.specialist-info {
   user-select: none;
   scroll-snap-align: start;
   display: flex;
