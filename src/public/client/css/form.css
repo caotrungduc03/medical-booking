@@ -8,15 +8,18 @@
 }
 
 body {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
 }
 
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .wrapper {
   position: relative;
   width: 80%;
   height: 700px;
+  margin: 80px 0 40px 0;
   border: 5px solid rgba(20, 20, 255, 0.5);
   border-radius: 20px;
   display: flex;
