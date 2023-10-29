@@ -18,12 +18,12 @@ const register = catchAsync(async (req, res) => {
   ]);
 
   if (dataCreate.password !== confirmPassword) {
-    throw new ApiError('Password and confirm password do not match', 400);
+    throw new ApiError(400, 'Xác nhận mật khẩu không trùng khớp!');
   }
 
   const isUserExists = await User.exists({ email: dataCreate.email });
   if (isUserExists) {
-    throw new ApiError('User is already exists', 400);
+    throw new ApiError(400, 'Email đã tồn tại');
   }
 
   const role = await Role.findOne({ roleIndex: 'khach-hang' });
@@ -38,12 +38,14 @@ const login = catchAsync(async (req, res) => {
 
   const user = await User.findOne({ email }).select('+password');
   if (!user) {
-    throw new ApiError('Email or password is incorrect', 400);
+    throw new ApiError(400, 'Email hoặc mật khẩu nhập sai');
   }
-
+  // if (!user.isEmailVerified) {
+  //   throw new ApiError(403, 'Chưa xác thực email!', );
+  // }
   const isPassword = await bcrypt.compare(password, user.password);
   if (!isPassword) {
-    throw new ApiError('Email or password is incorrect', 400);
+    throw new ApiError(400, 'Email hoặc mật khẩu nhập sai');
   }
 
   const accessToken = jwt.sign(
@@ -56,9 +58,7 @@ const login = catchAsync(async (req, res) => {
     },
   );
 
-  res.status(200).json({
-    accessToken,
-  });
+  res.status(200).json(response(200, 'Thành công', accessToken));
 });
 
 module.exports = {

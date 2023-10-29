@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const router = require('./routers/v1');
 const errorMiddleware = require('./middlewares/error.middleware');
@@ -31,6 +32,10 @@ app.use('/static/', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Parse cookie
+app.use(cookieParser());
+
+// API v1
 app.use('/api/v1/', router);
 app.use('/admin', viewAdminRouter);
 app.use('/', viewClientRouter);

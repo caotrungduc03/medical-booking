@@ -9,7 +9,7 @@ const userSchema = new Schema(
   {
     avatar: {
       type: String,
-      default: 'avatar-default.jpg',
+      default: '/static/admin/images/avatar/anonymous.png',
     },
     firstName: {
       type: String,
@@ -76,10 +76,10 @@ const userSchema = new Schema(
       type: String,
       trim: true,
     },
-    isEmailVerified: {
-      type: Boolean,
-      default: false,
-    },
+    // isEmailVerified: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     isLocked: {
       type: Boolean,
       default: false,

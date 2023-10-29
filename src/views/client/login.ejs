@@ -4,7 +4,7 @@
 <head>
   <%- include('../partials/client/head') %>
 
-  <title>YouMed - Login </title>
+  <title>YouMed - Login</title>
 
 </head>
 
@@ -22,13 +22,13 @@
                 <p class="mb-0">Sử dụng tài khoản có sẵn để đăng nhập</p>
               </div>
               <div class="p-40 pt-32">
-                <form action="/" method="post">
+                <form id="loginForm">
                   <div class="form-group">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
                       </div>
-                      <input type="text" class="form-control pl-15 bg-transparent" placeholder="Email">
+                      <input type="text" id="email" class="form-control pl-15 bg-transparent" placeholder="Email" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -36,7 +36,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text  bg-transparent"><i class="ti-lock"></i></span>
                       </div>
-                      <input type="password" class="form-control pl-15 bg-transparent" placeholder="Mật khẩu">
+                      <input type="password" id="password" class="form-control pl-15 bg-transparent" placeholder="Mật khẩu" required>
+                      <span id="btn-eye" class="position-absolute" style="right: 10px; top: 6px; z-index: 9; color: #0052cc; display: none"><i class="fa fa-eye"></i></span>
                     </div>
                   </div>
                   <div class="row">
@@ -73,6 +74,7 @@
 
   <%- include('../partials/client/script') %>
 
+  <script src="/static/client/js/login_register.js"></script>
 </body>
 
 </html>

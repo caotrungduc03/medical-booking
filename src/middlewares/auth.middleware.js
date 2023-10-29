@@ -11,7 +11,7 @@ const extractTokenFromHeader = (req) => {
 const authMiddleware = catchAsync(async (req, res, next) => {
   const accessToken = extractTokenFromHeader(req);
   if (!accessToken) {
-    throw new ApiError('Unauthorized', 401);
+    throw new ApiError(401, 'Unauthorized');
   }
 
   const payload = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
@@ -20,7 +20,7 @@ const authMiddleware = catchAsync(async (req, res, next) => {
   const user = await User.findById(userId);
 
   if (!user) {
-    throw new ApiError('Unauthorized', 401);
+    throw new ApiError(401, 'Unauthorized');
   }
 
   req.user = user;

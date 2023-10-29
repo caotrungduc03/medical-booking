@@ -2,6 +2,7 @@ const { Role } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const response = require('../utils/response');
 const pick = require('../utils/pick');
+const ApiError = require('../utils/ApiError');
 
 const getRoles = catchAsync(async (req, res) => {
   const query = req.query;
@@ -53,7 +54,7 @@ const updateRoleById = catchAsync(async (req, res) => {
   const dataUpdate = pick(req.body, ['roleName', 'roleIndex', 'isLocked']);
   const updatedRole = await Role.findByIdAndUpdate(roleId, dataUpdate);
   if (!updatedRole) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Role not found');
+    throw new ApiError(404, 'Role not found');
   }
 
   res.status(200).json(response(200, 'Thành công'));
@@ -64,7 +65,7 @@ const deleteRoleById = catchAsync(async (req, res) => {
 
   const deletedRole = await Role.findByIdAndDelete(roleId);
   if (!deletedRole) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Role not found');
+    throw new ApiError(404, 'Role not found');
   }
 
   res.status(200).json(response(200, 'Thành công'));
