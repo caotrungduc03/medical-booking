@@ -1,26 +1,34 @@
 const updateTbl = () => {
-  $('#unlockRoleTbl').DataTable().ajax.reload();
-  $('#lockRoleTbl').DataTable().ajax.reload();
+  $('#unlockUserTbl').DataTable().ajax.reload();
+  $('#lockUserTbl').DataTable().ajax.reload();
 };
 
-const configUnlockRoleTbl = () => {
-  $('#unlockRoleTbl').dataTable({
+const configUnlockUserTbl = () => {
+  $('#unlockUserTbl').dataTable({
     autoWidth: false,
     processing: true,
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/roles?isLocked=false',
+      url: '/api/v1/users?isLocked=false',
       dataSrc: function (json) {
-        $('#unlockRoleNav').html(
+        $('#unlockUserNav').html(
           `<span>Không khoá (${json.data.length})</span>`,
         );
 
         json.data.forEach((element, index) => {
           element.index = index + 1;
+          element.fullName = element.lastName + ' ' + element.firstName;
+          element.contact = `
+            <div>
+              <p>Email: ${element.email}</p>
+              <p>SĐT: ${element.phone ?? 'Chưa cập nhật'}</p>
+            </div>
+          `;
+          element.address = element.address ?? 'Chưa cập nhật';
           element.method = `
           <div class="div_icon">
-            <a href="#" id="btn-update" title="Sửa" data-toggle="modal" data-target="#updateRoleModal" class="mr-1"><i class="ti-pencil-alt"></i></a>
+            <a href="#" id="btn-update" title="Sửa" data-toggle="modal" data-target="#" class="mr-1"><i class="ti-pencil-alt"></i></a>
             <span id="btn-lock" class="model_img mr-1" title="Khoá"><i class="ti-lock"></i></span>
           </div>
           `;
@@ -31,8 +39,10 @@ const configUnlockRoleTbl = () => {
     },
     columns: [
       { data: 'index', width: '10%' },
-      { data: 'roleName', width: '*' },
-      { data: 'roleIndex', width: '30%' },
+      { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '12%' },
+      { data: 'contact', width: '20%' },
+      { data: 'address', width: '20%' },
       { data: 'method', className: 'text-center', width: '15%' },
     ],
     columnDefs: [
@@ -65,19 +75,27 @@ const configUnlockRoleTbl = () => {
   });
 };
 
-const configLockRoleTbl = () => {
-  $('#lockRoleTbl').dataTable({
+const configLockUserTbl = () => {
+  $('#lockUserTbl').dataTable({
     autoWidth: false,
     processing: true,
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/roles?isLocked=true',
+      url: '/api/v1/users?isLocked=true',
       dataSrc: function (json) {
-        $('#lockRoleNav').html(`<span>Khoá (${json.data.length})</span>`);
+        $('#lockUserNav').html(`<span>Khoá (${json.data.length})</span>`);
 
         json.data.forEach((element, index) => {
           element.index = index + 1;
+          element.fullName = element.lastName + ' ' + element.firstName;
+          element.contact = `
+            <div>
+              <p>Email: ${element.email}</p>
+              <p>SĐT: ${element.phone ?? 'Chưa cập nhật'}</p>
+            </div>
+          `;
+          element.address = element.address ?? 'Chưa cập nhật';
           element.method = `
           <div class="div_icon">
             <span id="btn-unlock" class="model_img mr-1" title="Mở khoá"><i class="ti-unlock"></i></span>
@@ -91,8 +109,10 @@ const configLockRoleTbl = () => {
     },
     columns: [
       { data: 'index', width: '10%' },
-      { data: 'roleName', width: '*' },
-      { data: 'roleIndex', width: '30%' },
+      { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '12%' },
+      { data: 'contact', width: '20%' },
+      { data: 'address', width: '20%' },
       { data: 'method', className: 'text-center', width: '15%' },
     ],
     columnDefs: [
@@ -125,13 +145,13 @@ const configLockRoleTbl = () => {
   });
 };
 
-const handleEnterRoleName = (formId) => {
+const handleEnterUserName = (formId) => {
   $(`${formId} #roleName`).on('input', function () {
     $(`${formId} #roleIndex`).val(convertToSlug(this.value.trim()));
   });
 };
 
-const handleAddRole = (id) => {
+const handleAddUser = (id) => {
   const modalId = `#${id}Modal`;
   const formId = `#${id}Form`;
 
@@ -143,9 +163,23 @@ const handleAddRole = (id) => {
       data[field.name] = field.value;
     });
 
+    data.roles = [];
+    $('#roles input:checked:not(:disabled)').each((index, element) => {
+      data.roles.push($(element).val());
+    });
+
+    if (!data.email.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)) {
+      return notiError('Email không hợp lệ');
+    }
+    if (!data.password?.match(/\d/) || !data.password?.match(/[a-zA-Z]/)) {
+      return notiError(
+        'Mật khẩu cần tối thiểu 8 kí tự, gồm cả chữ cái và chữ số',
+      );
+    }
+
     try {
       let result = await (
-        await fetch(`/api/v1/roles`, {
+        await fetch(`/api/v1/users`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -172,14 +206,14 @@ const handleAddRole = (id) => {
 };
 
 const handleChangeLock = (tblId, btnId) => {
-  let role;
+  let user;
   $(`${tblId} tbody`).on('click', btnId, async function () {
-    role = $(tblId).DataTable().row($(this).parents('tr')).data();
+    user = $(tblId).DataTable().row($(this).parents('tr')).data();
 
     swal({
       title: 'Bạn có chắc chắn ?',
-      text: `Muốn ${btnId === '#btn-lock' ? 'KHOÁ' : 'MỞ KHOÁ'} quyền ${
-        role.roleName
+      text: `Muốn ${btnId === '#btn-lock' ? 'KHOÁ' : 'MỞ KHOÁ'} tài khoản ${
+        user.fullName
       }`,
       icon: 'warning',
       buttons: ['Hủy', btnId === '#btn-lock' ? 'Khoá' : 'Mở khoá'],
@@ -188,7 +222,7 @@ const handleChangeLock = (tblId, btnId) => {
       .then(async (willDelete) => {
         if (willDelete) {
           const result = await (
-            await fetch(`/api/v1/roles/${role.id}`, {
+            await fetch(`/api/v1/users/${user.id}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
@@ -217,15 +251,15 @@ const handleChangeLock = (tblId, btnId) => {
   });
 };
 
-const handleDeleteRole = () => {
-  let role;
+const handleDeleteUser = () => {
+  let user;
 
-  $(`#lockRoleTbl tbody`).on('click', '#btn-delete', async function () {
-    role = $('#lockRoleTbl').DataTable().row($(this).parents('tr')).data();
+  $(`#lockUserTbl tbody`).on('click', '#btn-delete', async function () {
+    user = $('#lockUserTbl').DataTable().row($(this).parents('tr')).data();
 
     swal({
       title: 'Bạn có chắc chắn ?',
-      text: `Muốn XOÁ quyền ${role.roleName}`,
+      text: `Muốn XOÁ tài khoản ${user.fullName}`,
       icon: 'warning',
       buttons: ['Hủy', 'Xóa'],
       dangerMode: true,
@@ -233,7 +267,7 @@ const handleDeleteRole = () => {
       .then(async (willDelete) => {
         if (willDelete) {
           const result = await (
-            await fetch(`/api/v1/roles/${role.id}`, {
+            await fetch(`/api/v1/users/${user.id}`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',
@@ -261,10 +295,10 @@ const handleDeleteRole = () => {
   });
 };
 
-const handleUpdateRole = () => {
-  const tblId = '#unlockRoleTbl';
-  const modalId = '#updateRoleModal';
-  const formId = '#updateRoleForm';
+const handleUpdateUser = () => {
+  const tblId = '#unlockUserTbl';
+  const modalId = '#updateUserModal';
+  const formId = '#updateUserForm';
   let role;
 
   $(`${tblId} tbody`).on('click', '#btn-update', function () {
@@ -313,13 +347,13 @@ const handleUpdateRole = () => {
 };
 
 $(document).ready(function () {
-  configUnlockRoleTbl();
-  configLockRoleTbl();
-  handleEnterRoleName('#addRoleForm');
-  handleEnterRoleName('#updateRoleForm');
-  handleAddRole('addRole');
-  handleChangeLock('#unlockRoleTbl', '#btn-lock');
-  handleChangeLock('#lockRoleTbl', '#btn-unlock');
-  handleDeleteRole();
-  handleUpdateRole();
+  configUnlockUserTbl();
+  configLockUserTbl();
+  handleEnterUserName('#addUserForm');
+  handleEnterUserName('#updateUserForm');
+  handleAddUser('addUser');
+  handleChangeLock('#unlockUserTbl', '#btn-lock');
+  handleChangeLock('#lockUserTbl', '#btn-unlock');
+  handleDeleteUser();
+  handleUpdateUser();
 });

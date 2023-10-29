@@ -1,12 +1,11 @@
 const express = require('express');
-const authMiddleware = require('../../middlewares/auth.middleware');
-const roleMiddleware = require('../../middlewares/role.middleware');
+const { authMiddleware, roleMiddleware } = require('../../middlewares');
 const { userController } = require('../../controllers');
 
 const userRouter = express.Router();
 
-// userRouter.use(authMiddleware);
-// userRouter.use(roleMiddleware(['admin']));
+userRouter.use(authMiddleware);
+userRouter.use(roleMiddleware(['admin']));
 
 userRouter
   .route('/')
@@ -15,8 +14,8 @@ userRouter
 
 userRouter
   .route('/:userId')
-  .get(userController.getUser)
-  .put(userController.updateUser)
-  .delete(userController.deleteUser);
+  .get(userController.getUserById)
+  .patch(userController.updateUserById)
+  .delete(userController.deleteUserById);
 
 module.exports = userRouter;

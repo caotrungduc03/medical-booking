@@ -1,7 +1,11 @@
 const express = require('express');
 const { roleController } = require('../../controllers');
+const { authMiddleware, roleMiddleware } = require('../../middlewares');
 
 const roleRouter = express.Router();
+
+roleRouter.use(authMiddleware);
+roleRouter.use(roleMiddleware(['admin']));
 
 roleRouter
   .route('/')

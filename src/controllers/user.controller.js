@@ -1,80 +1,108 @@
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
 const { User } = require('../models');
+const response = require('../utils/response');
+const pick = require('../utils/pick');
 
 const getUsers = catchAsync(async (req, res) => {
-  const users = await User.find();
-  res.status(200).json({
-    users,
-  });
-});
+  const query = req.query;
+  const filter = {};
 
-const getUser = catchAsync(async (req, res) => {
-  const userId = req.params.userId || req.user.id;
-  const user = await User.findById(userId);
-
-  if (!user) {
-    throw new ApiError('User not found', 404);
+  if (query.isLocked) {
+    filter.isLocked = query.isLocked;
   }
 
-  res.status(200).json({
-    user,
-  });
+  if (query.search) {
+    let searchValue = query.search['value'];
+    filter['$or'] = [
+      { firstName: { $regex: searchValue, $options: 'i' } },
+      { lastName: { $regex: searchValue, $options: 'i' } },
+    ];
+  }
+
+  let columnIndex;
+  let columnName;
+  let columnSortOrder;
+  if (query.order) {
+    columnIndex = query.order[0]['column']; // Column index
+    columnName = query.columns[columnIndex]['data']; // Column name
+    columnSortOrder = query.order[0]['dir']; // asc or desc
+  }
+  let order = `${columnName}:${columnSortOrder}`;
+  const options = pick(query, ['draw', 'order', 'length', 'start', 'populate']);
+  let page = parseInt(options.start) / parseInt(options.length);
+  options['limit'] = options['length'];
+  delete options['length'];
+  options['page'] = options['start'];
+  delete options['start'];
+  options['page'] = page + 1;
+  options['sortBy'] = options['order'];
+  delete options['order'];
+  options['sortBy'] = order;
+
+  const users = await User.paginate(filter, options);
+
+  res.status(200).json(response(200, 'Thành công', users));
 });
 
 const createUser = catchAsync(async (req, res) => {
-  const newUser = req.body;
-  const { name, email, password } = newUser;
+  await User.create(req.body);
 
-  if (!name || !email || !password) {
-    throw new ApiError('Name, email and password are required', 400);
-  }
-
-  const isUserExists = await User.exists({ email });
-  if (isUserExists) {
-    throw new ApiError('User is already exists', 400);
-  }
-
-  const user = await User.create(newUser);
-
-  user.password = undefined;
-
-  res.status(201).json({
-    user,
-  });
+  res.status(201).json(response(201, 'Thành công'));
 });
 
-const updateUser = catchAsync(async (req, res) => {
+const getUserById = catchAsync(async (req, res) => {
   const { userId } = req.params;
-  const userRaw = req.body;
-  const updatedUser = await User.findByIdAndUpdate(userId, userRaw, {
-    new: true,
-  });
 
+  const user = await User.findById(userId);
+
+  res.status(200).json(response(200, 'Thành công', user));
+});
+
+const updateUserById = catchAsync(async (req, res) => {
+  const { userId } = req.params;
+  const { confirmPassword, ...remainingData } = req.body;
+
+  const dataUpdate = pick(remainingData, [
+    'firstName',
+    'lastName',
+    'email',
+    'password',
+    'gender',
+    'cardId',
+    'birthday',
+    'phone',
+    'address',
+    'isLocked',
+  ]);
+
+  if (confirmPassword && dataCreate.password !== confirmPassword) {
+    throw new ApiError(400, 'Xác nhận mật khẩu không trùng khớp!');
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(userId, dataUpdate);
   if (!updatedUser) {
-    throw new ApiError('User not found', 404);
+    throw new ApiError(404, 'User not found');
   }
 
-  res.status(200).json({
-    updatedUser,
-  });
+  res.status(200).json(response(200, 'Thành công'));
 });
 
-const deleteUser = catchAsync(async (req, res) => {
+const deleteUserById = catchAsync(async (req, res) => {
   const { userId } = req.params;
-  const deletedUser = await User.findByIdAndDelete(userId);
 
+  const deletedUser = await User.findByIdAndDelete(userId);
   if (!deletedUser) {
-    throw new ApiError('User not found', 404);
+    throw new ApiError(404, 'User not found');
   }
 
-  res.status(204).json();
+  res.status(200).json(response(200, 'Thành công'));
 });
 
 module.exports = {
   getUsers,
-  getUser,
   createUser,
-  updateUser,
-  deleteUser,
+  getUserById,
+  updateUserById,
+  deleteUserById,
 };

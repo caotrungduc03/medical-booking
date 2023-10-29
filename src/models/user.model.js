@@ -21,12 +21,6 @@ const userSchema = new Schema(
       require: true,
       trim: true,
     },
-    email: {
-      type: String,
-      required: true,
-      trim: true,
-      unique: true,
-    },
     gender: {
       type: String,
       trim: true,
@@ -43,7 +37,6 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       trim: true,
-      lowercase: true,
       validate(value) {
         if (!value.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)) {
           throw new Error('Email không hợp lệ');

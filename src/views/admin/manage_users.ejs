@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/admin/head') %>
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+  <div class="wrapper">
+    <div id="loader"></div>
+
+    <%- include('../partials/admin/header') %>
+
+    <%- include('../partials/admin/sidebar') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto">
+              <h3>Quản lý tài khoản</h3>
+              <div class="d-inline-block align-items-center">
+                <nav>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/manage"><i class="mdi mdi-home-outline"></i></a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">Quản trị hệ thống</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quản lý tài khoản</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+            <div class="row align-items-end">
+              <div class="col-xl-12 col-12">
+                <div class="box-header with-border">
+                  <h4 class="box-title">Danh sách tài khoản</h4>
+                </div>
+                <div class="box-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item">
+                      <a id="unlockUserNav" class="nav-link active" data-toggle="tab" href="#unlockUserTab" role="tab">
+                        <span><i class="ti-unlock mr-1"></i>Không khóa</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a id="lockUserNav" class="nav-link" data-toggle="tab" href="#lockUserTab" role="tab">
+                        <span><i class="ti-lock mr-1"></i>Khóa</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="modal" data-target="#addUserModal">
+                        <span class="model_img"><i class="fa fa-plus mr-1"></i> Thêm mới</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane fade active show" id="unlockUserTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="unlockUserTbl" class="table table-striped dataTable" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Họ tên</th>
+                              <th>CMND/CCCD</th>
+                              <th>Liên lạc</th>
+                              <th>Địa chỉ</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="lockUserTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="lockUserTbl" class="table table-striped dataTable p-0" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Họ tên</th>
+                              <th>CMND/CCCD</th>
+                              <th>Liên lạc</th>
+                              <th>Địa chỉ</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../partials/admin/footer') %>
+
+  </div>
+
+  <div id="addUserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="max-width: 60%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm tài khoản mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="addUserForm">
+          <div class="modal-body d-flex">
+            <div class="col-8">
+              <div class="form-group row">
+                <div class="col-4">
+                  <label for="lastName">Họ, tên đệm <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-text"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="lastName" name="lastName" required />
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label for="firstName">Tên <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-text"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="firstName" name="firstName" required />
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label for="gender">Giới tính</label>
+                  <div class="input-group" style="height: 34px">
+                    <select class="form-control select2input" id="gender" name="gender" style="background-color: white; width: 100%">
+                      <option value="Nam">Nam</option>
+                      <option value="Nữ">Nữ</option>
+                      <option value="Khác" selected>Khác</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-6">
+                  <label for="cardId">CMND/CCCD <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-id-badge"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="cardId" name="cardId" required />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="birthday">Ngày sinh</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                    </div>
+                    <input type="date" class="form-control" id="birthday" name="birthday" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-6">
+                  <label for="email">Email <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-email"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="email" name="email" required />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="phone">Số điện thoại</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="phone" name="phone" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-6">
+                  <label for="password">Mật khẩu <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" id="password" name="password" required />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="confirmPassword">Xác nhận mật khẩu <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="address" name="address" />
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <h4>Nhóm quyền</h4>
+              <ul id="roles" style="list-style: none;">
+                <li>
+                  <input type="checkbox" checked disabled />
+                  <label>Khách hàng</label>
+                </li>
+                <% roles.forEach((role) => { %>
+                <% if (role.roleIndex !== 'khach-hang') { %>
+                <li>
+                  <input type="checkbox" id="<%= role._id %>" value="<%= role._id %>" />
+                  <label for="<%= role._id %>"><%= role.roleName %></label>
+                </li>
+                <% } %>
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> THÊM</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <div id="updateUserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm quyền mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="updateUserForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Tên quyền</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="roleName" name="roleName" class="form-control" placeholder="Admin" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Index</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="roleIndex" name="roleIndex" class="form-control" placeholder="admin" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> CẬP NHẬT</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- Page Content overlay -->
+
+  <%- include('../partials/admin/script') %>
+
+  <script src="/static/admin/js/script/manage_users.js"></script>
+</body>
+
+</html>
