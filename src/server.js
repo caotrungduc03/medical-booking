@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const router = require('./routers/v1');
-const errorMiddleware = require('./middlewares/error.middleware');
+const { errorMiddleware } = require('./middlewares');
 const viewAdminRouter = require('./routers/viewAdmin.route');
 const viewClientRouter = require('./routers/viewClient.route');
 
@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Parse cookie
-app.use(cookieParser());
+app.use(cookieParser('medical-booking'));
 
 // API v1
 app.use('/api/v1/', router);

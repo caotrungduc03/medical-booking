@@ -58,6 +58,8 @@ const login = catchAsync(async (req, res) => {
     },
   );
 
+  res.cookie('tokens', accessToken, { signed: true, httpOnly: true });
+
   res.status(200).json(response(200, 'Thành công', accessToken));
 });
 

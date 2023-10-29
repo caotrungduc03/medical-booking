@@ -73,10 +73,8 @@ const handleLogin = () => {
       ).json();
 
       if (result.code === 200) {
-        const accessToken = result.data;
-        window.localStorage.setItem('access-token-mb', accessToken);
         notiSuccess('Đăng nhập thành công!');
-        setTimeout(() => (window.location.href = '/admin'), 2000);
+        setTimeout(() => (window.location.href = '/admin'), 1000);
       } else {
         notiError(result.message);
       }

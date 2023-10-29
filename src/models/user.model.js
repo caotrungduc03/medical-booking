@@ -114,7 +114,7 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.virtual('fullName').get(function () {
-  return this.firstName + ' ' + this.lastName;
+  return this.lastName + ' ' + this.firstName;
 });
 
 const User = mongoose.model('User', userSchema);

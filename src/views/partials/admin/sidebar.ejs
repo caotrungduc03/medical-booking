@@ -2,11 +2,11 @@
   <section class="user-profile px-30 py-0">
     <div class="d-flex align-items-center">
       <div class="image">
-        <img src="/static/admin/images/avatar/anonymous.png" alt="Not Found" onerror="this.src='/static/admin/images/avatar/anonymous.png'" class="avatar avatar-lg">
+        <img src="<%= user.avatar %>" alt="Not Found" onerror="this.src='/static/admin/images/avatar/anonymous.png'" class="avatar avatar-lg">
       </div>
       <div class="info ml-10">
         <p class="mb-0">Xin chào,</p>
-        <h5 class="mb-0">Cao Trung Đức</h5>
+        <h5 class="mb-0"><%= user.fullName %></h5>
       </div>
     </div>
   </section>
