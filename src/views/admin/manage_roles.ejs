@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/admin/head') %>
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+  <div class="wrapper">
+    <div id="loader"></div>
+
+    <%- include('../partials/admin/header') %>
+
+    <%- include('../partials/admin/sidebar') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto">
+              <h3>Quản lý quyền</h3>
+              <div class="d-inline-block align-items-center">
+                <nav>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/manage"><i class="mdi mdi-home-outline"></i></a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">Quản trị hệ thống</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quản lý quyền</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+            <div class="row align-items-end">
+              <div class="col-xl-12 col-12">
+                <div class="box-header with-border">
+                  <h4 class="box-title">Danh sách quyền</h4>
+                </div>
+                <div class="box-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item">
+                      <a id="unlockRoleNav" class="nav-link active" data-toggle="tab" href="#unlockRoleTab" role="tab">
+                        <span><i class="ti-unlock mr-1"></i>Không khóa</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a id="lockRoleNav" class="nav-link" data-toggle="tab" href="#lockRoleTab" role="tab">
+                        <span><i class="ti-lock mr-1"></i>Khóa</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="modal" data-target="#addRoleModal">
+                        <span class="model_img"><i class="fa fa-plus mr-1"></i> Thêm mới</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane fade active show" id="unlockRoleTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="unlockRoleTbl" class="table table-striped dataTable" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Tên quyền</th>
+                              <th>Index</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="lockRoleTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="lockRoleTbl" class="table table-striped dataTable p-0" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Tên quyền</th>
+                              <th>Index</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../partials/admin/footer') %>
+
+  </div>
+
+  <div id="addRoleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm quyền mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="addRoleForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Tên quyền</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="roleName" name="roleName" class="form-control" placeholder="Admin" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Index</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="roleIndex" name="roleIndex" class="form-control" placeholder="admin" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> THÊM</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <div id="updateRoleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm quyền mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="updateRoleForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Tên quyền</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="roleName" name="roleName" class="form-control" placeholder="Admin" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Index</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="roleIndex" name="roleIndex" class="form-control" placeholder="admin" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> CẬP NHẬT</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- Page Content overlay -->
+
+  <%- include('../partials/admin/script') %>
+
+  <script src="/static/admin/js/script/manage_roles.js"></script>
+</body>
+
+</html>

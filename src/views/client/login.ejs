@@ -4,7 +4,7 @@
 <head>
   <%- include('../partials/client/head') %>
 
-  <title>YouMed - Login </title>
+  <title>YouMed - Login</title>
 
 </head>
 
@@ -18,17 +18,17 @@
           <div class="col-lg-5 col-md-5 col-12">
             <div class="bg-white rounded30 shadow-lg">
               <div class="content-top-agile p-20 pb-0">
-                <h2 class="text-primary">Let's Get Started</h2>
-                <p class="mb-0">Sign in to continue to WebkitX.</p>
+                <h2 class="text-primary">Đăng nhập</h2>
+                <p class="mb-0">Sử dụng tài khoản có sẵn để đăng nhập</p>
               </div>
-              <div class="p-40">
-                <form action="/" method="post">
+              <div class="p-40 pt-32">
+                <form id="loginForm">
                   <div class="form-group">
                     <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
                       </div>
-                      <input type="text" class="form-control pl-15 bg-transparent" placeholder="Username">
+                      <input type="text" id="email" class="form-control pl-15 bg-transparent" placeholder="Email" required>
                     </div>
                   </div>
                   <div class="form-group">
@@ -36,31 +36,32 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text  bg-transparent"><i class="ti-lock"></i></span>
                       </div>
-                      <input type="password" class="form-control pl-15 bg-transparent" placeholder="Password">
+                      <input type="password" id="password" class="form-control pl-15 bg-transparent" placeholder="Mật khẩu" required>
+                      <span id="btn-eye" class="position-absolute" style="right: 10px; top: 6px; z-index: 9; color: #0052cc; display: none"><i class="fa fa-eye"></i></span>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-6">
                       <div class="checkbox">
                         <input type="checkbox" id="basic_checkbox_1">
-                        <label for="basic_checkbox_1">Remember Me</label>
+                        <label for="basic_checkbox_1">Lưu tên đăng nhập</label>
                       </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-6">
                       <div class="fog-pwd text-right">
-                        <a href="/forgot-password" class="hover-warning"><i class="ion ion-locked"></i> Forgot pwd?</a><br>
+                        <a href="/forgot-password" class="hover-warning"><i class="ion ion-locked"></i> Quên mật khẩu?</a><br>
                       </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-12 text-center">
-                      <button type="submit" class="btn btn-danger mt-10">SIGN IN</button>
+                      <button type="submit" class="btn btn-danger mt-10">ĐĂNG NHẬP</button>
                     </div>
                     <!-- /.col -->
                   </div>
                 </form>
                 <div class="text-center">
-                  <p class="mt-15 mb-0">Don't have an account? <a href="/register" class="text-warning ml-5">Sign Up</a></p>
+                  <p class="mt-15 mb-0">Chưa có tài khoản? <a href="/register" class="text-warning ml-5">Đăng ký</a></p>
                 </div>
               </div>
             </div>
@@ -73,6 +74,7 @@
 
   <%- include('../partials/client/script') %>
 
+  <script src="/static/client/js/login_register.js"></script>
 </body>
 
 </html>

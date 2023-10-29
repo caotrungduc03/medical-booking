@@ -25,7 +25,7 @@
                   <div class="flex-grow-1 p-30 flex-grow-1 bg-img dask-bg bg-none-md" style="background-position: right bottom; background-size: auto 100%; background-image: url(/static/admin/images/svg-icon/color-svg/custom-1.svg)">
                     <div class="row">
                       <div class="col-12">
-                        <h2>Chào mừng trở lại, <strong>Cao Trung Đức!</strong></h2>
+                        <h2>Chào mừng trở lại, <strong><%= user.fullName %></strong>!</h2>
                         <p class="text-dark my-10 font-size-16">
                           Hệ thống đặt lịch khám bệnh hàng đầu tại Việt Nam
                         </p>
@@ -62,6 +62,14 @@
   <!-- Page Content overlay -->
 
   <%- include('../partials/admin/script') %>
+
+  <script>
+    $('td.fc-event-container').each(function(index, element) {
+      if (index > 0) {
+        $(element).hide();
+      }
+    });
+  </script>
 
 </body>
 

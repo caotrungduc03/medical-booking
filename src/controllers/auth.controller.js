@@ -2,28 +2,35 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
-const { User } = require('../models');
+const { User, Role } = require('../models');
+const pick = require('../utils/pick');
+const response = require('../utils/response');
 
 const register = catchAsync(async (req, res) => {
-  const { avatar, name, email } = req.body;
-  let { password } = req.body;
+  const { confirmPassword, ...remainingData } = req.body;
 
-  if (!name || !email || !password) {
-    throw new ApiError('Name, email and password are required', 400);
+  let dataCreate = pick(remainingData, [
+    'firstName',
+    'lastName',
+    'cardId',
+    'email',
+    'password',
+  ]);
+
+  if (dataCreate.password !== confirmPassword) {
+    throw new ApiError(400, 'Xác nhận mật khẩu không trùng khớp!');
   }
 
-  const isUserExists = await User.exists({ email });
+  const isUserExists = await User.exists({ email: dataCreate.email });
   if (isUserExists) {
-    throw new ApiError('User is already exists', 400);
+    throw new ApiError(400, 'Email đã tồn tại');
   }
 
-  const user = await User.create({ avatar, name, email, password });
+  const role = await Role.findOne({ roleIndex: 'khach-hang' });
 
-  user.password = undefined;
+  await User.create({ ...dataCreate, roles: [role._id] });
 
-  res.status(201).json({
-    user,
-  });
+  res.status(201).json(response(201, 'Thành công'));
 });
 
 const login = catchAsync(async (req, res) => {
@@ -31,12 +38,14 @@ const login = catchAsync(async (req, res) => {
 
   const user = await User.findOne({ email }).select('+password');
   if (!user) {
-    throw new ApiError('Email or password is incorrect', 400);
+    throw new ApiError(400, 'Email hoặc mật khẩu nhập sai');
   }
-
+  // if (!user.isEmailVerified) {
+  //   throw new ApiError(403, 'Chưa xác thực email!', );
+  // }
   const isPassword = await bcrypt.compare(password, user.password);
   if (!isPassword) {
-    throw new ApiError('Email or password is incorrect', 400);
+    throw new ApiError(400, 'Email hoặc mật khẩu nhập sai');
   }
 
   const accessToken = jwt.sign(
@@ -49,9 +58,9 @@ const login = catchAsync(async (req, res) => {
     },
   );
 
-  res.status(200).json({
-    accessToken,
-  });
+  res.cookie('tokens', accessToken, { signed: true, httpOnly: true });
+
+  res.status(200).json(response(200, 'Thành công', accessToken));
 });
 
 module.exports = {
