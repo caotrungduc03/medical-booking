@@ -2,28 +2,35 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const catchAsync = require('../utils/catchAsync');
 const ApiError = require('../utils/ApiError');
-const { User } = require('../models');
+const { User, Role } = require('../models');
+const pick = require('../utils/pick');
+const response = require('../utils/response');
 
 const register = catchAsync(async (req, res) => {
-  const { avatar, name, email } = req.body;
-  let { password } = req.body;
+  const { confirmPassword, ...remainingData } = req.body;
 
-  if (!name || !email || !password) {
-    throw new ApiError('Name, email and password are required', 400);
+  let dataCreate = pick(remainingData, [
+    'firstName',
+    'lastName',
+    'cardId',
+    'email',
+    'password',
+  ]);
+
+  if (dataCreate.password !== confirmPassword) {
+    throw new ApiError('Password and confirm password do not match', 400);
   }
 
-  const isUserExists = await User.exists({ email });
+  const isUserExists = await User.exists({ email: dataCreate.email });
   if (isUserExists) {
     throw new ApiError('User is already exists', 400);
   }
 
-  const user = await User.create({ avatar, name, email, password });
+  const role = await Role.findOne({ roleIndex: 'khach-hang' });
 
-  user.password = undefined;
+  await User.create({ ...dataCreate, roles: [role._id] });
 
-  res.status(201).json({
-    user,
-  });
+  res.status(201).json(response(201, 'Thành công'));
 });
 
 const login = catchAsync(async (req, res) => {

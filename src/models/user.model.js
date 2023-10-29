@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const toJSON = require('../utils/toJSON');
+const paginate = require('../utils/paginate');
 
 const Schema = mongoose.Schema;
 
@@ -9,7 +11,12 @@ const userSchema = new Schema(
       type: String,
       default: 'avatar-default.jpg',
     },
-    name: {
+    firstName: {
+      type: String,
+      require: true,
+      trim: true,
+    },
+    lastName: {
       type: String,
       require: true,
       trim: true,
@@ -18,23 +25,79 @@ const userSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      unique: true,
+    },
+    gender: {
+      type: String,
+      trim: true,
+      enum: ['Nam', 'Nữ', 'Khác'],
+      default: 'Khác',
+    },
+    cardId: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      validate(value) {
+        if (!value.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)) {
+          throw new Error('Email không hợp lệ');
+        }
+      },
     },
     password: {
       type: String,
       required: true,
       trim: true,
+      minlength: 8,
+      validate(value) {
+        if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+          throw new Error(
+            'Mật khẩu cần tối thiểu 8 kí tự, gồm cả chữ cái và chữ số',
+          );
+        }
+      },
       select: false,
     },
-    role: {
-      type: String,
-      enum: ['user', 'admin'],
-      default: 'user',
+    birthday: {
+      type: Date,
+      trim: true,
     },
+    phone: {
+      type: String,
+      trim: true,
+    },
+    address: {
+      type: String,
+      trim: true,
+    },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    isLocked: {
+      type: Boolean,
+      default: false,
+    },
+    roles: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Role',
+      },
+    ],
   },
   {
     timestamps: true,
   },
 );
+
+userSchema.plugin(toJSON);
+userSchema.plugin(paginate);
 
 userSchema.pre('save', async function (next) {
   const user = this;
@@ -48,6 +111,10 @@ userSchema.pre('save', async function (next) {
   } catch (error) {
     next(error);
   }
+});
+
+userSchema.virtual('fullName').get(function () {
+  return this.firstName + ' ' + this.lastName;
 });
 
 const User = mongoose.model('User', userSchema);
