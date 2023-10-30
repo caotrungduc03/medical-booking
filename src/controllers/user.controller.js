@@ -66,7 +66,6 @@ const updateUserById = catchAsync(async (req, res) => {
   const dataUpdate = pick(remainingData, [
     'firstName',
     'lastName',
-    'email',
     'password',
     'gender',
     'cardId',
@@ -74,9 +73,10 @@ const updateUserById = catchAsync(async (req, res) => {
     'phone',
     'address',
     'isLocked',
+    'roles',
   ]);
 
-  if (confirmPassword && dataCreate.password !== confirmPassword) {
+  if (confirmPassword && dataUpdate?.password !== confirmPassword) {
     throw new ApiError(400, 'Xác nhận mật khẩu không trùng khớp!');
   }
 

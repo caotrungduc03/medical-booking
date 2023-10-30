@@ -131,7 +131,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ti-text"></i></span>
                     </div>
-                    <input type="text" class="form-control" id="lastName" name="lastName" required />
+                    <input type="text" class="form-control" name="lastName" required />
                   </div>
                 </div>
                 <div class="col-4">
@@ -140,13 +140,13 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ti-text"></i></span>
                     </div>
-                    <input type="text" class="form-control" id="firstName" name="firstName" required />
+                    <input type="text" class="form-control" name="firstName" required />
                   </div>
                 </div>
                 <div class="col-4">
                   <label for="gender">Giới tính</label>
                   <div class="input-group" style="height: 34px">
-                    <select class="form-control select2input" id="gender" name="gender" style="background-color: white; width: 100%">
+                    <select class="form-control select2input" name="gender" style="background-color: white; width: 100%">
                       <option value="Nam">Nam</option>
                       <option value="Nữ">Nữ</option>
                       <option value="Khác" selected>Khác</option>
@@ -161,7 +161,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ti-id-badge"></i></span>
                     </div>
-                    <input type="text" class="form-control" id="cardId" name="cardId" required />
+                    <input type="text" class="form-control" name="cardId" required />
                   </div>
                 </div>
                 <div class="col-6">
@@ -170,7 +170,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                     </div>
-                    <input type="date" class="form-control" id="birthday" name="birthday" />
+                    <input type="date" class="form-control" name="birthday" />
                   </div>
                 </div>
               </div>
@@ -181,7 +181,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ti-email"></i></span>
                     </div>
-                    <input type="text" class="form-control" id="email" name="email" required />
+                    <input type="text" class="form-control" name="email" required />
                   </div>
                 </div>
                 <div class="col-6">
@@ -190,7 +190,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-phone"></i></span>
                     </div>
-                    <input type="text" class="form-control" id="phone" name="phone" />
+                    <input type="text" class="form-control" name="phone" />
                   </div>
                 </div>
               </div>
@@ -201,7 +201,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ti-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" id="password" name="password" required />
+                    <input type="password" class="form-control" name="password" required />
                   </div>
                 </div>
                 <div class="col-6">
@@ -210,7 +210,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ti-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required />
+                    <input type="password" class="form-control" name="confirmPassword" required />
                   </div>
                 </div>
               </div>
@@ -220,7 +220,146 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ti-text"></i></span>
                   </div>
-                  <input type="text" class="form-control" id="address" name="address" />
+                  <input type="text" class="form-control" name="address" />
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <h4>Nhóm quyền</h4>
+              <ul id="roles" style="list-style: none;">
+                <li>
+                  <input type="checkbox" checked disabled />
+                  <label>Khách hàng</label>
+                </li>
+                <% roles.forEach((role) => { %>
+                <% if (role.roleIndex !== 'khach-hang') { %>
+                <li>
+                  <input type="checkbox" id="<%= 'update-' + role._id %>" value="<%= role._id %>" />
+                  <label for="<%= 'update-' + role._id %>"><%= role.roleName %></label>
+                </li>
+                <% } %>
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> THÊM</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <div id="updateUserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="max-width: 60%;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Cập nhật tài khoản</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="updateUserForm">
+          <div class="modal-body d-flex">
+            <div class="col-8">
+              <div class="form-group row">
+                <div class="col-4">
+                  <label for="lastName">Họ, tên đệm <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-text"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="lastName" required />
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label for="firstName">Tên <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-text"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="firstName" required />
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label for="gender">Giới tính</label>
+                  <div class="input-group" style="height: 34px">
+                    <select class="form-control select2input" name="gender" style="background-color: white; width: 100%">
+                      <option value="Nam">Nam</option>
+                      <option value="Nữ">Nữ</option>
+                      <option value="Khác" selected>Khác</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-6">
+                  <label for="cardId">CMND/CCCD <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-id-badge"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="cardId" required />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="birthday">Ngày sinh</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                    </div>
+                    <input type="date" class="form-control" name="birthday" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-6">
+                  <label for="email">Email</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-email"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="email" readonly />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="phone">Số điện thoại</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                    </div>
+                    <input type="text" class="form-control" name="phone" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-6">
+                  <label for="password">Mật khẩu</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" name="password" />
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label for="confirmPassword">Xác nhận mật khẩu</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ti-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" name="confirmPassword" />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="address" />
                 </div>
               </div>
             </div>
@@ -240,45 +379,6 @@
                 <% } %>
                 <% }) %>
               </ul>
-            </div>
-          </div>
-          <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
-            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> THÊM</button>
-          </div>
-        </form>
-      </div>
-      <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-  </div>
-
-  <div id="updateUserModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="myLargeModalLabel">Thêm quyền mới</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        </div>
-        <form id="updateUserForm">
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Tên quyền</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ti-text"></i></span>
-                </div>
-                <input type="text" id="roleName" name="roleName" class="form-control" placeholder="Admin" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Index</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ti-text"></i></span>
-                </div>
-                <input type="text" id="roleIndex" name="roleIndex" class="form-control" placeholder="admin" readonly />
-              </div>
             </div>
           </div>
           <div class="modal-footer d-flex justify-content-between">

@@ -28,7 +28,7 @@ const configUnlockUserTbl = () => {
           element.address = element.address ?? 'Chưa cập nhật';
           element.method = `
           <div class="div_icon">
-            <a href="#" id="btn-update" title="Sửa" data-toggle="modal" data-target="#" class="mr-1"><i class="ti-pencil-alt"></i></a>
+            <a href="#" id="btn-update" title="Sửa" data-toggle="modal" data-target="#updateUserModal" class="mr-1"><i class="ti-pencil-alt"></i></a>
             <span id="btn-lock" class="model_img mr-1" title="Khoá"><i class="ti-lock"></i></span>
           </div>
           `;
@@ -164,9 +164,11 @@ const handleAddUser = (id) => {
     });
 
     data.roles = [];
-    $('#roles input:checked:not(:disabled)').each((index, element) => {
-      data.roles.push($(element).val());
-    });
+    $(`${formId} #roles input:checked:not(:disabled)`).each(
+      (index, element) => {
+        data.roles.push($(element).val());
+      },
+    );
 
     if (!data.email.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)) {
       return notiError('Email không hợp lệ');
@@ -299,14 +301,27 @@ const handleUpdateUser = () => {
   const tblId = '#unlockUserTbl';
   const modalId = '#updateUserModal';
   const formId = '#updateUserForm';
-  let role;
+  let user;
 
   $(`${tblId} tbody`).on('click', '#btn-update', function () {
-    role = $(tblId).DataTable().row($(this).parents('tr')).data();
+    user = $(tblId).DataTable().row($(this).parents('tr')).data();
 
     const formFields = $(formId).serializeArray();
     formFields.forEach((field) => {
-      $(`${formId} [name='${field.name}']`).val(role[field.name]).change();
+      $(`${formId} [name='${field.name}']`)
+        .val(
+          field.name === 'birthday'
+            ? moment(user['birthday']).format('YYYY-MM-DD')
+            : user[field.name],
+        )
+        .change();
+    });
+
+    $(`${formId} #roles input:not(:disabled)`).each((index, element) => {
+      const e = $(element);
+      if (user.roles.includes(e.val())) {
+        e.prop('checked', true);
+      }
     });
   });
 
@@ -318,9 +333,23 @@ const handleUpdateUser = () => {
       data[field.name] = field.value;
     });
 
+    data.roles = [];
+    $(`${formId} #roles input:checked:not(:disabled)`).each(function () {
+      data.roles.push($(this).val());
+    });
+
+    if (
+      data.password &&
+      (!data.password?.match(/\d/) || !data.password?.match(/[a-zA-Z]/))
+    ) {
+      return notiError(
+        'Mật khẩu cần tối thiểu 8 kí tự, gồm cả chữ cái và chữ số',
+      );
+    }
+
     try {
       let result = await (
-        await fetch(`/api/v1/roles/${role.id}`, {
+        await fetch(`/api/v1/users/${user.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
