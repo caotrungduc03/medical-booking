@@ -1,4 +1,4 @@
-{"_id":{"$oid":"653cc7dfe197dd1348c9f2f3"},"roleName":"Admin","roleIndex":"admin","isLocked":false,"createdAt":{"$date":"2023-10-28T08:35:43.452Z"},"updatedAt":{"$date":"2023-10-28T08:35:43.452Z"},"__v":0}
 {"_id":{"$oid":"653d2419cdf191ad48e803cf"},"roleName":"Nhân viên kế toán","roleIndex":"nhan-vien-ke-toan","isLocked":true,"createdAt":{"$date":"2023-10-28T15:09:13.307Z"},"updatedAt":{"$date":"2023-10-28T15:09:16.252Z"},"__v":0}
-{"_id":{"$oid":"653cc82cc12dece1afe6dd29"},"roleName":"Khách hàng","roleIndex":"khach-hang","isLocked":false,"createdAt":{"$date":"2023-10-28T08:37:00.991Z"},"updatedAt":{"$date":"2023-10-28T14:42:33.974Z"},"__v":0}
 {"_id":{"$oid":"653d2409cdf191ad48e803c9"},"roleName":"Nhân viên phê duyệt","roleIndex":"nhan-vien-phe-duyet","isLocked":false,"createdAt":{"$date":"2023-10-28T15:08:57.166Z"},"updatedAt":{"$date":"2023-10-28T15:08:57.166Z"},"__v":0}
+{"_id":{"$oid":"653cc7dfe197dd1348c9f2f3"},"roleName":"Admin","roleIndex":"admin","isLocked":false,"createdAt":{"$date":"2023-10-28T08:35:43.452Z"},"updatedAt":{"$date":"2023-10-28T08:35:43.452Z"},"__v":0}
+{"_id":{"$oid":"653cc82cc12dece1afe6dd29"},"roleName":"Khách hàng","roleIndex":"khach-hang","isLocked":false,"createdAt":{"$date":"2023-10-28T08:37:00.991Z"},"updatedAt":{"$date":"2023-10-28T14:42:33.974Z"},"__v":0}
