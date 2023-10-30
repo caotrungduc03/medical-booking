@@ -14,8 +14,39 @@
   <section class="sidebar">
     <!-- sidebar menu-->
     <ul class="sidebar-menu" data-widget="tree">
-      <li><a href="#"><i class="icon-Write"><span class="path1"></span><span class="path2"></span></i>Phê duyệt đơn khám bệnh</a></li>
-      <li><a href="#"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Quản lý cơ sở y tế</a></li>
+      <li class="<%= path === '/' ? 'active' : ':' %>">
+        <a href="/admin">
+          <i class="ti-home"><span class="path1"></span><span class="path2"></span></i>
+          <span>Trang chủ</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="ti-user"><span class="path1"></span><span class="path2"></span></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="ti-calendar"><span class="path1"></span><span class="path2"></span></i>
+          <span>Lịch khám</span>
+        </a>
+      </li>
+      <!-- <li>
+        <a href="#">
+          <i class="ti-money"><span class="path1"></span><span class="path2"></span></i>
+          <span>Lịch sử thanh toán</span>
+        </a>
+      </li> -->
+      <% if(ROLES?.find(role => role === 'nhan-vien-phe-duyet' )) { %>
+      <li>
+        <a href="#">
+          <i class="icon-Write"><span class="path1"></span><span class="path2"></span></i>
+          <span>Phê duyệt đơn khám bệnh</span>
+        </a>
+      </li>
+      <% } %>
+      <% if(ROLES?.find(role => role === 'admin' )) { %>
       <li class="treeview">
         <a href="#">
           <i class="icon-Bullet-list"><span class="path1"></span><span class="path2"></span></i>
@@ -25,10 +56,56 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/admin/manage-users"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Quản lý tài khoản</a></li>
-          <li><a href="/admin/manage-roles"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Quản lý quyền</a></li>
+          <li class="<%= path === '/manage-users' ? 'active' : ':' %>">
+            <a href="/admin/manage-users">
+              <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+              <span>Quản lý tài khoản</span>
+              <span class="pull-right-container"> </span>
+            </a>
+          </li>
+
+          <li class="<%= path === '/manage-roles' ? 'active' : ':' %>">
+            <a href="/admin/manage-roles">
+              <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+              <span>Quản lý quyền</span>
+              <span class="pull-right-container"> </span>
+            </a>
+          </li>
         </ul>
       </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="icon-Bullet-list"><span class="path1"></span><span class="path2"></span></i>
+          <span>Danh mục hệ thống</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-right pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li class="">
+            <a href="#">
+              <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+              <span>Quản lý chuyên khoa</span>
+              <span class="pull-right-container"> </span>
+            </a>
+          </li>
+          <li class="">
+            <a href="#">
+              <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+              <span>Quản lý bác sĩ</span>
+              <span class="pull-right-container"> </span>
+            </a>
+          </li>
+          <li class="">
+            <a href="#">
+              <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+              <span>Quản lý ca làm việc</span>
+              <span class="pull-right-container"> </span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <% } %>
     </ul>
   </section>
 </aside>

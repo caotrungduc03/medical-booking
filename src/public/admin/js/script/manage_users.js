@@ -22,10 +22,10 @@ const configUnlockUserTbl = () => {
           element.contact = `
             <div>
               <p>Email: ${element.email}</p>
-              <p>SĐT: ${element.phone ?? 'Chưa cập nhật'}</p>
+              <p>SĐT: ${element.phone || 'Chưa cập nhật'}</p>
             </div>
           `;
-          element.address = element.address ?? 'Chưa cập nhật';
+          element.address = element.address || 'Chưa cập nhật';
           element.method = `
           <div class="div_icon">
             <a href="#" id="btn-update" title="Sửa" data-toggle="modal" data-target="#updateUserModal" class="mr-1"><i class="ti-pencil-alt"></i></a>
@@ -92,10 +92,10 @@ const configLockUserTbl = () => {
           element.contact = `
             <div>
               <p>Email: ${element.email}</p>
-              <p>SĐT: ${element.phone ?? 'Chưa cập nhật'}</p>
+              <p>SĐT: ${element.phone || 'Chưa cập nhật'}</p>
             </div>
           `;
-          element.address = element.address ?? 'Chưa cập nhật';
+          element.address = element.address || 'Chưa cập nhật';
           element.method = `
           <div class="div_icon">
             <span id="btn-unlock" class="model_img mr-1" title="Mở khoá"><i class="ti-unlock"></i></span>
@@ -177,6 +177,9 @@ const handleAddUser = (id) => {
       return notiError(
         'Mật khẩu cần tối thiểu 8 kí tự, gồm cả chữ cái và chữ số',
       );
+    }
+    if (data.password !== data.confirmPassword) {
+      return notiError('Xác nhận mật khẩu không trùng khớp');
     }
 
     try {
@@ -345,6 +348,9 @@ const handleUpdateUser = () => {
       return notiError(
         'Mật khẩu cần tối thiểu 8 kí tự, gồm cả chữ cái và chữ số',
       );
+    }
+    if (data?.password !== data?.confirmPassword) {
+      return notiError('Xác nhận mật khẩu không trùng khớp');
     }
 
     try {
