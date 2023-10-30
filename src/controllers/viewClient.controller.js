@@ -24,6 +24,14 @@ const home = catchAsync(async (req, res) => {
   res.render('client/home');
 });
 
+const notFound = catchAsync(async (req, res) => {
+  res.render('client/not_found');
+});
+
+const permissionDenied = catchAsync(async (req, res) => {
+  res.render('client/permission_denied');
+});
+
 module.exports = {
   register,
   login,
@@ -31,4 +39,6 @@ module.exports = {
   form,
   aboutUs,
   home,
+  notFound,
+  permissionDenied,
 };

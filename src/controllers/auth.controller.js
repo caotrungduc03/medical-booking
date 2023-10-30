@@ -33,12 +33,15 @@ const register = catchAsync(async (req, res) => {
   res.status(201).json(response(201, 'Thành công'));
 });
 
-const login = catchAsync(async (req, res) => {
+const login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email }).select('+password');
   if (!user) {
     throw new ApiError(400, 'Email hoặc mật khẩu nhập sai');
+  }
+  if (user.isLocked === true) {
+    next(new ApiError(401, 'Tài khoản đã bị khoá'));
   }
   // if (!user.isEmailVerified) {
   //   throw new ApiError(403, 'Chưa xác thực email!', );

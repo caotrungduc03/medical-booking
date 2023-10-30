@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/client/head') %>
+
+  <title>Không có quyền</title>
+</head>
+
+<body class="hold-transition theme-primary bg-img" style="background-image: url(/static/admin/images/auth-bg/bg-5.jpg)">
+  <section class="error-page h-p100">
+    <div class="container h-p100">
+      <div class="row h-p100 align-items-center justify-content-center text-center">
+        <div class="col-lg-7 col-md-10 col-12">
+          <div class="rounded30 p-50">
+            <img src="/static/admin/images/auth-bg/403.webp" class="max-w-200" alt="" />
+            <h1>403</h1>
+            <h3>Bạn không có quyền để thực hiện chức năng này!</h3>
+            <div class="my-30"><a href="/" class="btn btn-danger">Quay lại trang chủ</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%- include('../partials/client/script') %>
+
+</body>
+
+</html>

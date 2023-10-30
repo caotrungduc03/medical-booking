@@ -56,6 +56,10 @@ const getUserById = catchAsync(async (req, res) => {
 
   const user = await User.findById(userId);
 
+  if (!user) {
+    throw new ApiError(404, 'User not found');
+  }
+
   res.status(200).json(response(200, 'Thành công', user));
 });
 
@@ -66,7 +70,6 @@ const updateUserById = catchAsync(async (req, res) => {
   const dataUpdate = pick(remainingData, [
     'firstName',
     'lastName',
-    'email',
     'password',
     'gender',
     'cardId',
@@ -74,16 +77,21 @@ const updateUserById = catchAsync(async (req, res) => {
     'phone',
     'address',
     'isLocked',
+    'roles',
   ]);
 
-  if (confirmPassword && dataCreate.password !== confirmPassword) {
+  if (!dataUpdate.password) {
+    delete dataUpdate.password;
+  }
+
+  if (confirmPassword && dataUpdate?.password !== confirmPassword) {
     throw new ApiError(400, 'Xác nhận mật khẩu không trùng khớp!');
   }
 
-  const updatedUser = await User.findByIdAndUpdate(userId, dataUpdate);
-  if (!updatedUser) {
-    throw new ApiError(404, 'User not found');
-  }
+  const user = await User.findById(userId);
+  Object.assign(user, dataUpdate);
+
+  await user.save();
 
   res.status(200).json(response(200, 'Thành công'));
 });
