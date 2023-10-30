@@ -6,7 +6,7 @@ const { User } = require('../models');
 const authMiddleware = catchAsync(async (req, res, next) => {
   let accessToken = req.signedCookies?.tokens;
   if (!accessToken) {
-    res.redirect('/login');
+    return res.redirect('/login');
     // throw new ApiError(401, 'Unauthorized');
   }
 
@@ -16,7 +16,7 @@ const authMiddleware = catchAsync(async (req, res, next) => {
   const user = await User.findById(userId).populate('roles');
 
   if (!user) {
-    throw new ApiError(401, 'Unauthorized');
+    return res.redirect('/login');
   }
 
   if (user.isLocked === true) {
