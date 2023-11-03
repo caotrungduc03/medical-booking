@@ -11,6 +11,7 @@ const handleLogout = () => {
         if (willDelete) {
           const result = await (await fetch('/api/v1/auth/logout')).json();
           if (result.code === 200) {
+            localStorage.setItem('isLogin', 'false');
             window.location.href = '/';
           } else {
             notiError(result.message);

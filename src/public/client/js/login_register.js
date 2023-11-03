@@ -74,6 +74,7 @@ const handleLogin = () => {
 
       if (result.code === 200) {
         notiSuccess('Đăng nhập thành công!');
+        localStorage.setItem('isLogin', 'true');
         setTimeout(() => (window.location.href = '/admin'), 1000);
       } else {
         notiError(result.message);
