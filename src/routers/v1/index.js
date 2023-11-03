@@ -3,6 +3,7 @@ const userRouter = require('./user.router');
 const authRouter = require('./auth.router');
 const roleRouter = require('./role.router');
 const departmentRouter = require('./department.router');
+const medicalFormRouter = require('./medical_form.route');
 
 const router = express.Router();
 
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/departments',
     route: departmentRouter,
+  },
+  {
+    path: '/medical-forms',
+    route: medicalFormRouter,
   },
 ];
 

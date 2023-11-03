@@ -23,6 +23,11 @@ viewAdminRouter.get(
   viewAdminController.manageDepartments,
 );
 viewAdminRouter.get('/profile', authMiddleware, viewAdminController.profile);
+viewAdminRouter.get(
+  '/order-medical-form',
+  authMiddleware,
+  viewAdminController.orderMedicalForm,
+);
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);
 
 module.exports = viewAdminRouter;

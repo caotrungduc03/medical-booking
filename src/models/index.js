@@ -3,4 +3,5 @@ module.exports = {
   Role: require('./role.model'),
   Count: require('./count.model'),
   Department: require('./department.model'),
+  MedicalForm: require('./medical_form.model'),
 };
