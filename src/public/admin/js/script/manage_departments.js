@@ -59,7 +59,7 @@ const configAllDepartmentTbl = () => {
       sInfoEmpty: 'Hiển thị từ 0 đến 0 trong tổng số 0 mục',
       sInfoFiltered: '(được lọc từ _MAX_ bản ghi)',
       sInfoPostFix: '',
-      sSearch: 'Tìm kiếm theo tên:',
+      sSearch: 'Tìm kiếm theo tên chuyên khoa:',
       sUrl: '',
       oPaginate: {
         sFirst: 'Đầu',
