@@ -107,10 +107,31 @@ const deleteUserById = catchAsync(async (req, res) => {
   res.status(200).json(response(200, 'Thành công'));
 });
 
+const updateProfile = catchAsync(async (req, res) => {
+  const user = req.user;
+
+  const dataUpdate = pick(req.body, [
+    'firstName',
+    'lastName',
+    'gender',
+    'cardId',
+    'birthday',
+    'phone',
+    'address',
+  ]);
+
+  Object.assign(user, dataUpdate);
+
+  await user.save();
+
+  res.status(200).json(response(200, 'Thành công'));
+});
+
 module.exports = {
   getUsers,
   createUser,
   getUserById,
   updateUserById,
   deleteUserById,
+  updateProfile,
 };

@@ -4,4 +4,5 @@ module.exports = {
   viewAdminController: require('./viewAdmin.controller'),
   viewClientController: require('./viewClient.controller'),
   roleController: require('./role.controller'),
+  departmentController: require('./department.controller'),
 };

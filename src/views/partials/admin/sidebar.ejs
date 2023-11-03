@@ -20,8 +20,8 @@
           <span>Trang chủ</span>
         </a>
       </li>
-      <li>
-        <a href="#">
+      <li class="<%= path === '/profile' ? 'active' : ':' %>">
+        <a href="/admin/profile">
           <i class="ti-user"><span class="path1"></span><span class="path2"></span></i>
           <span>Thông tin cá nhân</span>
         </a>
@@ -82,8 +82,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class="">
-            <a href="#">
+          <li class="<%= path === '/manage-departments' ? 'active' : ':' %>">
+            <a href="/admin/manage-departments">
               <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
               <span>Quản lý chuyên khoa</span>
               <span class="pull-right-container"> </span>

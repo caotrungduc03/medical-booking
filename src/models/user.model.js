@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const moment = require('moment/moment');
 const toJSON = require('../utils/toJSON');
 const paginate = require('../utils/paginate');
 
@@ -108,6 +109,10 @@ userSchema.pre('save', async function (next) {
 
 userSchema.virtual('fullName').get(function () {
   return this.lastName + ' ' + this.firstName;
+});
+
+userSchema.virtual('birthdayFormat').get(function () {
+  return moment(this.birthday).format('YYYY-MM-DD');
 });
 
 const User = mongoose.model('User', userSchema);

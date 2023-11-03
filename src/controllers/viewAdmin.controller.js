@@ -27,8 +27,26 @@ const manageUsers = catchAsync(async (req, res) => {
   });
 });
 
+const manageDepartments = catchAsync(async (req, res) => {
+  res.render('admin/manage_departments', {
+    path: '/manage-departments',
+    user: req.user,
+    ROLES: req.roles,
+  });
+});
+
+const profile = catchAsync(async (req, res) => {
+  res.render('admin/profile', {
+    path: '/profile',
+    user: req.user,
+    ROLES: req.roles,
+  });
+});
+
 module.exports = {
   dashboard,
   manageRoles,
   manageUsers,
+  manageDepartments,
+  profile,
 };

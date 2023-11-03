@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/admin/head') %>
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+  <div class="wrapper">
+    <div id="loader"></div>
+
+    <%- include('../partials/admin/header') %>
+
+    <%- include('../partials/admin/sidebar') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto">
+              <h3>Thông tin cá nhân</h3>
+              <div class="d-inline-block align-items-center">
+                <nav>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/"><i class="mdi mdi-home-outline"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Thông tin cá nhân</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+            <div class="row align-items-end">
+              <div class="col-xl-12 col-12">
+                <div class="box-header with-border">
+                  <h4 class="box-title">Thông tin chi tiết cá nhân - </h4>
+                  <span>
+                    &nbsp;<i class="fa fa-key"></i>
+                    Quyền: <%= user.roles.map((role) => role.roleName).join(', ') %>
+                  </span>
+                </div>
+                <form id="updateProfileForm">
+                  <div class="box-body">
+                    <div class="row">
+                      <div class="form-group col-12 col-lg-4">
+                        <label for="lastName">Họ, tên đệm <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-text"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="lastName" value="<%= user.lastName %>" required />
+                        </div>
+                      </div>
+                      <div class="form-group col-12 col-lg-4">
+                        <label for="firstName">Tên <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-text"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="firstName" value="<%= user.firstName %>" required />
+                        </div>
+                      </div>
+                      <div class="form-group col-12 col-lg-4">
+                        <label for="gender">Giới tính</label>
+                        <div class="input-group" style="height: 34px">
+                          <select class="form-control select2input" name="gender" value="<%= user.gender %>" style="background-color: white; width: 100%">
+                            <option value="Khác" selected>Khác</option>
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-12 col-lg-6">
+                        <label for="cardId">CMND/CCCD <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-id-badge"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="cardId" value="<%= user.cardId %>" required />
+                        </div>
+                      </div>
+                      <div class="form-group col-12 col-lg-6">
+                        <label for="birthday">Ngày sinh</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                          </div>
+                          <input type="date" class="form-control" name="birthday" value="<%= user.birthdayFormat %>" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-12 col-lg-6">
+                        <label for="email">Email</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-email"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="email" value="<%= user.email %>" disabled />
+                        </div>
+                      </div>
+                      <div class="form-group col-12 col-lg-6">
+                        <label for="phone">Số điện thoại</label>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="phone" value="<%= user.phone %>" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="address">Địa chỉ</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ti-text"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="address" value="<%= user.address %>" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="box-footer d-flex justify-content-center">
+                    <a href="/admin" class="btn btn-rounded btn-warning btn-outline mr-2">
+                      <i class="ti-trash"></i> Quay lại
+                    </a>
+                    <button type="submit" class="btn btn-rounded btn-primary btn-outline">
+                      <i class="ti-save-alt"></i> Cập nhật thông tin
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../partials/admin/footer') %>
+
+  </div>
+
+  <!-- Page Content overlay -->
+
+  <%- include('../partials/admin/script') %>
+
+  <script src="/static/admin/js/script/profile.js"></script>
+</body>
+
+</html>

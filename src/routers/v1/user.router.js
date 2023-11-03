@@ -4,6 +4,8 @@ const { userController } = require('../../controllers');
 
 const userRouter = express.Router();
 
+userRouter.patch('/profile', authMiddleware, userController.updateProfile);
+
 userRouter.use(authMiddleware);
 userRouter.use(roleMiddleware(['admin']));
 
