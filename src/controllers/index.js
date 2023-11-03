@@ -5,4 +5,5 @@ module.exports = {
   viewClientController: require('./viewClient.controller'),
   roleController: require('./role.controller'),
   departmentController: require('./department.controller'),
+  medicalFormController: require('./medical_form.controller'),
 };

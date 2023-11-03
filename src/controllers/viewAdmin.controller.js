@@ -1,4 +1,4 @@
-const { Role } = require('../models');
+const { Role, Department } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 
 const dashboard = catchAsync(async (req, res) => {
@@ -43,10 +43,22 @@ const profile = catchAsync(async (req, res) => {
   });
 });
 
+const orderMedicalForm = catchAsync(async (req, res) => {
+  const departments = await Department.find();
+
+  res.render('admin/order_medical_form', {
+    path: '/order-medical-form',
+    user: req.user,
+    ROLES: req.roles,
+    departments,
+  });
+});
+
 module.exports = {
   dashboard,
   manageRoles,
   manageUsers,
   manageDepartments,
   profile,
+  orderMedicalForm,
 };
