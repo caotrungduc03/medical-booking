@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/admin/head') %>
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+  <div class="wrapper">
+    <div id="loader"></div>
+
+    <%- include('../partials/admin/header') %>
+
+    <%- include('../partials/admin/sidebar') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto">
+              <h3>Quản lý chuyên khoa</h3>
+              <div class="d-inline-block align-items-center">
+                <nav>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/"><i class="mdi mdi-home-outline"></i></a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">Danh mục hệ thống</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quản lý chuyên khoa</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+            <div class="row align-items-end">
+              <div class="col-xl-12 col-12">
+                <div class="box-header with-border">
+                  <h4 class="box-title">Danh sách các chuyên khoa</h4>
+                </div>
+                <div class="box-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item">
+                      <a id="allDepartmentNav" class="nav-link active" data-toggle="tab" href="#allDepartmentTab" role="tab">
+                        <span><i class="ti-unlock mr-1"></i>Tất cả</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="modal" data-target="#addDepartmentModal">
+                        <span class="model_img"><i class="fa fa-plus mr-1"></i> Thêm mới</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane fade active show" id="allDepartmentTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="allDepartmentTbl" class="table table-striped dataTable" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Tên chuyên khoa</th>
+                              <th>Năm thành lập</th>
+                              <th>Trưởng khoa</th>
+                              <th>Thao tác</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../partials/admin/footer') %>
+
+  </div>
+
+  <div id="addDepartmentModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm chuyên khoa mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="addDepartmentForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="name">Tên chuyên khoa <span class="text-danger">*</span></label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="name" name="name" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="year">Năm thành lập <span class="text-danger">*</span></label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="number" id="year" name="year" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="leader">Trưởng khoa <span class="text-danger">*</span></label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="leader" name="leader" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description">Mô tả <span class="text-danger">*</span></label>
+              <textarea type="number" id="description" name="description" class="form-control" required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> THÊM</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <div id="updateDepartmentModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm chuyên khoa mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="updateDepartmentForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="departmentCode">Mã chuyên khoa</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="departmentCode" name="departmentCode" class="form-control" disabled />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Tên chuyên khoa <span class="text-danger">*</span></label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="name" name="name" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="year">Năm thành lập <span class="text-danger">*</span></label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="number" id="year" name="year" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="leader">Trưởng khoa <span class="text-danger">*</span></label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="leader" name="leader" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description">Mô tả <span class="text-danger">*</span></label>
+              <textarea type="number" id="description" name="description" class="form-control" required></textarea>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> THÊM</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- Page Content overlay -->
+
+  <%- include('../partials/admin/script') %>
+
+  <script src="/static/admin/js/script/manage_departments.js"></script>
+</body>
+
+</html>

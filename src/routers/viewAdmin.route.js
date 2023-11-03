@@ -16,6 +16,12 @@ viewAdminRouter.get(
   roleMiddleware(['admin']),
   viewAdminController.manageRoles,
 );
+viewAdminRouter.get(
+  '/manage-departments',
+  authMiddleware,
+  roleMiddleware(['admin']),
+  viewAdminController.manageDepartments,
+);
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);
 
 module.exports = viewAdminRouter;
