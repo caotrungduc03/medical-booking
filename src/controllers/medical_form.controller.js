@@ -66,9 +66,16 @@ const updateMedicalFormByUser = catchAsync(async (req, res) => {
   res.status(200).json(response(200, 'Thành công'));
 });
 
+const getAllMedicalForms = catchAsync(async (req, res) => {
+  const medicalForms = await MedicalForm.find();
+
+  res.status(200).json(response(200, 'Thành công', medicalForms));
+});
+
 module.exports = {
   getMedicalForms,
   createMedicalForm,
   getMedicalFormsByUser,
   updateMedicalFormByUser,
+  getAllMedicalForms,
 };

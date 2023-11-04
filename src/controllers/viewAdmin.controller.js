@@ -3,7 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 
 const dashboard = catchAsync(async (req, res) => {
   res.render('admin/dashboard', {
-    path: '/dashboard',
+    path: '/',
     user: req.user,
     ROLES: req.roles,
   });
@@ -54,6 +54,17 @@ const orderMedicalForm = catchAsync(async (req, res) => {
   });
 });
 
+const statistic = catchAsync(async (req, res) => {
+  const departments = await Department.find();
+
+  res.render('admin/statistic', {
+    path: '/statistic',
+    user: req.user,
+    ROLES: req.roles,
+    departments,
+  });
+});
+
 module.exports = {
   dashboard,
   manageRoles,
@@ -61,4 +72,5 @@ module.exports = {
   manageDepartments,
   profile,
   orderMedicalForm,
+  statistic,
 };

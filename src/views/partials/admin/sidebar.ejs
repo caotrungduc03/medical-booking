@@ -17,7 +17,7 @@
       <li class="<%= path === '/' ? 'active' : ':' %>">
         <a href="/admin">
           <i class="ti-home"><span class="path1"></span><span class="path2"></span></i>
-          <span>Trang chủ</span>
+          <span>Bảng điều khiển</span>
         </a>
       </li>
       <li class="<%= path === '/profile' ? 'active' : ':' %>">
@@ -35,7 +35,7 @@
       <li>
         <a href="#">
           <i class="ti-calendar"><span class="path1"></span><span class="path2"></span></i>
-          <span>Lịch khám</span>
+          <span>Lịch sử khám bệnh</span>
         </a>
       </li>
       <!-- <li>
@@ -47,8 +47,14 @@
       <% if(ROLES?.find(role => role === 'nhan-vien-phe-duyet' )) { %>
       <li>
         <a href="#">
-          <i class="icon-Write"><span class="path1"></span><span class="path2"></span></i>
+          <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
           <span>Phê duyệt đơn khám bệnh</span>
+        </a>
+      </li>
+      <li class="<%= path === '/statistic' ? 'active' : ':' %>">
+        <a href="/admin/statistic">
+          <i class="fa fa-bar-chart"><span class="path1"></span><span class="path2"></span></i>
+          <span>Thống kê đơn khám bệnh</span>
         </a>
       </li>
       <% } %>
