@@ -1,3 +1,4 @@
+const { Department } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 
 const register = catchAsync(async (req, res) => {
@@ -13,7 +14,9 @@ const forgotPassword = catchAsync(async (req, res) => {
 });
 
 const form = catchAsync(async (req, res) => {
-  res.render('client/form');
+  const departments = await Department.find();
+
+  res.render('client/form', { departments });
 });
 
 const aboutUs = catchAsync(async (req, res) => {

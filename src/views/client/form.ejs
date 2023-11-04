@@ -23,58 +23,78 @@
         <form action="#">
           <div class="row">
             <div class="input-box-1">
-              <input type="text" name="name" required>
-              <label>Họ tên(*)</label>
+              <input type="text" name="fullName" id="fullName" required>
+              <label>Họ và tên <span class="text-danger">*</span></label>
             </div>
             <div class="input-box-1">
-              <input type="text" name="sex" required>
-              <label>Giới tính(*)</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-box-1">
-              <input type="text" name="address" required>
-              <label>Địa chỉ(*)</label>
-            </div>
-            <div class="input-box-1">
-              <input type="date" name="date_of_birth" required>
-              <label>Ngày sinh(*)</label>
+              <label>Giới tính <span class="text-danger">*</span></label>
+              <select name="gender" id="gender" style="width: 100%;" required>
+                <option value="" selected>Khác</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
             </div>
           </div>
           <div class="row">
             <div class="input-box-1">
-              <input type="text" name="phone_number" required>
-              <label>Điện thoại(*)</label>
+              <input type="text" name="address" id="address" required>
+              <label>Địa chỉ <span class="text-danger">*</span></label>
             </div>
             <div class="input-box-1">
-              <input type="datetime" name="email">
-              <label>Email</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-box-1">
-              <input type="text" name="id_number" required>
-              <label>Số CMND / CCCD(*)</label>
-            </div>
-            <div class="input-box-1">
-              <input type="date" name="date_range" required>
-              <label>Ngày cấp(*)</label>
+              <input type="date" name="birthday" id="birthday" required>
+              <label>Ngày sinh <span class="text-danger">*</span></label>
             </div>
           </div>
           <div class="row">
             <div class="input-box-1">
-              <input type="text" name="department" required>
-              <label>Khoa(*)</label>
+              <input type="text" name="phone" id="phone" required>
+              <label>Điện thoại <span class="text-danger">*</span></label>
             </div>
             <div class="input-box-1">
-              <input type="text" name="date" required>
-              <label>Giờ hẹn(*)</label>
+              <input type="text" name="email" id="email">
+              <label>Email <span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-box-1">
+              <input type="text" name="cardId" id="cardId" required>
+              <label>Số CMND / CCCD <span class="text-danger">*</span></label>
+            </div>
+
+            <div class="input-box-1">
+              <label>Khoa <span class="text-danger">*</span></label>
+              <select name="medicalDepartment" id="medicalDepartment" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+                <% departments.forEach(d => { %>
+                <option><%= d.name %></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-box-1">
+              <input type="date" name="medicalDay" id="medicalDay" required>
+              <label>Ngày khám <span class="text-danger">*</span></label>
+            </div>
+            <div class="input-box-1">
+              <label>Giờ khám <span class="text-danger">*</span></label>
+              <select class="selected_box" name="medicalHour" id="medicalHour" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+                <option>7h30 - 8h30</option>
+                <option>8h30 - 9h30</option>
+                <option>9h30 - 10h30</option>
+                <option>10h30 - 11h30</option>
+                <option>13h30 - 14h30</option>
+                <option>14h30 - 15h30</option>
+                <option>15h30 - 16h30</option>
+                <option>16h30 - 17h30</option>
+              </select>
             </div>
           </div>
           <div class="row">
             <div class="input-box-2">
               <input type="text" name="reason" required>
-              <label>Lý do khám(*)</label>
+              <label>Lý do khám <span class="text-danger">*</span></label>
             </div>
           </div>
           <div class="row">
@@ -105,49 +125,49 @@
       e.preventDefault();
 
       const data = {};
-      const name = document.querySelector('#name');
-      const sex = document.querySelector('#sex');
-      const address = document.querySelector('#address');
-      const date_of_birth = document.querySelector('#date_of_birth');
-      const phone_number = document.querySelector('#phone_number');
-      const email = document.querySelector('#email');
-      const id_number = document.querySelector('#id_number');
-      const date_range = document.querySelector('#date_range');
-      const department = document.querySelector('#department');
-      const date = document.querySelector('#date');
-      const reason = document.querySelector('#reason');
-      const note = document.querySelector('#note');
+      data.fullName = document.getElementById('fullName').value;
+      data.gender = document.getElementById('gender').value;
+      data.address = document.getElementById('address').value;
+      data.birthday = document.getElementById('birthday').value;
+      data.phone = document.getElementById('phone').value;
+      data.email = document.getElementById('email').value;
+      data.cardId = document.getElementById('cardId').value;
+      data.medicalDepartment = document.getElementById('medicalDepartment').value;
 
+      // console.log("Du lieu gui len: ", document.getElementById('medicalDay'));
 
-      // const password = document.querySelector('#password');
+      data.medicalDay = document.getElementById('medicalDay').value;
+      data.medicalHour = document.getElementById('medicalHour').value;
 
       // data["name"] = name.value;
-      data.name = name.value;
-      data.sex = sex.value;
-      data.address = address.value;
-      data.date_of_birth = date_of_birth.value;
-      data.phone_number = phone_number.value;
-      data.email = email.value;
-      data.id_number = id_number.value;
-      data.date_range = date_range.value;
-      data.department = department.value;
-      data.date = date.value;
-      data.reason = reason.value;
-      data.note = note.value;
-
 
       console.log("Du lieu gui len: ", data);
 
-      const result = await (await fetch('/api/v1/users', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-      })).json()
+      // const result = await (await fetch('/api/v1/users', { //fetch 
+      //   method: 'POST',
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(data) //
+      // })).json()
 
-      console.log("Du lieu nhan ve: ", result);
-
+      // console.log("Du lieu nhan ve: ", result);
+      try {
+        let result = await (
+          await fetch(`/api/v1/medical-forms`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+        ).json();
+        if (result.code === 201) {
+          setTimeout(() => window.location.reload(), 1000);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     })
   </script>
 
