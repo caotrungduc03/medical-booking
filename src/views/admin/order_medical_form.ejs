@@ -59,7 +59,7 @@
                       <div class="form-group col-12 col-lg-4">
                         <label for="gender">Giới tính <span class="text-danger">*</span></label>
                         <div class="input-group" style="height: 34px">
-                          <select class="form-control select2input" name="gender" value="<%= user.gender %>" style="background-color: white; width: 100%" required>
+                          <select class="form-control select2input" id="gender" name="gender" value="<%= user.gender %>" style="background-color: white; width: 100%" required>
                             <option value="" selected>Khác</option>
                             <option value="Nam">Nam</option>
                             <option value="Nữ">Nữ</option>
@@ -111,7 +111,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="ti-text"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="address" value="<%= user.address %>" required />
+                        <input type="text" class="form-control" name="address" required />
                       </div>
                     </div>
                     <div class="row">
@@ -176,6 +176,9 @@
   <%- include('../partials/admin/script') %>
 
   <script src="/static/admin/js/script/order_medical_form.js"></script>
+  <script>
+    $('#gender').val('<%= user.gender %>').change()
+  </script>
 </body>
 
 </html>

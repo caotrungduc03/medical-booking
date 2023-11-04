@@ -56,7 +56,8 @@ const updateMedicalFormByUser = catchAsync(async (req, res) => {
   const { medicalFormId } = req.params;
 
   const medicalForm = await MedicalForm.findById(medicalFormId);
-  if (req.user._id !== medicalForm.user) {
+
+  if (!req.user._id.equals(medicalForm?.user)) {
     throw new ApiError(404, 'Không có quyền');
   }
 

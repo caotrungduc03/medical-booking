@@ -20,16 +20,16 @@ medicalFormRouter.get(
 );
 
 medicalFormRouter.get(
-  '/:medicalFormId',
-  authMiddleware,
-  medicalFormController.updateMedicalFormByUser,
-);
-
-medicalFormRouter.get(
   '/',
   authMiddleware,
   roleMiddleware(['nhan-vien-phe-duyet']),
   medicalFormController.getMedicalForms,
+);
+
+medicalFormRouter.patch(
+  '/:medicalFormId',
+  authMiddleware,
+  medicalFormController.updateMedicalFormByUser,
 );
 
 module.exports = medicalFormRouter;
