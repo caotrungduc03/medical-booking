@@ -20,21 +20,21 @@
           <span>Bảng điều khiển</span>
         </a>
       </li>
-      <li class="<%= path === '/profile' ? 'active' : ':' %>">
-        <a href="/admin/profile">
-          <i class="ti-user"><span class="path1"></span><span class="path2"></span></i>
-          <span>Thông tin cá nhân</span>
-        </a>
-      </li>
       <li class="<%= path === '/order-medical-form' ? 'active' : ':' %>">
         <a href="/admin/order-medical-form">
           <i class="icon-Write"><span class="path1"></span><span class="path2"></span></i>
           <span>Đặt lịch khám bệnh</span>
         </a>
       </li>
+      <li class="<%= path === '/profile' ? 'active' : ':' %>">
+        <a href="/admin/profile">
+          <i class="ti-user"><span class="path1"></span><span class="path2"></span></i>
+          <span>Thông tin cá nhân</span>
+        </a>
+      </li>
       <li>
         <a href="#">
-          <i class="ti-calendar"><span class="path1"></span><span class="path2"></span></i>
+          <i class="fa fa-calendar"><span class="path1"></span><span class="path2"></span></i>
           <span>Lịch sử khám bệnh</span>
         </a>
       </li>
@@ -47,7 +47,7 @@
       <% if(ROLES?.find(role => role === 'nhan-vien-phe-duyet' )) { %>
       <li>
         <a href="#">
-          <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+          <i class="ti-clipboard"><span class="path1"></span><span class="path2"></span></i>
           <span>Phê duyệt đơn khám bệnh</span>
         </a>
       </li>

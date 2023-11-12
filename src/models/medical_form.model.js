@@ -67,6 +67,15 @@ const medicalFormSchema = new Schema(
       trim: true,
       required: true,
     },
+    reason: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    note: {
+      type: String,
+      trim: true,
+    },
   },
   {
     timestamps: true,
