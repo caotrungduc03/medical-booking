@@ -19,6 +19,13 @@ medicalFormRouter.get(
   medicalFormController.getAllMedicalForms,
 );
 
+medicalFormRouter.patch(
+  '/status/:medicalFormId',
+  authMiddleware,
+  roleMiddleware(['nhan-vien-phe-duyet']),
+  medicalFormController.updateMedicalFormStatus,
+);
+
 medicalFormRouter.get(
   '/',
   authMiddleware,

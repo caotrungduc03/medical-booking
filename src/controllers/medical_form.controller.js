@@ -8,6 +8,14 @@ const getMedicalForms = catchAsync(async (req, res) => {
   const query = req.query;
   const filter = {};
 
+  if (query.status) {
+    if (Array.isArray(query.status)) {
+      filter.status = { $in: [...query.status] };
+    } else {
+      filter.status = { $in: [query.status] };
+    }
+  }
+
   if (query.search) {
     let searchValue = query.search['value'];
     filter.fullName = { $regex: searchValue, $options: 'i' };
@@ -39,7 +47,7 @@ const getMedicalForms = catchAsync(async (req, res) => {
 });
 
 const createMedicalForm = catchAsync(async (req, res) => {
-  await MedicalForm.create(req.body);
+  await MedicalForm.create({ ...req.body, status: 0 });
 
   res.status(201).json(response(201, 'Thành công'));
 });
@@ -58,7 +66,7 @@ const updateMedicalFormByUser = catchAsync(async (req, res) => {
   const medicalForm = await MedicalForm.findById(medicalFormId);
 
   if (!req.user._id.equals(medicalForm?.user)) {
-    throw new ApiError(404, 'Không có quyền');
+    throw new ApiError(403, 'Không có quyền');
   }
 
   Object.assign(medicalForm, req.body);
@@ -73,10 +81,27 @@ const getAllMedicalForms = catchAsync(async (req, res) => {
   res.status(200).json(response(200, 'Thành công', medicalForms));
 });
 
+const updateMedicalFormStatus = async (req, res) => {
+  const { medicalFormId } = req.params;
+  const { status } = req.body;
+
+  const medicalForm = await MedicalForm.findById(medicalFormId);
+
+  if (!medicalForm) {
+    throw new ApiError(404, 'Đơn khám không tồn tại');
+  }
+
+  Object.assign(medicalForm, { status });
+  await medicalForm.save();
+
+  res.status(200).json(response(200, 'Thành công'));
+};
+
 module.exports = {
   getMedicalForms,
   createMedicalForm,
   getMedicalFormsByUser,
   updateMedicalFormByUser,
   getAllMedicalForms,
+  updateMedicalFormStatus,
 };

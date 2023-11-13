@@ -65,6 +65,17 @@ const statistic = catchAsync(async (req, res) => {
   });
 });
 
+const manageOrder = catchAsync(async (req, res) => {
+  const departments = await Department.find();
+
+  res.render('admin/manage_order', {
+    path: '/manage-order',
+    user: req.user,
+    ROLES: req.roles,
+    departments,
+  });
+});
+
 module.exports = {
   dashboard,
   manageRoles,
@@ -73,4 +84,5 @@ module.exports = {
   profile,
   orderMedicalForm,
   statistic,
+  manageOrder,
 };

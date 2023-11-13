@@ -46,7 +46,6 @@ const medicalFormSchema = new Schema(
     phone: {
       type: String,
       trim: true,
-      required: true,
     },
     address: {
       type: String,
@@ -76,6 +75,7 @@ const medicalFormSchema = new Schema(
       type: String,
       trim: true,
     },
+    status: Number,
   },
   {
     timestamps: true,
