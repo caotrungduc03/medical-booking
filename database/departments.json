@@ -1,0 +1,13 @@
+{"_id":{"$oid":"617ab96a9b2a49a8e82a10d1"},"departmentCode":"CK.000001","name":"Chuyên Khoa Tim Mạch","year":2023,"leader":"Nguyễn Văn A","description":"Chuyên khoa về bệnh tim mạch."}
+{"_id":{"$oid":"617ab96a9b2a49a8e82a10d2"},"departmentCode":"CK.000002","name":"Chuyên Khoa Ngoại Tiêu Hóa","year":2023,"leader":"Trần Thị B","description":"Chuyên khoa về bệnh ngoại tiêu hóa."}
+{"_id":{"$oid":"617ab96a9b2a49a8e82a10d3"},"departmentCode":"CK.000003","name":"Chuyên Khoa Nội Tiết","year":2023,"leader":"Lê Văn C","description":"Chuyên khoa về bệnh lý nội tiết."}
+{"_id":{"$oid":"617ab96a9b2a49a8e82a10d4"},"departmentCode":"CK.000004","name":"Chuyên Khoa Da Liễu","year":2023,"leader":"Phạm Thị D","description":"Chuyên khoa về bệnh lý da liễu."}
+{"_id":{"$oid":"617ab96a9b2a49a8e82a10d5"},"departmentCode":"CK.000005","name":"Chuyên Khoa Hô Hấp","year":2023,"leader":"Hoàng Văn E","description":"Chuyên khoa về bệnh lý hô hấp."}
+{"_id":{"$oid":"617ab96a9b2a49a8e82a10d6"},"departmentCode":"CK.000006","name":"Chuyên Khoa Cơ Xương Khớp","year":2023,"leader":"Vũ Thị F","description":"Chuyên khoa về bệnh lý cơ xương khớp."}
+{"_id":{"$oid":"617ab96a9b2a49a8e82a10d7"},"departmentCode":"CK.000007","name":"Chuyên Khoa Thần Kinh","year":2023,"leader":"Đặng Văn G","description":"Chuyên khoa về bệnh lý thần kinh."}
+{"_id":{"$oid":"65466b6369adeebd98c28abc"},"departmentCode":"CK.000008","name":"Chuyên Khoa Răng Hàm Mặt","year":2023,"leader":"Ngô Thị H","description":"Chuyên khoa về răng hàm mặt."}
+{"_id":{"$oid":"65466b6369adeebd98c28abd"},"departmentCode":"CK.000009","name":"Chuyên Khoa Thận Niệu","year":2023,"leader":"Lý Văn I","description":"Chuyên khoa về bệnh lý thận và đường tiểu."}
+{"_id":{"$oid":"65466b6369adeebd98c28abe"},"departmentCode":"CK.000010","name":"Chuyên Khoa Ung Bướu","year":2023,"leader":"Mai Thị K","description":"Chuyên khoa về bệnh lý ung thư."}
+{"_id":{"$oid":"65466b6369adeebd98c28abf"},"departmentCode":"CK.000011","name":"Chuyên Khoa Sản Khoa","year":2023,"leader":"Trương Văn L","description":"Chuyên khoa về thai sản và phụ khoa."}
+{"_id":{"$oid":"65466b6369adeebd98c28ac0"},"departmentCode":"CK.000012","name":"Chuyên Khoa Thẩm Mỹ","year":2023,"leader":"Hà Thị M","description":"Chuyên khoa về phẫu thuật thẩm mỹ."}
+{"_id":{"$oid":"65466ccb9ba08d16d637e3da"},"fullName":"Nguyễn Thị H","gender":"Nữ","cardId":"999888777","email":"nguyenthih@example.com","birthday":"1993-08-08","phone":"999888777","address":"Số 8, Đường XYZ, Quận ABC, Thành phố Dalat","medicalDepartment":"Chuyên Khoa Răng Hàm Mặt","medicalDay":"2023-12-08","medicalHour":"10h30 - 11h30"}

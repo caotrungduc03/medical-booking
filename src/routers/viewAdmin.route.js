@@ -28,6 +28,18 @@ viewAdminRouter.get(
   authMiddleware,
   viewAdminController.orderMedicalForm,
 );
+viewAdminRouter.get(
+  '/statistic',
+  authMiddleware,
+  roleMiddleware(['nhan-vien-phe-duyet']),
+  viewAdminController.statistic,
+);
+viewAdminRouter.get(
+  '/manage-order',
+  authMiddleware,
+  roleMiddleware(['nhan-vien-phe-duyet']),
+  viewAdminController.manageOrder,
+);
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);
 
 module.exports = viewAdminRouter;
