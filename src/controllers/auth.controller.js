@@ -5,6 +5,8 @@ const ApiError = require('../utils/ApiError');
 const { User, Role } = require('../models');
 const pick = require('../utils/pick');
 const response = require('../utils/response');
+const { sendVerificationEmail } = require('../utils/mail');
+const { generateToken } = require('../utils/token');
 
 const register = catchAsync(async (req, res) => {
   const { confirmPassword, ...remainingData } = req.body;
@@ -28,7 +30,11 @@ const register = catchAsync(async (req, res) => {
 
   const role = await Role.findOne({ roleIndex: 'khach-hang' });
 
-  await User.create({ ...dataCreate, roles: [role._id] });
+  const user = await User.create({ ...dataCreate, roles: [role._id] });
+  const fullName = user.lastName + ' ' + user.firstName;
+
+  const token = await generateToken(user);
+  sendVerificationEmail(user.email, fullName, token);
 
   res.status(201).json(response(201, 'Thành công'));
 });
@@ -43,9 +49,9 @@ const login = catchAsync(async (req, res, next) => {
   if (user.isLocked === true) {
     next(new ApiError(401, 'Tài khoản đã bị khoá'));
   }
-  // if (!user.isEmailVerified) {
-  //   throw new ApiError(403, 'Chưa xác thực email!', );
-  // }
+  if (!user.isEmailVerified) {
+    throw new ApiError(403, 'Chưa xác thực email!');
+  }
   const isPassword = await bcrypt.compare(password, user.password);
   if (!isPassword) {
     throw new ApiError(400, 'Email hoặc mật khẩu nhập sai');

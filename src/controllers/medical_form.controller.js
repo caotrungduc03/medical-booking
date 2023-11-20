@@ -3,6 +3,7 @@ const catchAsync = require('../utils/catchAsync');
 const response = require('../utils/response');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
+const { sendApprovalConfirmation } = require('../utils/mail');
 
 const getMedicalForms = catchAsync(async (req, res) => {
   const query = req.query;
@@ -93,6 +94,14 @@ const updateMedicalFormStatus = async (req, res) => {
 
   Object.assign(medicalForm, { status });
   await medicalForm.save();
+
+  sendApprovalConfirmation({
+    to: medicalForm.email,
+    fullName: medicalForm.fullName,
+    medicalTime: new Date(),
+    medicalOrder: Math.floor(Math.random() * 100),
+    isApproved: status === 1,
+  });
 
   res.status(200).json(response(200, 'Thành công'));
 };

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xác thực email</title>
+</head>
+
+<body>
+  <% if (isSuccess) { %>
+  <p>Xác thực thành công!</p>
+  <% } else { %>
+  <p>Xác thực thất bại! Vui lòng kiểm tra lại hòm thư</p>
+  <% } %>
+  <a href="<%= url %>">Về trang chủ</a>
+</body>
+
+</html>
