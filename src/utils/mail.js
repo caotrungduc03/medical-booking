@@ -40,7 +40,31 @@ const sendVerificationEmail = (to, fullName, token = '') => {
   sendEmail(to, subject, text);
 };
 
+const sendApprovalConfirmation = (body) => {
+  const { to, fullName, medicalTime, medicalOrder, isApproved } = body;
+  const subject = 'Xác nhận Phê duyệt Đơn Khám Bệnh';
+  let text;
+  if (isApproved) {
+    text = `
+    Xin chào ${fullName},
+    Đơn khám bệnh của bạn đã được chấp nhận.
+    Thời gian khám: ${medicalTime}
+    Số thứ tự: ${medicalOrder}
+    Vui lòng đến đúng giờ theo địa chỉ đã đăng ký.
+  `;
+  } else {
+    text = `
+    Xin chào ${fullName},
+    Rất tiếc, đơn khám bệnh của bạn đã không được chấp nhận.
+    Vui lòng xem xét lại đơn khám và gửi lại khi đã sửa đổi.
+  `;
+  }
+
+  sendEmail(to, subject, text);
+};
+
 module.exports = {
   sendEmail,
   sendVerificationEmail,
+  sendApprovalConfirmation,
 };
