@@ -4,4 +4,5 @@ module.exports = {
   Count: require('./count.model'),
   Department: require('./department.model'),
   MedicalForm: require('./medical_form.model'),
+  Token: require('./token.model'),
 };

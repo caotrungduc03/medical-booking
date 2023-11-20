@@ -70,10 +70,10 @@ const userSchema = new Schema(
       type: String,
       trim: true,
     },
-    // isEmailVerified: {
-    //   type: Boolean,
-    //   default: false,
-    // },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
     isLocked: {
       type: Boolean,
       default: false,
