@@ -48,7 +48,13 @@ const getMedicalForms = catchAsync(async (req, res) => {
 });
 
 const createMedicalForm = catchAsync(async (req, res) => {
-  await MedicalForm.create({ ...req.body, status: 0 });
+  const files = req.files;
+  await MedicalForm.create({
+    ...req.body,
+    CCCD: files.CCCD[0].path,
+    BHYT: files.BHYT[0].path,
+    status: 0,
+  });
 
   res.status(201).json(response(201, 'Thành công'));
 });

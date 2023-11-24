@@ -4,3 +4,7 @@ node_modules
 # Environment varibales
 .env*
 !.env*.example
+
+# Large files
+**/uploads/*/*
+!**/uploads/*/.gitkeep
