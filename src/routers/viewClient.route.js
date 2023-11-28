@@ -1,5 +1,6 @@
 const express = require('express');
 const { viewClientController } = require('../controllers');
+const { checkCookieMiddleware } = require('../middlewares');
 
 const viewClientRouter = express.Router();
 
@@ -13,7 +14,7 @@ viewClientRouter.get(
   '/permission-denied',
   viewClientController.permissionDenied,
 );
-viewClientRouter.get('/', viewClientController.home);
+viewClientRouter.get('/', checkCookieMiddleware, viewClientController.home);
 viewClientRouter.get('*', viewClientController.notFound);
 
 module.exports = viewClientRouter;

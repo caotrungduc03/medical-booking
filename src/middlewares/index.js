@@ -3,4 +3,5 @@ module.exports = {
   roleMiddleware: require('./role.middleware'),
   errorMiddleware: require('./error.middleware'),
   uploadMiddleware: require('./upload.middleware'),
+  checkCookieMiddleware: require('./checkCookie.middleware'),
 };

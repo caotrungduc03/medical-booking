@@ -25,7 +25,9 @@ const aboutUs = catchAsync(async (req, res) => {
 });
 
 const home = catchAsync(async (req, res) => {
-  res.render('client/home');
+  res.render('client/home', {
+    user: req.user,
+  });
 });
 
 const notFound = catchAsync(async (req, res) => {
