@@ -109,6 +109,15 @@ const deleteUserById = catchAsync(async (req, res) => {
 
 const updateProfile = catchAsync(async (req, res) => {
   const user = req.user;
+  const files = req.files;
+
+  let avatar = user.avatar;
+  if (files.avatar?.[0]) {
+    const filePath = files.avatar[0].path;
+    avatar =
+      '/static/admin/uploads/AVATAR/' +
+      filePath.substring(filePath.lastIndexOf('\\') + 1);
+  }
 
   const dataUpdate = pick(req.body, [
     'firstName',
@@ -119,6 +128,7 @@ const updateProfile = catchAsync(async (req, res) => {
     'phone',
     'address',
   ]);
+  dataUpdate.avatar = avatar;
 
   Object.assign(user, dataUpdate);
 

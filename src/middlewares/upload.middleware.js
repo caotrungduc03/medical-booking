@@ -9,7 +9,7 @@ const getDest = (uploadDir) => {
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     // Check the fieldname and store files accordingly
-    if (file.fieldname === 'AVATAR') {
+    if (file.fieldname === 'avatar') {
       cb(null, getDest('AVATAR'));
     } else if (file.fieldname === 'CCCD') {
       cb(null, getDest('CCCD'));
@@ -46,6 +46,9 @@ const checkFileType = (file, cb) => {
   }
 };
 
+const uploadAvatar = upload.fields([{ name: 'avatar', maxCount: 1 }]);
+
 module.exports = {
   upload,
+  uploadAvatar,
 };

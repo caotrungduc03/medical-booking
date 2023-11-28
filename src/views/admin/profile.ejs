@@ -50,84 +50,105 @@
                 <form id="updateProfileForm">
                   <div class="box-body">
                     <div class="row">
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="lastName">Họ, tên đệm <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-text"></i></span>
+                      <div class="col-lg-8">
+                        <div class="row">
+                          <div class="form-group col-12 col-lg-6">
+                            <label for="lastName">Họ, tên đệm <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ti-text"></i></span>
+                              </div>
+                              <input type="text" class="form-control" name="lastName" value="<%= user.lastName %>" required />
+                            </div>
                           </div>
-                          <input type="text" class="form-control" name="lastName" value="<%= user.lastName %>" required />
+                          <div class="form-group col-12 col-lg-6">
+                            <label for="firstName">Tên <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ti-text"></i></span>
+                              </div>
+                              <input type="text" class="form-control" name="firstName" value="<%= user.firstName %>" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-12 col-lg-6">
+                            <label for="gender">Giới tính</label>
+                            <div class="input-group" style="height: 34px">
+                              <select class="form-control select2input" name="gender" value="<%= user.gender %>" style="background-color: white; width: 100%">
+                                <option value="Khác" selected>Khác</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group col-12 col-lg-6">
+                            <label for="birthday">Ngày sinh</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                              </div>
+                              <input type="date" class="form-control" name="birthday" value="<%= user.birthdayFormat %>" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-12 col-lg-6">
+                            <label for="email">Email</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ti-email"></i></span>
+                              </div>
+                              <input type="text" class="form-control" name="email" value="<%= user.email %>" disabled />
+                            </div>
+                          </div>
+                          <div class="form-group col-12 col-lg-6">
+                            <label for="phone">Số điện thoại</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                              </div>
+                              <input type="text" class="form-control" name="phone" value="<%= user.phone %>" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="address">Địa chỉ</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="ti-text"></i></span>
+                            </div>
+                            <input type="text" class="form-control" name="address" value="<%= user.address %>" />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group col-12 col-lg-6">
+                            <label for="cardId">CMND/CCCD <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ti-id-badge"></i></span>
+                              </div>
+                              <input type="text" class="form-control" name="cardId" value="<%= user.cardId %>" required />
+                            </div>
+                          </div>
+                          <div class="form-group col-12 col-lg-6">
+                            <label for="address">Ảnh đại diện</label>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="ti-image"></i></span>
+                              </div>
+                              <input type="file" class="form-control" name="avatar" />
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="firstName">Tên <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-text"></i></span>
-                          </div>
-                          <input type="text" class="form-control" name="firstName" value="<%= user.firstName %>" required />
-                        </div>
-                      </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="gender">Giới tính</label>
-                        <div class="input-group" style="height: 34px">
-                          <select class="form-control select2input" name="gender" value="<%= user.gender %>" style="background-color: white; width: 100%">
-                            <option value="Khác" selected>Khác</option>
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
-                          </select>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <img src="<%= user.avatar %>" alt="Avatar" class="img-thumbnail mt-4">
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="form-group col-12 col-lg-6">
-                        <label for="cardId">CMND/CCCD <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-id-badge"></i></span>
-                          </div>
-                          <input type="text" class="form-control" name="cardId" value="<%= user.cardId %>" required />
-                        </div>
-                      </div>
-                      <div class="form-group col-12 col-lg-6">
-                        <label for="birthday">Ngày sinh</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                          </div>
-                          <input type="date" class="form-control" name="birthday" value="<%= user.birthdayFormat %>" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-12 col-lg-6">
-                        <label for="email">Email</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-email"></i></span>
-                          </div>
-                          <input type="text" class="form-control" name="email" value="<%= user.email %>" disabled />
-                        </div>
-                      </div>
-                      <div class="form-group col-12 col-lg-6">
-                        <label for="phone">Số điện thoại</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
-                          </div>
-                          <input type="text" class="form-control" name="phone" value="<%= user.phone %>" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="address">Địa chỉ</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="ti-text"></i></span>
-                        </div>
-                        <input type="text" class="form-control" name="address" value="<%= user.address %>" />
-                      </div>
-                    </div>
+
                   </div>
                   <div class="box-footer d-flex justify-content-center">
                     <a href="/admin" class="btn btn-rounded btn-warning btn-outline mr-2">
@@ -156,6 +177,10 @@
   <%- include('../partials/admin/script') %>
 
   <script src="/static/admin/js/script/profile.js"></script>
+  <script>
+    const gender = "<%= user.gender %>";
+    $('select[name="gender"]').val(gender).change();
+  </script>
 </body>
 
 </html>
