@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/admin/head') %>
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+  <div class="wrapper">
+    <div id="loader"></div>
+
+    <%- include('../partials/admin/header') %>
+
+    <%- include('../partials/admin/sidebar') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto">
+              <h3>Lịch sử khám bệnh</h3>
+              <div class="d-inline-block align-items-center">
+                <nav>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/admin"><i class="mdi mdi-home-outline"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Lịch sử khám bệnh</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+            <div class="row align-items-end">
+              <div class="col-xl-12 col-12">
+                <div class="box-header with-border">
+                  <h4 class="box-title">Danh sách đơn khám bệnh</h4>
+                </div>
+                <div class="box-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item">
+                      <a id="allOrderNav" class="nav-link active" data-toggle="tab" href="#allOrderTab" role="tab">
+                        Tất cả <span></span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a id="notApproveOrderNav" class="nav-link" data-toggle="tab" href="#notApproveOrderTab" role="tab">
+                        Chưa xét <span></span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a id="approveOrderNav" class="nav-link" data-toggle="tab" href="#approveOrderTab" role="tab">
+                        Đủ điều kiện <span></span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a id="unApproveOrderNav" class="nav-link" data-toggle="tab" href="#unApproveOrderTab" role="tab">
+                        Chưa đủ điều kiện <span></span>
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane fade active show" id="allOrderTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="allOrderTbl" class="table table-striped dataTable p-0 manage-order" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Họ và tên</th>
+                              <th>Giới tính</th>
+                              <th>Ngày sinh</th>
+                              <th>Chuyên khoa khám</th>
+                              <th>Thời gian</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="notApproveOrderTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="notApproveOrderTbl" class="table table-striped dataTable p-0 manage-order" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Họ và tên</th>
+                              <th>Giới tính</th>
+                              <th>Ngày sinh</th>
+                              <th>Chuyên khoa khám</th>
+                              <th>Thời gian</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="approveOrderTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="approveOrderTbl" class="table table-striped dataTable p-0 manage-order" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Họ và tên</th>
+                              <th>Giới tính</th>
+                              <th>Ngày sinh</th>
+                              <th>Chuyên khoa khám</th>
+                              <th>Thời gian</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="unApproveOrderTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="unApproveOrderTbl" class="table table-striped dataTable p-0 manage-order" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Họ và tên</th>
+                              <th>Giới tính</th>
+                              <th>Ngày sinh</th>
+                              <th>Chuyên khoa khám</th>
+                              <th>Thời gian</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../partials/admin/footer') %>
+
+  </div>
+
+  <div id="infoOrderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm chuyên khoa mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="infoOrderForm">
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group col-12 col-lg-4">
+                <label for="fullName">Họ và tên</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="fullName" readonly />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-4">
+                <label for="gender">Giới tính</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="gender" readonly />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-4">
+                <label for="birthday">Ngày sinh</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                  </div>
+                  <input type="date" class="form-control" name="birthday" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-lg-4">
+                <label for="cardId">CMND/CCCD</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-id-badge"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="cardId" readonly />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-4">
+                <label for="email">Email</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-email"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="email" readonly />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-4">
+                <label for="phone">Số điện thoại</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="phone" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Địa chỉ hiện tại</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" class="form-control" name="address" readonly />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-lg-4">
+                <label for="medicalDepartment">Chuyên khoa khám</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="medicalDepartment" readonly />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-4">
+                <label for="medicalDay">Ngày khám</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                  </div>
+                  <input type="date" class="form-control" name="medicalDay" readonly />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-4">
+                <label for="medicalHour">Giờ khám</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="medicalHour" readonly />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Lý do khám <span class="text-danger">*</span></label>
+              <textarea class="form-control" name="reason" readonly></textarea>
+            </div>
+            <div class="form-group">
+              <label for="address">Ghi chú</label>
+              <textarea class="form-control" name="note" readonly></textarea>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <!-- <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> CẬP NHẬT</button> -->
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- Page Content overlay -->
+
+  <%- include('../partials/admin/script') %>
+
+  <script src="/static/admin/js/script/history_order.js"></script>
+</body>
+
+</html>

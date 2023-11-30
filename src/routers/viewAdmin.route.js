@@ -40,6 +40,11 @@ viewAdminRouter.get(
   roleMiddleware(['nhan-vien-phe-duyet']),
   viewAdminController.manageOrder,
 );
+viewAdminRouter.get(
+  '/history-order',
+  authMiddleware,
+  viewAdminController.historyOrder,
+);
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);
 
 module.exports = viewAdminRouter;

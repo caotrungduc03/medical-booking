@@ -82,12 +82,12 @@ const medicalFormSchema = new Schema(
     CCCD: {
       type: String,
       trim: true,
-      required: true,
+      // required: true,
     },
     BHYT: {
       type: String,
       trim: true,
-      required: true,
+      // required: true,
     },
   },
   {

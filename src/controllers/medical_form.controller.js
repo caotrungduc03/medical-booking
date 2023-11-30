@@ -48,11 +48,11 @@ const getMedicalForms = catchAsync(async (req, res) => {
 });
 
 const createMedicalForm = catchAsync(async (req, res) => {
-  const files = req.files;
+  // const files = req.files;
   await MedicalForm.create({
     ...req.body,
-    CCCD: files.CCCD[0].path,
-    BHYT: files.BHYT[0].path,
+    // CCCD: files.CCCD[0].path,
+    // BHYT: files.BHYT[0].path,
     status: 0,
   });
 
@@ -61,8 +61,45 @@ const createMedicalForm = catchAsync(async (req, res) => {
 
 const getMedicalFormsByUser = catchAsync(async (req, res) => {
   const user = req.user;
+  const query = req.query;
+  const filter = {};
 
-  const medicalForms = await MedicalForm.find({ user: user._id });
+  if (query.status) {
+    if (Array.isArray(query.status)) {
+      filter.status = { $in: [...query.status] };
+    } else {
+      filter.status = { $in: [query.status] };
+    }
+  }
+
+  if (query.search) {
+    let searchValue = query.search['value'];
+    filter.fullName = { $regex: searchValue, $options: 'i' };
+  }
+
+  filter.user = user._id;
+
+  let columnIndex;
+  let columnName;
+  let columnSortOrder;
+  if (query.order) {
+    columnIndex = query.order[0]['column']; // Column index
+    columnName = query.columns[columnIndex]['data']; // Column name
+    columnSortOrder = query.order[0]['dir']; // asc or desc
+  }
+  let order = `${columnName}:${columnSortOrder}`;
+  const options = pick(query, ['draw', 'order', 'length', 'start', 'populate']);
+  let page = parseInt(options.start) / parseInt(options.length);
+  options['limit'] = options['length'];
+  delete options['length'];
+  options['page'] = options['start'];
+  delete options['start'];
+  options['page'] = page + 1;
+  options['sortBy'] = options['order'];
+  delete options['order'];
+  options['sortBy'] = order;
+
+  const medicalForms = await MedicalForm.paginate(filter, options);
 
   res.status(200).json(response(200, 'Thành công', medicalForms));
 });
