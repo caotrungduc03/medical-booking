@@ -7,7 +7,7 @@ const medicalFormRouter = express.Router();
 medicalFormRouter.post('/', medicalFormController.createMedicalForm);
 
 medicalFormRouter.get(
-  '/user',
+  '/me',
   authMiddleware,
   medicalFormController.getMedicalFormsByUser,
 );

@@ -1,10 +1,19 @@
 const express = require('express');
-const { authMiddleware, roleMiddleware } = require('../../middlewares');
+const {
+  authMiddleware,
+  roleMiddleware,
+  uploadMiddleware,
+} = require('../../middlewares');
 const { userController } = require('../../controllers');
 
 const userRouter = express.Router();
 
-userRouter.patch('/profile', authMiddleware, userController.updateProfile);
+userRouter.patch(
+  '/profile',
+  authMiddleware,
+  uploadMiddleware.uploadAvatar,
+  userController.updateProfile,
+);
 
 userRouter.use(authMiddleware);
 userRouter.use(roleMiddleware(['admin']));

@@ -75,7 +75,20 @@ const medicalFormSchema = new Schema(
       type: String,
       trim: true,
     },
-    status: Number,
+    status: {
+      type: Number,
+      default: 0,
+    },
+    CCCD: {
+      type: String,
+      trim: true,
+      // required: true,
+    },
+    BHYT: {
+      type: String,
+      trim: true,
+      // required: true,
+    },
   },
   {
     timestamps: true,
