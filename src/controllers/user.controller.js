@@ -3,6 +3,8 @@ const ApiError = require('../utils/ApiError');
 const { User } = require('../models');
 const response = require('../utils/response');
 const pick = require('../utils/pick');
+const { generateToken } = require('../utils/token');
+const { sendVerificationEmail } = require('../utils/mail');
 
 const getUsers = catchAsync(async (req, res) => {
   const query = req.query;
@@ -46,7 +48,11 @@ const getUsers = catchAsync(async (req, res) => {
 });
 
 const createUser = catchAsync(async (req, res) => {
-  await User.create(req.body);
+  const user = await User.create({ ...req.body });
+  const fullName = user.lastName + ' ' + user.firstName;
+
+  const token = await generateToken(user);
+  sendVerificationEmail(user.email, fullName, token);
 
   res.status(201).json(response(201, 'Thành công'));
 });
