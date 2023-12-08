@@ -7,7 +7,7 @@
 .header {
   position: fixed;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   height: 62px;
   width: 100%;
@@ -17,6 +17,7 @@
 }
 
 .header_logo {
+  flex: 1;
   height: 50%;
   margin-left: 12px;
 }
@@ -26,29 +27,15 @@
   width: auto;
 }
 
-.header_nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.header_nav {
-  list-style-type: none;
-}
-
-.nav_item {
-}
-
-.header_logo {
+.header_infor {
   flex: 2;
 }
 
 .header_nav {
-  flex: 3;
-}
-
-.header_user {
-  flex: 3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style-type: none;
 }
 
 .header_nav a,
@@ -88,10 +75,6 @@
 }
 
 .header_user {
-  flex: 1;
-  display: flex;
-  justify-content: end;
-  align-items: center;
   margin-right: 12px;
 }
 

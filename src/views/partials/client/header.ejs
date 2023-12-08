@@ -3,30 +3,30 @@
     <a href="/"><img src="/static/client/images/logo.svg" alt=""></a>
   </div>
 
-  <ul class="header_nav">
-    <li class="nav_item"><a href="/form">Đặt khám</a></li>
-    <li class="nav_item"><a href="">Tư vấn trực tuyền</a></li>
-    <li class="nav_item"><a href="">Tin Y tế</a></li>
-    <li class="nav_item"><a class="" href="/about-us">Về chúng tôi</a></li>
-  </ul>
+  <div class="header_infor">
+    <ul class="header_nav">
+      <li class="nav_item"><a href="/form">Đặt khám</a></li>
+      <li class="nav_item"><a class="" href="/about-us">Về chúng tôi</a></li>
+    </ul>
 
+
+  </div>
   <div class="header_user">
     <a href="/register" class="user_register">Đăng ký</a>
     <a href="/login" class="user_login">Đăng nhập</a>
   </div>
-
-  <div class="header_user" style="display: none; justify-content: center; align-items: center;">
+  <div class="header_user" style="display: none;">
     <a href="/admin" class="login">
       <img src="/static/admin/images/avatar/anonymous.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
     </a>
   </div>
   <script>
     const arr = document.querySelectorAll('.header_user');
-    if (localStorage.getItem('isLogin') === 'true') {
+    if (localStorage.getItem('isLogin') !== 'true') {
       arr[0].style.display = 'none';
-      arr[1].style.display = 'flex';
+      arr[1].style.display = 'block';
     } else {
-      arr[0].style.display = 'flex';
+      arr[0].style.display = 'block';
       arr[1].style.display = 'none';
     }
   </script>
