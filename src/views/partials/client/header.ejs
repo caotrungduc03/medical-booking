@@ -11,13 +11,16 @@
 
 
   </div>
+  <% if (user) { %>
+  <div class="header_user">
+    <a href="/admin" class="login">
+      <img src="<%= user.avatar %>" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+    </a>
+  </div>
+  <% } else { %>
   <div class="header_user">
     <a href="/register" class="user_register">Đăng ký</a>
     <a href="/login" class="user_login">Đăng nhập</a>
   </div>
-  <div class="header_user" style="display: none;">
-    <a href="/admin" class="login">
-      <img src="/static/admin/images/avatar/anonymous.png" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
-    </a>
-  </div>
+  <% } %>
 </header>

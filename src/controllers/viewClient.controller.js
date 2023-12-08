@@ -13,15 +13,19 @@ const login = catchAsync(async (req, res) => {
 const forgotPassword = catchAsync(async (req, res) => {
   res.render('client/forgotPassword');
 });
-
 const form = catchAsync(async (req, res) => {
   const departments = await Department.find();
 
-  res.render('client/form', { departments });
+  res.render('client/form', {
+    departments,
+    user: req.user,
+  });
 });
 
 const aboutUs = catchAsync(async (req, res) => {
-  res.render('client/aboutUs');
+  res.render('client/aboutUs', {
+    user: req.user,
+  });
 });
 
 const home = catchAsync(async (req, res) => {
