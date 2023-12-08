@@ -1,10 +1,18 @@
 const express = require('express');
 const { medicalFormController } = require('../../controllers');
-const { authMiddleware, roleMiddleware } = require('../../middlewares');
+const {
+  authMiddleware,
+  roleMiddleware,
+  uploadMiddleware,
+} = require('../../middlewares');
 
 const medicalFormRouter = express.Router();
 
-medicalFormRouter.post('/', medicalFormController.createMedicalForm);
+medicalFormRouter.post(
+  '/',
+  uploadMiddleware.uploadMedicalForm,
+  medicalFormController.createMedicalForm,
+);
 
 medicalFormRouter.get(
   '/me',

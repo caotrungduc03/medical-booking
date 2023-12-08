@@ -78,7 +78,7 @@
                     </div>
                     <div class="row">
                       <div class="form-group col-12 col-lg-4">
-                        <label for="cardId">CMND/CCCD <span class="text-danger">*</span></label>
+                        <label for="cardId">Số CMND/CCCD <span class="text-danger">*</span></label>
                         <div class="input-group">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="ti-id-badge"></i></span>
@@ -102,6 +102,35 @@
                             <span class="input-group-text"><i class="fa fa-phone"></i></span>
                           </div>
                           <input type="text" class="form-control" name="phone" value="<%= user.phone %>" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-12 col-lg-4">
+                        <label for="cccd">Ảnh CMDN/CCCD <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-image"></i></span>
+                          </div>
+                          <input type="file" class="form-control" id="cccd" required />
+                        </div>
+                      </div>
+                      <div class="form-group col-12 col-lg-4">
+                        <label for="insuranceId">Số BHYT</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-id-badge"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="insuranceId" />
+                        </div>
+                      </div>
+                      <div class="form-group col-12 col-lg-4">
+                        <label for="bhyt">Ảnh BHYT</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ti-image"></i></span>
+                          </div>
+                          <input type="file" class="form-control" id="bhyt" />
                         </div>
                       </div>
                     </div>
