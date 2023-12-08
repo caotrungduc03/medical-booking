@@ -325,7 +325,6 @@ const handleDetail = () => {
     const formFields = $(formId).serializeArray();
     formFields.forEach((field) => {
       if (['birthday', 'medicalDay'].includes(field.name)) {
-        console.log(field.name, order[field.name + 'Format']);
         $(`${formId} [name='${field.name}']`)
           .val(moment(order[field.name]).format('YYYY-MM-DD'))
           .change();
@@ -333,6 +332,8 @@ const handleDetail = () => {
         $(`${formId} [name='${field.name}']`).val(order[field.name]).change();
       }
     });
+    $('#cccd').attr('src', order.cccd);
+    $('#bhyt').attr('src', order.bhyt);
   });
 };
 

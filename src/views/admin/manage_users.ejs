@@ -227,15 +227,16 @@
             <div class="col-4">
               <h4>Nhóm quyền</h4>
               <ul id="roles" style="list-style: none;">
-                <li>
-                  <input type="checkbox" checked disabled />
-                  <label>Khách hàng</label>
-                </li>
                 <% roles.forEach((role) => { %>
                 <% if (role.roleIndex !== 'khach-hang') { %>
                 <li>
                   <input type="checkbox" id="<%= 'update-' + role._id %>" value="<%= role._id %>" />
                   <label for="<%= 'update-' + role._id %>"><%= role.roleName %></label>
+                </li>
+                <% } else { %>
+                <li>
+                  <input type="checkbox" value="<%= role._id %>" checked readonly />
+                  <label class="text-primary">Khách hàng</label>
                 </li>
                 <% } %>
                 <% }) %>
@@ -366,15 +367,16 @@
             <div class="col-4">
               <h4>Nhóm quyền</h4>
               <ul id="roles" style="list-style: none;">
-                <li>
-                  <input type="checkbox" checked disabled />
-                  <label>Khách hàng</label>
-                </li>
                 <% roles.forEach((role) => { %>
                 <% if (role.roleIndex !== 'khach-hang') { %>
                 <li>
                   <input type="checkbox" id="<%= role._id %>" value="<%= role._id %>" />
                   <label for="<%= role._id %>"><%= role.roleName %></label>
+                </li>
+                <% } else { %>
+                <li>
+                  <input type="checkbox" value="<%= role._id %>" checked readonly />
+                  <label class="text-primary">Khách hàng</label>
                 </li>
                 <% } %>
                 <% }) %>

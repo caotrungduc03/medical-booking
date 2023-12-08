@@ -48,11 +48,30 @@ const getMedicalForms = catchAsync(async (req, res) => {
 });
 
 const createMedicalForm = catchAsync(async (req, res) => {
-  // const files = req.files;
+  const files = req.files;
+  let cccd;
+  let bhyt = '';
+
+  if (files.cccd) {
+    const filePath = files.cccd[0].path;
+    cccd =
+      '/static/admin/uploads/CCCD/' +
+      filePath.substring(filePath.lastIndexOf('\\') + 1);
+  } else {
+    throw new ApiError(400, 'Vui lòng gửi file ảnh CMND/CCCD');
+  }
+
+  if (files.bhyt?.[0]) {
+    const filePath = files.bhyt[0].path;
+    bhyt =
+      '/static/admin/uploads/BHYT/' +
+      filePath.substring(filePath.lastIndexOf('\\') + 1);
+  }
+
   await MedicalForm.create({
     ...req.body,
-    // CCCD: files.CCCD[0].path,
-    // BHYT: files.BHYT[0].path,
+    cccd,
+    bhyt,
     status: 0,
   });
 

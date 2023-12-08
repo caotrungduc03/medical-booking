@@ -164,11 +164,9 @@ const handleAddUser = (id) => {
     });
 
     data.roles = [];
-    $(`${formId} #roles input:checked:not(:disabled)`).each(
-      (index, element) => {
-        data.roles.push($(element).val());
-      },
-    );
+    $(`${formId} #roles input:checked`).each((index, element) => {
+      data.roles.push($(element).val());
+    });
 
     if (!data.email.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)) {
       return notiError('Email không hợp lệ');
@@ -337,7 +335,7 @@ const handleUpdateUser = () => {
     });
 
     data.roles = [];
-    $(`${formId} #roles input:checked:not(:disabled)`).each(function () {
+    $(`${formId} #roles input:checked`).each(function () {
       data.roles.push($(this).val());
     });
 

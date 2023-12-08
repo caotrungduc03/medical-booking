@@ -79,12 +79,17 @@ const medicalFormSchema = new Schema(
       type: Number,
       default: 0,
     },
-    CCCD: {
+    cccd: {
       type: String,
       trim: true,
-      // required: true,
+      required: true,
     },
-    BHYT: {
+    insuranceId: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    bhyt: {
       type: String,
       trim: true,
       // required: true,

@@ -11,9 +11,9 @@ const storage = multer.diskStorage({
     // Check the fieldname and store files accordingly
     if (file.fieldname === 'avatar') {
       cb(null, getDest('AVATAR'));
-    } else if (file.fieldname === 'CCCD') {
+    } else if (file.fieldname === 'cccd') {
       cb(null, getDest('CCCD'));
-    } else if (file.fieldname === 'BHYT') {
+    } else if (file.fieldname === 'bhyt') {
       cb(null, getDest('BHYT'));
     } else {
       cb(new ApiError(400, 'Trường không hợp lệ!'));
@@ -48,7 +48,19 @@ const checkFileType = (file, cb) => {
 
 const uploadAvatar = upload.fields([{ name: 'avatar', maxCount: 1 }]);
 
+const uploadMedicalForm = upload.fields([
+  {
+    name: 'cccd',
+    maxCount: 1,
+  },
+  {
+    name: 'bhyt',
+    maxCount: 1,
+  },
+]);
+
 module.exports = {
   upload,
   uploadAvatar,
+  uploadMedicalForm,
 };

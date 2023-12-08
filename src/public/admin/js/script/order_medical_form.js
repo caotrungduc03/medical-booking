@@ -1,20 +1,20 @@
 const orderMedicalForm = () => {
   $('#orderMedicalForm').on('submit', async function (e) {
     e.preventDefault();
-    const data = {};
+    const data = new FormData();
     const formFields = $(this).serializeArray();
+    const documentCCCDs = $(`input[id="cccd"]`);
+    const documentBHYTs = $(`input[id="bhyt"]`);
     formFields.forEach((field) => {
-      data[field.name] = field.value;
+      data.append([field.name], field.value);
     });
-
+    data.append('cccd', documentCCCDs[0].files[0]);
+    data.append('bhyt', documentBHYTs[0].files[0]);
     try {
       let result = await (
         await fetch(`/api/v1/medical-forms`, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
+          body: data,
         })
       ).json();
       if (result.code === 201) {

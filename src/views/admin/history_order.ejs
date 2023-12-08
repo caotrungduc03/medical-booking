@@ -160,7 +160,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="myLargeModalLabel">Thêm chuyên khoa mới</h4>
+          <h4 class="modal-title" id="myLargeModalLabel">Thông tin chi tiết đơn khám bệnh</h4>
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         </div>
         <form id="infoOrderForm">
@@ -196,7 +196,7 @@
             </div>
             <div class="row">
               <div class="form-group col-12 col-lg-4">
-                <label for="cardId">CMND/CCCD</label>
+                <label for="cardId">Số CMND/CCCD</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="ti-id-badge"></i></span>
@@ -223,13 +223,24 @@
                 </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="address">Địa chỉ hiện tại</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ti-text"></i></span>
+            <div class="row">
+              <div class="form-group col-12 col-lg-4">
+                <label for="insuranceId">Số BHYT</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-id-badge"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="insuranceId" readonly />
                 </div>
-                <input type="text" class="form-control" name="address" readonly />
+              </div>
+              <div class="form-group col-12 col-lg-8">
+                <label for="address">Địa chỉ hiện tại</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="address" readonly />
+                </div>
               </div>
             </div>
             <div class="row">
@@ -262,12 +273,20 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="address">Lý do khám <span class="text-danger">*</span></label>
+              <label for="address">Lý do khám</label>
               <textarea class="form-control" name="reason" readonly></textarea>
             </div>
             <div class="form-group">
               <label for="address">Ghi chú</label>
               <textarea class="form-control" name="note" readonly></textarea>
+            </div>
+            <div class="row">
+              <div class="form-group col-6">
+                <img src="" id="cccd" name="cccd" alt="CCCD" class="img-thumbnail">
+              </div>
+              <div class="form-group col-6">
+                <img src="" id="bhyt" name="bhyt" alt="BHYT" class="img-thumbnail">
+              </div>
             </div>
           </div>
           <div class="modal-footer d-flex justify-content-between">
