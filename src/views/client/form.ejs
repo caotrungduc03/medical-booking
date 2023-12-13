@@ -23,18 +23,13 @@
         <h2>Đặt lịch khám</h2>
         <form action="#">
           <div class="row">
-            <!-- <div class="form-mb-5">
-              <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" name="fullName" id="fullName" required>
-            </div> -->
-
             <div class="form-mb-5">
               <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" id="name" placeholder="Họ và tên" />
+              <input class="form-input" type="text" name="fullName" id="fullName" placeholder="VD: Nguyễn Văn A" required />
             </div>
             <div class="form-mb-5">
               <label class=" form-label">Giới tính <span class="text-danger">*</span></label>
-              <select class="form-select" name="gender" id="gender" style="width: 100%;" required>
+              <select class="form-select" name="gender" id="gender" required>
                 <option value="" selected>Khác</option>
                 <option value="Nam">Nam</option>
                 <option value="Nữ">Nữ</option>
@@ -54,21 +49,21 @@
           <div class="row">
             <div class="form-mb-5">
               <label class="form-label">Điện thoại <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" name="phone" id="phone" required>
+              <input class="form-input" type="text" name="phone" id="phone" placeholder="VD: 0123456789" required>
             </div>
             <div class="form-mb-5">
               <label class="form-label">Email <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" name="email" id="email">
+              <input class="form-input" type="text" name="email" id="email" placeholder="VD: abc@example.com" required>
             </div>
           </div>
           <div class="row">
             <div class="form-mb-5">
               <label class="form-label">Số CMND / CCCD <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" name="cardId" id="cardId" required>
+              <input class="form-input" type="text" name="cardId" id="cardId" placeholder="VD: 001001001001" required>
             </div>
             <div class="form-mb-5">
               <label class="form-label">Khoa <span class="text-danger">*</span></label>
-              <select class="form-select" name="medicalDepartment" id="medicalDepartment" style="width: 100%;" required>
+              <select class="form-select" name="medicalDepartment" id="medicalDepartment" required>
                 <option value="" selected>-- Chọn --</option>
                 <% departments.forEach(d => { %>
                 <option><%= d.name %></option>
@@ -80,7 +75,6 @@
             <div class="form-mb-5">
               <label class="form-label">Ngày khám <span class="text-danger">*</span></label class="form-label">
               <input class="form-input" type="date" name="medicalDay" id="medicalDay" required>
-
             </div>
             <div class="form-mb-5">
               <label class="form-label">Giờ khám <span class="text-danger">*</span></label class="form-label">
@@ -123,8 +117,6 @@
       console.log(result);
     }
 
-    // fetchData();
-
     const form = document.querySelector('form');
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -148,15 +140,6 @@
 
       console.log("Du lieu gui len: ", data);
 
-      // const result = await (await fetch('/api/v1/users', { //fetch 
-      //   method: 'POST',
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(data) //
-      // })).json()
-
-      // console.log("Du lieu nhan ve: ", result);
       try {
         let result = await (
           await fetch(`/api/v1/medical-forms`, {
@@ -168,6 +151,7 @@
           })
         ).json();
         if (result.code === 201) {
+          alert('Đặt lịch hẹn thành công');
           setTimeout(() => window.location.reload(), 1000);
         }
       } catch (error) {
