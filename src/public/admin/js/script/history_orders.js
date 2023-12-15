@@ -302,7 +302,7 @@ const configUnApproveOrderTbl = () => {
 };
 
 const getCurrentTabId = () => {
-  const topicsOrders = $('.manage-order');
+  const topicsOrders = $('.manage-orders');
 
   for (let i = 0; i < topicsOrders.length; i++) {
     let node = topicsOrders[i];
@@ -318,7 +318,7 @@ const getCurrentTabId = () => {
 const handleDetail = () => {
   const formId = '#infoOrderForm';
   let order;
-  $('.manage-order').on('click', '#btn-detail', function () {
+  $('.manage-orders').on('click', '#btn-detail', function () {
     const tabId = getCurrentTabId();
     order = $(`${tabId} table`).DataTable().row($(this).parents('tr')).data();
 

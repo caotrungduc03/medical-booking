@@ -65,22 +65,22 @@ const statistic = catchAsync(async (req, res) => {
   });
 });
 
-const manageOrder = catchAsync(async (req, res) => {
+const manageOrders = catchAsync(async (req, res) => {
   const departments = await Department.find();
 
-  res.render('admin/manage_order', {
-    path: '/manage-order',
+  res.render('admin/manage_orders', {
+    path: '/manage-orders',
     user: req.user,
     ROLES: req.roles,
     departments,
   });
 });
 
-const historyOrder = catchAsync(async (req, res) => {
+const historyOrders = catchAsync(async (req, res) => {
   const departments = await Department.find();
 
-  res.render('admin/history_order', {
-    path: '/history-order',
+  res.render('admin/history_orders', {
+    path: '/history-orders',
     user: req.user,
     ROLES: req.roles,
     departments,
@@ -95,6 +95,6 @@ module.exports = {
   profile,
   orderMedicalForm,
   statistic,
-  manageOrder,
-  historyOrder,
+  manageOrders,
+  historyOrders,
 };

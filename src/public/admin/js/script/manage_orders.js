@@ -300,7 +300,7 @@ const configUnApproveOrderTbl = () => {
 };
 
 const getCurrentTabId = () => {
-  const topicsOrders = $('.manage-order');
+  const topicsOrders = $('.manage-orders');
 
   for (let i = 0; i < topicsOrders.length; i++) {
     let node = topicsOrders[i];
@@ -316,7 +316,7 @@ const getCurrentTabId = () => {
 const handleDetail = () => {
   const formId = '#infoOrderForm';
   let order;
-  $('.manage-order').on('click', '#btn-detail', function () {
+  $('.manage-orders').on('click', '#btn-detail', function () {
     const tabId = getCurrentTabId();
     order = $(`${tabId} table`).DataTable().row($(this).parents('tr')).data();
 
@@ -337,7 +337,7 @@ const handleDetail = () => {
 
 const handleChangeStatus = () => {
   let order;
-  $('.manage-order').on('click', '#btn-approve', function () {
+  $('.manage-orders').on('click', '#btn-approve', function () {
     const tabId = getCurrentTabId();
     order = $(`${tabId} table`).DataTable().row($(this).parents('tr')).data();
 
@@ -379,7 +379,7 @@ const handleChangeStatus = () => {
       });
   });
 
-  $('.manage-order').on('click', '#btn-unApprove', function () {
+  $('.manage-orders').on('click', '#btn-unApprove', function () {
     const tabId = getCurrentTabId();
     order = $(`${tabId} table`).DataTable().row($(this).parents('tr')).data();
 
