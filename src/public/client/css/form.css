@@ -6,19 +6,13 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
-body {
-}
-
 .container {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 .wrapper {
-  position: relative;
   width: 80%;
-  height: 700px;
   margin: 80px 0 40px 0;
   border: 5px solid rgba(20, 20, 255, 0.5);
   border-radius: 20px;
@@ -26,93 +20,61 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-.wrapper .form-box-register {
+.form-box-register {
   width: 100%;
   padding: 20px;
 }
-
 .form-box-register h2 {
   font-size: 50px;
   color: rgb(20, 20, 255);
   text-align: center;
 }
-
-.form-box-register .row {
+.row {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  text-align: center;
 }
-
-.input-box-1 {
-  float: left;
-  position: relative;
+.form-mb-5 {
   width: 40%;
-  height: 30px;
-  margin: 30px 0 0 0;
+  margin-bottom: 12px;
 }
-
-.input-box-1 label {
-  position: absolute;
-  top: 40%;
-  left: 5px;
-  transform: translateY(-165%);
-  font-size: 20px;
-  color: #162938;
+.form-label {
+  display: block;
   font-weight: 500;
-  pointer-events: none;
+  font-size: 16px;
+  color: #07074d;
+  margin-bottom: 12px;
+  margin-left: 12px;
 }
-
-.input-box-1 input,
-.input-box-1 select {
+.form-input,
+.form-select {
   width: 100%;
-  height: 100%;
-  border: 2px solid black;
-  border-radius: 10px;
-  font-size: 20px;
-  color: #162938;
+  padding: 6px 20px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  background: white;
   font-weight: 500;
-  padding: 0 35px 0 5px;
+  font-size: 16px;
+  color: #6b7280;
+  outline: none;
+  resize: none;
 }
-
+.form-input:focus {
+  border-color: #6a64f1;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
 .input-box-2 {
   width: 90%;
-  height: 30px;
   float: left;
-  display: flex;
-  position: relative;
-  margin: 30px 0;
+  margin-bottom: 12px;
 }
-
-.input-box-2 label {
-  position: absolute;
-  top: 40%;
-  left: 5px;
-  transform: translateY(-165%);
-  font-size: 20px;
-  color: #162938;
-  font-weight: 500;
-  pointer-events: none;
-}
-
-.input-box-2 input {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  font-size: 20px;
-  color: #162938;
-  font-weight: 500;
-  padding: 0 30px 0 5px;
-}
-
 .text-danger {
   color: red;
 }
-
-.btn {
+.form-btn {
   width: 30%;
   height: 45px;
+  margin-top: 12px;
   background: rgb(20, 20, 255);
   border: none;
   outline: none;
