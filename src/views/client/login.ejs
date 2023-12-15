@@ -43,7 +43,7 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="checkbox">
-                        <input type="checkbox" id="basic_checkbox_1">
+                        <input type="checkbox" id="basic_checkbox_1" checked>
                         <label for="basic_checkbox_1">Lưu tên đăng nhập</label>
                       </div>
                     </div>
@@ -75,6 +75,14 @@
   <%- include('../partials/client/script') %>
 
   <script src="/static/client/js/login_register.js"></script>
+  <script>
+    (() => {
+      const email = localStorage.getItem('email');
+      if (email !== 'null') {
+        $('#loginForm #email').val(email);
+      }
+    })();
+  </script>
 </body>
 
 </html>

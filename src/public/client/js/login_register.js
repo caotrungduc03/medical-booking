@@ -74,7 +74,7 @@ const handleLogin = () => {
 
       if (result.code === 200) {
         notiSuccess('Đăng nhập thành công!');
-        localStorage.setItem('isLogin', 'true');
+        handleSaveSession(email);
         setTimeout(() => (window.location.href = '/admin'), 1000);
       } else {
         notiError(result.message);
@@ -85,31 +85,42 @@ const handleLogin = () => {
   });
 };
 
-const handleEnterPassword = () => {
-  const eyeBtn = $('#btn-eye');
-  const password = $('#loginForm #password');
-
-  password.on('keyup', function (e) {
+const handleEnterPassword = (passwordInput, eyeBtn) => {
+  $(passwordInput).on('keyup', function (e) {
     if (e.target.value) {
-      eyeBtn.show();
+      $(eyeBtn).show();
     } else {
-      eyeBtn.hide();
+      $(eyeBtn).hide();
     }
   });
 
-  eyeBtn.on('click', function (e) {
-    if (password.attr('type') === 'password') {
-      password.attr('type', 'text');
-      eyeBtn.html('<i class="fa fa-eye-slash"></i>');
+  $(eyeBtn).on('click', function (e) {
+    if ($(passwordInput).attr('type') === 'password') {
+      $(passwordInput).attr('type', 'text');
+      $(eyeBtn).html('<i class="fa fa-eye-slash"></i>');
     } else {
-      password.attr('type', 'password');
-      eyeBtn.html('<i class="fa fa-eye"></i>');
+      $(passwordInput).attr('type', 'password');
+      $(eyeBtn).html('<i class="fa fa-eye"></i>');
     }
   });
+};
+
+const handleSaveSession = (email) => {
+  const isSaveSession = $('#loginForm #basic_checkbox_1').is(':checked');
+  if (isSaveSession) {
+    localStorage.setItem('email', email);
+  } else {
+    localStorage.setItem('email', null);
+  }
 };
 
 $(document).ready(function () {
   handleRegister();
   handleLogin();
-  handleEnterPassword();
+  handleEnterPassword('#loginForm #password', '#btn-eye');
+  handleEnterPassword('#registerForm #password', '#btn-eye-password');
+  handleEnterPassword(
+    '#registerForm #confirmPassword',
+    '#btn-eye-confirmPassword',
+  );
 });
