@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/admin/head') %>
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+  <div class="wrapper">
+    <div id="loader"></div>
+
+    <%- include('../partials/admin/header') %>
+
+    <%- include('../partials/admin/sidebar') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto">
+              <h3>Quản lý bác sĩ</h3>
+              <div class="d-inline-block align-items-center">
+                <nav>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/admin"><i class="mdi mdi-home-outline"></i></a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">Danh mục hệ thống</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quản lý bác sĩ</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+            <div class="row align-items-end">
+              <div class="col-xl-12 col-12">
+                <div class="box-header with-border">
+                  <h4 class="box-title">Danh sách các bác sĩ</h4>
+                </div>
+                <div class="box-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item">
+                      <a id="allDoctorNav" class="nav-link active" data-toggle="tab" href="#allDoctorTab" role="tab">
+                        <span>Tất cả</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="modal" data-target="#addDoctorModal">
+                        <span class="model_img"><i class="fa fa-plus mr-1"></i> Thêm mới</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane fade active show" id="allDoctorTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="allDoctorTbl" class="table table-striped dataTable" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Ảnh đại diện</th>
+                              <th>Tên bác sĩ</th>
+                              <th>Giới tính</th>
+                              <th>Bằng cấp</th>
+                              <th>Năm kinh nghiệm</th>
+                              <th>Chuyên khoa</th>
+                              <th>Thao tác</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../partials/admin/footer') %>
+
+  </div>
+
+  <div id="addDoctorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm bác sĩ mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="addDoctorForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="address">Ảnh đại diện</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-image"></i></span>
+                </div>
+                <input type="file" class="form-control" id="avatar" name="avatar" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Tên bác sĩ <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="name" name="name" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="gender">Giới tính <span class="text-danger">*</span></label>
+              <div class="input-group" style="height: 34px">
+                <select class="form-control select2input" name="gender" style="background-color: white; width: 100%" required>
+                  <option value="">-- Chọn --</option>
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="degree">Bằng cấp <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="degree" name="degree" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="experience">Năm kinh nghiệm <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="number" id="experience" name="experience" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="department">Chuyên khoa <span class="text-danger">*</span></label>
+              <select class="form-control select2input" name="department" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+                <% departments.forEach(d => { %>
+                <option value="<%= d._id %>"><%= d.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="description">Mô tả</label>
+              <textarea type="number" id="description" name="description" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> THÊM MỚI</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <div id="updateDoctorModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Cập nhật thông tin bác sĩ</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="updateDoctorForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="address">Ảnh đại diện</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-image"></i></span>
+                </div>
+                <input type="file" class="form-control" id="avatar" name="avatar" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="doctorCode">Mã bác sĩ</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="doctorCode" name="doctorCode" class="form-control" disabled />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Tên bác sĩ <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="name" name="name" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="gender">Giới tính <span class="text-danger">*</span></label>
+              <div class="input-group" style="height: 34px">
+                <select class="form-control select2input" name="gender" style="background-color: white; width: 100%" required>
+                  <option value="">-- Chọn --</option>
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="degree">Bằng cấp <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="text" id="degree" name="degree" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="experience">Năm kinh nghiệm <span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ti-text"></i></span>
+                </div>
+                <input type="number" id="experience" name="experience" class="form-control" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="department">Chuyên khoa <span class="text-danger">*</span></label>
+              <select class="form-control select2input" name="department" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+                <% departments.forEach(d => { %>
+                <option value="<%= d._id %>"><%= d.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="description">Mô tả</label>
+              <textarea type="number" id="description" name="description" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> CẬP NHẬT</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- Page Content overlay -->
+
+  <%- include('../partials/admin/script') %>
+
+  <script src="/static/admin/js/script/manage_doctors.js"></script>
+</body>
+
+</html>

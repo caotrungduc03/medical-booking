@@ -45,6 +45,12 @@ viewAdminRouter.get(
   authMiddleware,
   viewAdminController.historyOrders,
 );
+viewAdminRouter.get(
+  '/manage-doctors',
+  authMiddleware,
+  roleMiddleware(['admin']),
+  viewAdminController.manageDoctors,
+);
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);
 
 module.exports = viewAdminRouter;

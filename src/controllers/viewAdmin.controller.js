@@ -87,6 +87,17 @@ const historyOrders = catchAsync(async (req, res) => {
   });
 });
 
+const manageDoctors = catchAsync(async (req, res) => {
+  const departments = await Department.find();
+
+  res.render('admin/manage_doctors', {
+    path: '/manage-doctors',
+    user: req.user,
+    ROLES: req.roles,
+    departments,
+  });
+});
+
 module.exports = {
   dashboard,
   manageRoles,
@@ -97,4 +108,5 @@ module.exports = {
   statistic,
   manageOrders,
   historyOrders,
+  manageDoctors,
 };
