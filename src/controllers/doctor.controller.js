@@ -64,10 +64,7 @@ const createDoctor = catchAsync(async (req, res) => {
   data.doctorCode = 'CK.' + count.number.toString().padStart(6, '0');
 
   if (files.avatar?.[0]) {
-    const filePath = files.avatar[0].path;
-    data.avatar =
-      '/static/admin/uploads/AVATAR/' +
-      filePath.substring(filePath.lastIndexOf('\\') + 1);
+    data.avatar = files.avatar[0].path;
   } else {
     data.avatar =
       '/static/admin/images/' +

@@ -54,19 +54,13 @@ const createMedicalForm = catchAsync(async (req, res) => {
   let bhyt = '';
 
   if (files.cccd) {
-    const filePath = files.cccd[0].path;
-    cccd =
-      '/static/admin/uploads/CCCD/' +
-      filePath.substring(filePath.lastIndexOf('\\') + 1);
+    cccd = files.cccd[0].path;
   } else {
     throw new ApiError(400, 'Vui lòng gửi file ảnh CMND/CCCD');
   }
 
   if (files.bhyt?.[0]) {
-    const filePath = files.bhyt[0].path;
-    bhyt =
-      '/static/admin/uploads/BHYT/' +
-      filePath.substring(filePath.lastIndexOf('\\') + 1);
+    bhyt = files.bhyt[0].path;
   }
 
   const shift = await Shift.findById(data.shift);
