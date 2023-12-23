@@ -6,4 +6,5 @@ module.exports = {
   MedicalForm: require('./medical_form.model'),
   Token: require('./token.model'),
   Doctor: require('./doctor.model'),
+  Shift: require('./shift.model'),
 };

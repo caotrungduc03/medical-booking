@@ -119,10 +119,7 @@ const updateProfile = catchAsync(async (req, res) => {
 
   let avatar = user.avatar;
   if (files.avatar?.[0]) {
-    const filePath = files.avatar[0].path;
-    avatar =
-      '/static/admin/uploads/AVATAR/' +
-      filePath.substring(filePath.lastIndexOf('\\') + 1);
+    avatar = files.avatar[0].path;
   }
 
   const dataUpdate = pick(req.body, [

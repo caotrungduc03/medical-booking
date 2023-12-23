@@ -8,9 +8,20 @@ const getDoctors = catchAsync(async (req, res) => {
   const query = req.query;
   const filter = {};
 
+  if (query.department) {
+    if (query.department === 'null') {
+      filter.department = null;
+    } else {
+      filter.department = query.department;
+    }
+  }
   if (query.search) {
     let searchValue = query.search['value'];
     filter.name = { $regex: searchValue, $options: 'i' };
+  }
+  if (query.q) {
+    let qValue = query.q;
+    filter.name = { $regex: qValue, $options: 'i' };
   }
 
   let columnIndex;
@@ -53,10 +64,7 @@ const createDoctor = catchAsync(async (req, res) => {
   data.doctorCode = 'CK.' + count.number.toString().padStart(6, '0');
 
   if (files.avatar?.[0]) {
-    const filePath = files.avatar[0].path;
-    data.avatar =
-      '/static/admin/uploads/AVATAR/' +
-      filePath.substring(filePath.lastIndexOf('\\') + 1);
+    data.avatar = files.avatar[0].path;
   } else {
     data.avatar =
       '/static/admin/images/' +

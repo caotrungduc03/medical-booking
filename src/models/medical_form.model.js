@@ -14,14 +14,14 @@ const medicalFormSchema = new Schema(
     },
     fullName: {
       type: String,
-      require: true,
+      required: true,
       trim: true,
     },
     gender: {
       type: String,
       trim: true,
       enum: ['Nam', 'Nữ'],
-      require: true,
+      required: true,
     },
     cardId: {
       type: String,
@@ -53,17 +53,18 @@ const medicalFormSchema = new Schema(
       required: true,
     },
     medicalDepartment: {
-      type: String,
-      trim: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Department',
       required: true,
     },
-    medicalDay: {
-      type: Date,
+    doctor: {
+      type: Schema.Types.ObjectId,
+      ref: 'Doctor',
       required: true,
     },
-    medicalHour: {
-      type: String,
-      trim: true,
+    shift: {
+      type: Schema.Types.ObjectId,
+      ref: 'Shift',
       required: true,
     },
     reason: {

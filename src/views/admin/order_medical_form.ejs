@@ -144,36 +144,33 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="form-group col-12 col-lg-4">
+                      <div class="form-group col-12 col-lg-6">
                         <label for="medicalDepartment">Chuyên khoa khám <span class="text-danger">*</span></label>
-                        <select class="form-control select2input" name="medicalDepartment" style="width: 100%;" required>
+                        <select class="form-control select2input" id="medicalDepartment" name="medicalDepartment" style="width: 100%;" required>
                           <option value="" selected>-- Chọn --</option>
                           <% departments.forEach(d => { %>
-                          <option><%= d.name %></option>
+                          <option value="<%= d.id %>"><%= d.name %></option>
                           <% }) %>
                         </select>
                       </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="medicalDay">Ngày khám <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                          </div>
-                          <input type="date" class="form-control" name="medicalDay" required />
+                      <div class="form-group  col-12 col-lg-6">
+                        <label>Tên bác sĩ <span class="text-danger">*</span></label>
+                        <div class="input-group" style="height: 34px">
+                          <select style="width: 100%" id="doctor-select2" name="doctor" required></select>
                         </div>
                       </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="medicalHour">Giờ khám <span class="text-danger">*</span></label>
-                        <select class="form-control select2input" name="medicalHour" style="width: 100%;" required>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-12 col-lg-6">
+                        <label for="medicalDay">Ngày khám bệnh<span class="text-danger">*</span></label>
+                        <select class="form-control select2input" id="medicalDay" style="width: 100%;" required>
                           <option value="" selected>-- Chọn --</option>
-                          <option>7h30 - 8h30</option>
-                          <option>8h30 - 9h30</option>
-                          <option>9h30 - 10h30</option>
-                          <option>10h30 - 11h30</option>
-                          <option>13h30 - 14h30</option>
-                          <option>14h30 - 15h30</option>
-                          <option>15h30 - 16h30</option>
-                          <option>16h30 - 17h30</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-12 col-lg-6">
+                        <label for="medicalHour">Ca khám bệnh<span class="text-danger">*</span></label>
+                        <select class="form-control select2input" id="medicalHour" name="shift" style="width: 100%;" required>
+                          <option value="" selected>-- Chọn --</option>
                         </select>
                       </div>
                     </div>

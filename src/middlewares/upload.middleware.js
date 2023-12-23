@@ -1,23 +1,19 @@
 const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const path = require('path');
 const ApiError = require('../utils/ApiError');
 
-const getDest = (uploadDir) => {
-  return path.join(__dirname, `../public/admin/uploads/${uploadDir}`);
-};
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRECT,
+});
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    // Check the fieldname and store files accordingly
-    if (file.fieldname === 'avatar') {
-      cb(null, getDest('AVATAR'));
-    } else if (file.fieldname === 'cccd') {
-      cb(null, getDest('CCCD'));
-    } else if (file.fieldname === 'bhyt') {
-      cb(null, getDest('BHYT'));
-    } else {
-      cb(new ApiError(400, 'Trường không hợp lệ!'));
-    }
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'medical-booking',
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
