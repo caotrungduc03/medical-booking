@@ -8,11 +8,17 @@ const getDoctors = catchAsync(async (req, res) => {
   const query = req.query;
   const filter = {};
 
+  if (query.department) {
+    if (query.department === 'null') {
+      filter.department = null;
+    } else {
+      filter.department = query.department;
+    }
+  }
   if (query.search) {
     let searchValue = query.search['value'];
     filter.name = { $regex: searchValue, $options: 'i' };
   }
-
   if (query.q) {
     let qValue = query.q;
     filter.name = { $regex: qValue, $options: 'i' };

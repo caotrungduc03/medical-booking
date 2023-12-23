@@ -13,6 +13,10 @@ const getShifts = catchAsync(async (req, res) => {
     filter.place = { $regex: searchValue, $options: 'i' };
   }
 
+  if (query.doctor) {
+    filter.doctor = query.doctor;
+  }
+
   let columnIndex;
   let columnName;
   let columnSortOrder;

@@ -1,4 +1,4 @@
-const { MedicalForm } = require('../models');
+const { MedicalForm, Shift } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const response = require('../utils/response');
 const pick = require('../utils/pick');
@@ -48,6 +48,7 @@ const getMedicalForms = catchAsync(async (req, res) => {
 });
 
 const createMedicalForm = catchAsync(async (req, res) => {
+  const data = req.body;
   const files = req.files;
   let cccd;
   let bhyt = '';
@@ -68,12 +69,20 @@ const createMedicalForm = catchAsync(async (req, res) => {
       filePath.substring(filePath.lastIndexOf('\\') + 1);
   }
 
+  const shift = await Shift.findById(data.shift);
+  if (!shift) {
+    throw new ApiError(404, 'Ca khám bệnh không tìm thấy');
+  }
+
   await MedicalForm.create({
-    ...req.body,
+    ...data,
     cccd,
     bhyt,
     status: 0,
   });
+
+  shift.slot++;
+  await shift.save();
 
   res.status(201).json(response(201, 'Thành công'));
 });
