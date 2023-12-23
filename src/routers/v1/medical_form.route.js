@@ -23,21 +23,21 @@ medicalFormRouter.get(
 medicalFormRouter.get(
   '/getAll',
   authMiddleware,
-  roleMiddleware(['nhan-vien-phe-duyet']),
+  roleMiddleware(['nhan-vien-kiem-duyet']),
   medicalFormController.getAllMedicalForms,
 );
 
 medicalFormRouter.patch(
   '/status/:medicalFormId',
   authMiddleware,
-  roleMiddleware(['nhan-vien-phe-duyet']),
+  roleMiddleware(['nhan-vien-kiem-duyet']),
   medicalFormController.updateMedicalFormStatus,
 );
 
 medicalFormRouter.get(
   '/',
   authMiddleware,
-  roleMiddleware(['nhan-vien-phe-duyet']),
+  roleMiddleware(['nhan-vien-kiem-duyet']),
   medicalFormController.getMedicalForms,
 );
 
