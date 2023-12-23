@@ -104,8 +104,8 @@ const handleAddShift = () => {
         swal('Tạo thành công', {
           icon: 'success',
         });
-        // $(modalId).modal('hide');
-        // $(formId)[0].reset();
+        $(modalId).modal('hide');
+        $(formId)[0].reset();
         updateTbl();
       } else {
         swal(result.message, {

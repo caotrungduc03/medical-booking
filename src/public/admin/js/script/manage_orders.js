@@ -12,7 +12,7 @@ const configAllOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?status=0&status=1&status=2',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=0&status=1&status=2',
       dataSrc: function (json) {
         $('#allOrderNav span').html(`(${json.data.length})`);
 
@@ -20,7 +20,7 @@ const configAllOrderTbl = () => {
           element.index = index + 1;
           element.time = `
             <p>
-              ${element.medicalHour} 
+              ${element.shift.time} 
               <br>
               (${moment(element.medicalDay).format('YYYY-MM-DD')})
             </p>
@@ -44,7 +44,13 @@ const configAllOrderTbl = () => {
         width: '12%',
         render: (value) => moment(value).format('YYYY-MM-DD'),
       },
-      { data: 'medicalDepartment', width: '20%' },
+      {
+        data: 'medicalDepartment',
+        width: '20%',
+        render: (item) => {
+          return item.name;
+        },
+      },
       { data: 'time', width: '12%' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
@@ -85,7 +91,7 @@ const configNotApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?status=0',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=0',
       dataSrc: function (json) {
         $('#notApproveOrderNav span').html(`(${json.data.length})`);
 
@@ -93,7 +99,7 @@ const configNotApproveOrderTbl = () => {
           element.index = index + 1;
           element.time = `
             <p>
-              ${element.medicalHour} 
+              ${element.shift.time} 
               <br>
               (${moment(element.medicalDay).format('YYYY-MM-DD')})
             </p>
@@ -119,7 +125,13 @@ const configNotApproveOrderTbl = () => {
         width: '12%',
         render: (value) => moment(value).format('YYYY-MM-DD'),
       },
-      { data: 'medicalDepartment', width: '20%' },
+      {
+        data: 'medicalDepartment',
+        width: '20%',
+        render: (item) => {
+          return item.name;
+        },
+      },
       { data: 'time', width: '12%' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
@@ -160,7 +172,7 @@ const configApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?status=1',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=1',
       dataSrc: function (json) {
         $('#approveOrderNav span').html(`(${json.data.length})`);
 
@@ -168,7 +180,7 @@ const configApproveOrderTbl = () => {
           element.index = index + 1;
           element.time = `
             <p>
-              ${element.medicalHour} 
+              ${element.shift.time} 
               <br>
               (${moment(element.medicalDay).format('YYYY-MM-DD')})
             </p>
@@ -192,7 +204,13 @@ const configApproveOrderTbl = () => {
         width: '12%',
         render: (value) => moment(value).format('YYYY-MM-DD'),
       },
-      { data: 'medicalDepartment', width: '20%' },
+      {
+        data: 'medicalDepartment',
+        width: '20%',
+        render: (item) => {
+          return item.name;
+        },
+      },
       { data: 'time', width: '12%' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
@@ -233,7 +251,7 @@ const configUnApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?status=2',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=2',
       dataSrc: function (json) {
         $('#unApproveOrderNav span').html(`(${json.data.length})`);
 
@@ -241,7 +259,7 @@ const configUnApproveOrderTbl = () => {
           element.index = index + 1;
           element.time = `
             <p>
-              ${element.medicalHour} 
+              ${element.shift.time} 
               <br>
               (${moment(element.medicalDay).format('YYYY-MM-DD')})
             </p>
@@ -265,7 +283,13 @@ const configUnApproveOrderTbl = () => {
         width: '12%',
         render: (value) => moment(value).format('YYYY-MM-DD'),
       },
-      { data: 'medicalDepartment', width: '20%' },
+      {
+        data: 'medicalDepartment',
+        width: '20%',
+        render: (item) => {
+          return item.name;
+        },
+      },
       { data: 'time', width: '12%' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
@@ -326,6 +350,12 @@ const handleDetail = () => {
         $(`${formId} [name='${field.name}']`)
           .val(moment(order[field.name]).format('YYYY-MM-DD'))
           .change();
+      } else if (field.name === 'medicalDepartment') {
+        $(`${formId} [name='medicalDepartment']`).val(
+          order.medicalDepartment.name,
+        );
+      } else if (field.name === 'medicalHour') {
+        $(`${formId} [name='medicalHour']`).val(order.shift.time);
       } else {
         $(`${formId} [name='${field.name}']`).val(order[field.name]).change();
       }

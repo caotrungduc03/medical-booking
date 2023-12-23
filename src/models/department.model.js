@@ -22,8 +22,9 @@ const departmentSchema = new Schema(
       required: true,
     },
     leader: {
-      type: String,
-      trim: true,
+      type: Schema.Types.ObjectId,
+      ref: 'Doctor',
+      default: null,
     },
     description: {
       type: String,

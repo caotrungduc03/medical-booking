@@ -217,4 +217,6 @@ $(document).ready(function () {
   handleAddDepartment();
   handleDeleteDepartment();
   handleUpdateDepartment();
+  doctorSelect2Filter('#addDepartmentModal #doctor-select2');
+  doctorSelect2Filter('#updateDepartmentModal #doctor-select2');
 });
