@@ -35,15 +35,21 @@ viewAdminRouter.get(
   viewAdminController.statistic,
 );
 viewAdminRouter.get(
-  '/manage-order',
+  '/manage-orders',
   authMiddleware,
   roleMiddleware(['nhan-vien-phe-duyet']),
-  viewAdminController.manageOrder,
+  viewAdminController.manageOrders,
 );
 viewAdminRouter.get(
-  '/history-order',
+  '/history-orders',
   authMiddleware,
-  viewAdminController.historyOrder,
+  viewAdminController.historyOrders,
+);
+viewAdminRouter.get(
+  '/manage-doctors',
+  authMiddleware,
+  roleMiddleware(['admin']),
+  viewAdminController.manageDoctors,
 );
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);
 

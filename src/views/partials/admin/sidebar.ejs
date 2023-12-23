@@ -33,8 +33,8 @@
           <span>Thông tin cá nhân</span>
         </a>
       </li>
-      <li class="<%= path === '/history-order' ? 'active' : ':' %>">
-        <a href="/admin/history-order">
+      <li class="<%= path === '/history-orders' ? 'active' : ':' %>">
+        <a href="/admin/history-orders">
           <i class="fa fa-calendar"><span class="path1"></span><span class="path2"></span></i>
           <span>Lịch sử khám bệnh</span>
         </a>
@@ -46,8 +46,8 @@
         </a>
       </li> -->
       <% if(ROLES?.find(role => role === 'nhan-vien-phe-duyet' )) { %>
-      <li>
-        <a href="/admin/manage-order">
+      <li class="<%= path === '/manage-orders' ? 'active' : ':' %>">
+        <a href="/admin/manage-orders">
           <i class="ti-clipboard"><span class="path1"></span><span class="path2"></span></i>
           <span>Phê duyệt đơn khám bệnh</span>
         </a>
@@ -102,8 +102,8 @@
               <span class="pull-right-container"> </span>
             </a>
           </li>
-          <li class="">
-            <a href="#">
+          <li class="<%= path === '/manage-doctors' ? 'active' : ':' %>">
+            <a href="/admin/manage-doctors">
               <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
               <span>Quản lý bác sĩ</span>
               <span class="pull-right-container"> </span>

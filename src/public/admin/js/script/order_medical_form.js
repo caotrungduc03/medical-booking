@@ -21,7 +21,10 @@ const orderMedicalForm = () => {
         swal('Tạo thành công', {
           icon: 'success',
         });
-        setTimeout(() => (window.location.href = '/admin/history-order'), 1000);
+        setTimeout(
+          () => (window.location.href = '/admin/history-orders'),
+          1000,
+        );
       } else {
         swal(result.message, {
           icon: 'error',
