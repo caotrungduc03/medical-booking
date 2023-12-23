@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/admin/head') %>
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+  <div class="wrapper">
+    <div id="loader"></div>
+
+    <%- include('../partials/admin/header') %>
+
+    <%- include('../partials/admin/sidebar') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto">
+              <h3>Quản lý ca làm việc</h3>
+              <div class="d-inline-block align-items-center">
+                <nav>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/admin"><i class="mdi mdi-home-outline"></i></a>
+                    </li>
+                    <li class="breadcrumb-item" aria-current="page">Danh mục hệ thống</li>
+                    <li class="breadcrumb-item active" aria-current="page">Quản lý ca làm việc</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+            <div class="row align-items-end">
+              <div class="col-xl-12 col-12">
+                <div class="box-header with-border">
+                  <h4 class="box-title">Danh sách các ca làm việc</h4>
+                </div>
+                <div class="box-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item">
+                      <a id="allShiftNav" class="nav-link active" data-toggle="tab" href="#allShiftTab" role="tab">
+                        <span>Tất cả</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="modal" data-target="#addShiftModal">
+                        <span class="model_img"><i class="fa fa-plus mr-1"></i> Thêm mới</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane fade active show" id="allShiftTab" role="tabpanel">
+                      <div class="pt-15">
+                        <table id="allShiftTbl" class="table table-striped dataTable" role="grid" aria-describedby="example1_info" style="width: 100%">
+                          <thead class="bg-dark">
+                            <tr>
+                              <th>STT</th>
+                              <th>Bác sĩ</th>
+                              <th>Ngày làm việc</th>
+                              <th>Khung giờ làm việc</th>
+                              <th>Địa điểm</th>
+                              <th>Lượt đăng ký</th>
+                              <th>Thao tác</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../partials/admin/footer') %>
+
+  </div>
+
+  <div id="addShiftModal" class="modal fade" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Thêm ca làm việc mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="addShiftForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Tên bác sĩ <span class="text-danger">*</span></label>
+              <div class="input-group" style="height: 34px">
+                <select style="width: 100%" id="doctor-select2" name="doctor"></select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-lg-6">
+                <label>Ngày làm việc <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                  </div>
+                  <input type="date" class="form-control" name="date" required />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-6">
+                <label>Khung giờ làm việc <span class="text-danger">*</span></label>
+                <select class="form-control select2input" name="time" style="width: 100%;" required>
+                  <option value="" selected>-- Chọn --</option>
+                  <option>7h30 - 9h30</option>
+                  <option>7h30 - 11h30</option>
+                  <option>13h30 - 15h30</option>
+                  <option>15h30 - 17h30</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-lg-6">
+                <label>Địa điểm <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" name="place" class="form-control" required />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-6">
+                <label>Số lượng đơn khám tối đa <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="number" name="maxSlot" class="form-control" required />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Ghi chú</label>
+              <textarea name="note" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> THÊM MỚI</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <div id="updateShiftModal" class="modal fade" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myLargeModalLabel">Cập nhật ca làm việc mới</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        </div>
+        <form id="updateShiftForm">
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Tên bác sĩ <span class="text-danger">*</span></label>
+              <div class="input-group" style="height: 34px">
+                <select style="width: 100%" id="doctor-select2" name="doctor"></select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-lg-6">
+                <label>Ngày làm việc <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                  </div>
+                  <input type="date" class="form-control" name="date" required />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-6">
+                <label>Khung giờ làm việc <span class="text-danger">*</span></label>
+                <select class="form-control select2input" name="time" style="width: 100%;" required>
+                  <option value="" selected>-- Chọn --</option>
+                  <option>7h30 - 9h30</option>
+                  <option>7h30 - 11h30</option>
+                  <option>13h30 - 15h30</option>
+                  <option>15h30 - 17h30</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-lg-6">
+                <label>Địa điểm <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" name="place" class="form-control" required />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-6">
+                <label>Số lượng đơn khám tối đa <span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="number" name="maxSlot" class="form-control" required />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Ghi chú</label>
+              <textarea name="note" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline waves-effect waves-light" data-dismiss="modal"><i class="ti-arrow-left"></i> THOÁT</button>
+            <button type="submit" class="btn btn-primary"><i class="ti-plus"></i> CẬP NHẬT</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+
+  <!-- Page Content overlay -->
+
+  <%- include('../partials/admin/script') %>
+
+  <script src="/static/admin/js/script/manage_shifts.js"></script>
+</body>
+
+</html>

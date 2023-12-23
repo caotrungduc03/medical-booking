@@ -51,6 +51,12 @@ viewAdminRouter.get(
   roleMiddleware(['admin']),
   viewAdminController.manageDoctors,
 );
+viewAdminRouter.get(
+  '/manage-shifts',
+  authMiddleware,
+  roleMiddleware(['admin']),
+  viewAdminController.manageShifts,
+);
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);
 
 module.exports = viewAdminRouter;

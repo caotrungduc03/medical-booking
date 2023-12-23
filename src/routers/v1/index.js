@@ -5,6 +5,7 @@ const roleRouter = require('./role.router');
 const departmentRouter = require('./department.router');
 const medicalFormRouter = require('./medical_form.route');
 const doctorRouter = require('./doctor.route');
+const shiftRouter = require('./shift.route');
 
 const router = express.Router();
 
@@ -32,6 +33,10 @@ const routes = [
   {
     path: '/doctors',
     route: doctorRouter,
+  },
+  {
+    path: '/shifts',
+    route: shiftRouter,
   },
 ];
 

@@ -7,4 +7,5 @@ module.exports = {
   departmentController: require('./department.controller'),
   medicalFormController: require('./medical_form.controller'),
   doctorController: require('./doctor.controller'),
+  shiftController: require('./shift.controller'),
 };

@@ -55,6 +55,6 @@ const doctorSchema = new Schema(
 doctorSchema.plugin(paginate);
 doctorSchema.plugin(toJSON);
 
-const doctor = mongoose.model('doctor', doctorSchema);
+const Doctor = mongoose.model('Doctor', doctorSchema);
 
-module.exports = doctor;
+module.exports = Doctor;
