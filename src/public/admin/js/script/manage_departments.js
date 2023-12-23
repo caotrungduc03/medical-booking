@@ -9,7 +9,7 @@ const configAllDepartmentTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/departments',
+      url: '/api/v1/departments?populate=leader',
       dataSrc: function (json) {
         $('#allDepartmentNav').html(
           `<span>Tất cả (${json.data.length})</span>`,
@@ -37,8 +37,12 @@ const configAllDepartmentTbl = () => {
     columns: [
       { data: 'index', width: '10%' },
       { data: 'groupName', width: '*' },
-      { data: 'year', width: '10%' },
-      { data: 'leader', width: '20%' },
+      { data: 'year', width: '15%' },
+      {
+        data: 'leader',
+        width: '20%',
+        render: (item) => item.name,
+      },
       { data: 'method', className: 'text-center', width: '15%' },
     ],
     columnDefs: [
