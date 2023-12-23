@@ -14,12 +14,12 @@ const userSchema = new Schema(
     },
     firstName: {
       type: String,
-      require: true,
+      required: true,
       trim: true,
     },
     lastName: {
       type: String,
-      require: true,
+      required: true,
       trim: true,
     },
     gender: {
@@ -84,6 +84,7 @@ const userSchema = new Schema(
         ref: 'Role',
       },
     ],
+    lastLogin: Date,
   },
   {
     timestamps: true,

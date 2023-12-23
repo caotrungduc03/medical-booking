@@ -38,12 +38,20 @@ const configUnlockUserTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
       { data: 'cardId', width: '12%' },
       { data: 'contact', width: '20%' },
       { data: 'address', width: '20%' },
-      { data: 'method', className: 'text-center', width: '15%' },
+      {
+        data: 'lastLogin',
+        width: '16%',
+        render: (value) => {
+          if (!value) return 'Chưa bao giờ';
+          return moment(value).format('DD-MM-YYYY');
+        },
+      },
+      { data: 'method', className: 'text-center', width: '8%' },
     ],
     columnDefs: [
       {
@@ -108,12 +116,20 @@ const configLockUserTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
       { data: 'cardId', width: '12%' },
       { data: 'contact', width: '20%' },
       { data: 'address', width: '20%' },
-      { data: 'method', className: 'text-center', width: '15%' },
+      {
+        data: 'lastLogin',
+        width: '16%',
+        render: (value) => {
+          if (!value) return 'Chưa bao giờ';
+          return moment(value).format('DD-MM-YYYY');
+        },
+      },
+      { data: 'method', className: 'text-center', width: '8%' },
     ],
     columnDefs: [
       {
