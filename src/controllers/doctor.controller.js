@@ -13,6 +13,11 @@ const getDoctors = catchAsync(async (req, res) => {
     filter.name = { $regex: searchValue, $options: 'i' };
   }
 
+  if (query.q) {
+    let qValue = query.q;
+    filter.name = { $regex: qValue, $options: 'i' };
+  }
+
   let columnIndex;
   let columnName;
   let columnSortOrder;

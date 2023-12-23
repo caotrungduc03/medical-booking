@@ -10,7 +10,7 @@ const doctorSelect2Filter = (id, options) => {
     ajax: {
       url: url,
       dataType: 'json',
-      delay: 250,
+      delay: 400,
       quietMillis: 100,
       data: function (params) {
         return {
