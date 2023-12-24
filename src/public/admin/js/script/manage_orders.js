@@ -24,7 +24,7 @@ const configAllOrderTbl = () => {
         },
         extend: 'excelHtml5',
         filename:
-          'Danh_sach_nguoi_dung_khong_khoa_' +
+          'Danh_sach_tat_ca_don_kham_benh_' +
           new Date().getDate() +
           '_' +
           (new Date().getMonth() + 1) +
@@ -158,7 +158,7 @@ const configNotApproveOrderTbl = () => {
         },
         extend: 'excelHtml5',
         filename:
-          'Danh_sach_nguoi_dung_khong_khoa_' +
+          'Danh_sach_don_kham_benh_chua_xet_' +
           new Date().getDate() +
           '_' +
           (new Date().getMonth() + 1) +
@@ -294,7 +294,7 @@ const configApproveOrderTbl = () => {
         },
         extend: 'excelHtml5',
         filename:
-          'Danh_sach_nguoi_dung_khong_khoa_' +
+          'Danh_sach_don_kham_benh_du_dieu_kien_' +
           new Date().getDate() +
           '_' +
           (new Date().getMonth() + 1) +
@@ -428,7 +428,7 @@ const configUnApproveOrderTbl = () => {
         },
         extend: 'excelHtml5',
         filename:
-          'Danh_sach_nguoi_dung_khong_khoa_' +
+          'Danh_sach_don_kham_benh_khong_du_dieu_kien_' +
           new Date().getDate() +
           '_' +
           (new Date().getMonth() + 1) +

@@ -158,7 +158,7 @@ const configLockUserTbl = () => {
         },
         extend: 'excelHtml5',
         filename:
-          'Danh_sach_nguoi_dung_khong_khoa_' +
+          'Danh_sach_nguoi_dung_bi_khoa_' +
           new Date().getDate() +
           '_' +
           (new Date().getMonth() + 1) +
