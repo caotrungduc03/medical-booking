@@ -161,7 +161,24 @@ const updateMedicalFormByUser = catchAsync(async (req, res) => {
 });
 
 const getAllMedicalForms = catchAsync(async (req, res) => {
-  const medicalForms = await MedicalForm.find().populate('medicalDepartment');
+  const query = req.query;
+  const filter = {};
+  if (query.date) {
+    const dateValue = query.date;
+    const date = moment(dateValue);
+    const shifts = await Shift.find({
+      date: {
+        $gte: date.startOf('day').toDate(),
+        $lte: date.endOf('day').toDate(),
+      },
+    });
+    const shiftIds = shifts.map((shift) => shift.id);
+    filter.shift = { $in: shiftIds };
+  }
+
+  const medicalForms = await MedicalForm.find(filter).populate(
+    'medicalDepartment',
+  );
 
   res.status(200).json(response(200, 'Thành công', medicalForms));
 });

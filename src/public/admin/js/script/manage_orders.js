@@ -704,7 +704,7 @@ const handleClearFilter = () => {
     handleCheckCurrentTbl();
 
     $('.departmentFilter').val('').change();
-    $('.birthdayFilter').val('');
+    $('.dateFilter').val('');
     currentTbl.api().column(0).search('').column(1).search('').draw();
   });
 };
