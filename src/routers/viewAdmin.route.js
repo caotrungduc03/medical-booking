@@ -57,6 +57,7 @@ viewAdminRouter.get(
   roleMiddleware(['nhan-vien-to-chuc']),
   viewAdminController.manageShifts,
 );
+viewAdminRouter.get('/settings', authMiddleware, viewAdminController.settings);
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);
 
 module.exports = viewAdminRouter;

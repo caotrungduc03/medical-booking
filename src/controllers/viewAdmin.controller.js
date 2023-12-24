@@ -109,6 +109,14 @@ const manageShifts = catchAsync(async (req, res) => {
   });
 });
 
+const settings = catchAsync(async (req, res) => {
+  res.render('admin/settings', {
+    path: '/settings',
+    user: req.user,
+    ROLES: req.roles,
+  });
+});
+
 module.exports = {
   dashboard,
   manageRoles,
@@ -121,4 +129,5 @@ module.exports = {
   historyOrders,
   manageDoctors,
   manageShifts,
+  settings,
 };
