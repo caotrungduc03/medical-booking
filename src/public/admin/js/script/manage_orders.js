@@ -86,8 +86,9 @@ const configAllOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '10%' },
       { data: 'gender', width: '10%' },
       {
         data: 'birthday',
@@ -102,7 +103,7 @@ const configAllOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
       {
@@ -111,11 +112,11 @@ const configAllOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 5, 6],
       },
     ],
     language: {
@@ -221,8 +222,9 @@ const configNotApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '10%' },
       { data: 'gender', width: '10%' },
       {
         data: 'birthday',
@@ -237,7 +239,7 @@ const configNotApproveOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
       {
@@ -246,11 +248,11 @@ const configNotApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 6],
       },
     ],
     language: {
@@ -354,8 +356,9 @@ const configApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '10%' },
       { data: 'gender', width: '10%' },
       {
         data: 'birthday',
@@ -370,7 +373,7 @@ const configApproveOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
       {
@@ -379,11 +382,11 @@ const configApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 5, 6],
       },
     ],
     language: {
@@ -487,8 +490,9 @@ const configUnApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '10%' },
       { data: 'gender', width: '10%' },
       {
         data: 'birthday',
@@ -503,7 +507,7 @@ const configUnApproveOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
       {
@@ -512,11 +516,11 @@ const configUnApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 5, 6],
       },
     ],
     language: {
