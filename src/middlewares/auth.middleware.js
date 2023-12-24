@@ -23,6 +23,9 @@ const authMiddleware = catchAsync(async (req, res, next) => {
     next(new ApiError(401, 'Tài khoản đã bị khoá'));
   }
 
+  user.lastLogin = Date.now();
+  await user.save();
+
   const roles = user.roles.map((u) => u.roleIndex);
 
   req.user = user;

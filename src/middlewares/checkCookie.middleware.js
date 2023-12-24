@@ -16,6 +16,9 @@ const checkCookieMiddleware = async (req, res, next) => {
       return next();
     }
 
+    user.lastLogin = Date.now();
+    await user.save();
+
     const roles = user.roles.map((u) => u.roleIndex);
 
     req.user = user;
