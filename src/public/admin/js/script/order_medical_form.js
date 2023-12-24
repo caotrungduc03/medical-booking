@@ -13,6 +13,7 @@ const orderMedicalForm = () => {
     data.append('cccd', documentCCCDs[0].files[0]);
     data.append('bhyt', documentBHYTs[0].files[0]);
     try {
+      notiSuccess('Đã gửi yêu cầu, chờ hệ thống xử lý');
       let result = await (
         await fetch(`/api/v1/medical-forms`, {
           method: 'POST',

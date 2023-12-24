@@ -100,7 +100,7 @@ const configUnlockUserTbl = () => {
         width: '16%',
         render: (value) => {
           if (!value) return 'Chưa bao giờ';
-          return moment(value).format('DD-MM-YYYY');
+          return moment(value).format('HH:mm:ss, DD-MM-YYYY');
         },
       },
       { data: 'method', className: 'text-center', width: '8%' },
@@ -234,7 +234,7 @@ const configLockUserTbl = () => {
         width: '16%',
         render: (value) => {
           if (!value) return 'Chưa bao giờ';
-          return moment(value).format('DD-MM-YYYY');
+          return moment(value).format('HH:mm:ss, DD-MM-YYYY');
         },
       },
       { data: 'method', className: 'text-center', width: '8%' },
