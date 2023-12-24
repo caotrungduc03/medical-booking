@@ -1,4 +1,4 @@
-const { Department, User } = require('../models');
+const { Department, User, Doctor } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const { verifyToken } = require('../utils/token');
 
@@ -29,8 +29,14 @@ const aboutUs = catchAsync(async (req, res) => {
 });
 
 const home = catchAsync(async (req, res) => {
+  let departments = await Department.find();
+  let doctors = await Doctor.find().populate('department');
+  console.log(departments);
+  console.log(doctors);
   res.render('client/home', {
     user: req.user,
+    doctors,
+    departments,
   });
 });
 

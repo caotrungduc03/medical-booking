@@ -36,262 +36,35 @@
   </div>
 
   <section id="booking-doctor">
-    <div style="max-width: 80rem; margin: 0 auto; position: relative;">
-      <div class="nav-doctor">
-        <div>
-          <h2>Đặt khám bác sĩ</h2>
-          <p style="">Phiếu khám kèm số thứ tự và thời gian của bạn được xác nhận.</p>
-        </div>
-        <a href="#"">
-          <span class=" text-sm font-semibold">Xem thêm</span>
-          <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-            <g fill-rule="evenodd">
-              <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-              <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4" class="tranlate-x transition-transform"></path>
-            </g>
-          </svg>
-        </a>
-      </div>
+    <div style="max-width: 80rem; margin: 0 auto 40px; position: relative;">
 
+      <h3 style="padding:0 16px; font-size:1.5rem; margin-top: 2rem;">Đội ngũ bác sĩ hàng đầu</h3>
       <div class="doctor-items">
+        <% doctors.forEach(d => { %>
         <div class="doctor-info">
           <div class="items-info">
             <a href="#" class="avatar">
-              <img src="https://cdn.youmed.vn/photos/6482af81-ab7d-4587-b011-8a9bad38a1e9.png?width=100&aspect_ratio=1:1" alt="BS.CK2 Lê Thị Minh Hồng" />
+              <img src="<%=d.avatar %>" />
             </a>
             <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Lê Thị Minh Hồng" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">BS.CK2 Lê Thị Minh Hồng</h3>
+              <a href="#" title="Đặt lịch khám với bác sĩ <%=d.name %>" style="color: black">
+                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;"><%=d.name %></h3>
               </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Nhi Khoa</p>
-              <p class="text-sm font-semibold text-slider mgt-4">10 năm kinh nghiệm</p>
+              <p class="text-sm font-semibold text-slider mgt-4"><%=d.department.name %></p>
+              <p class="text-sm font-semibold text-slider mgt-4"><%=d.experience %> năm kinh nghiệm</p>
             </div>
           </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Lê Thị Minh Hồng">
+          <a href="/form" title="Đặt lịch khám với bác sĩ <%=d.name %>">
             <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
             <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
               <g fill-rule="evenodd">
                 <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
+                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4" class="tranlate-x transition-transform"></path>
               </g>
             </svg>
           </a>
         </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="https://cdn.youmed.vn/photos/4f01e016-00cf-498c-a82e-761393de038c.jpeg?width=100&aspect_ratio=1:1" alt="PGS. TS. BS Lâm Việt Trung" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Lâm Việt Trung" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">PGS. TS. BS Lâm Việt Trung</h3>
-              </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Tiêu Hóa</p>
-              <p class="text-sm font-semibold text-slider mgt-4">12 năm kinh nghiệm</p class=>
-            </div>
-          </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Lâm Việt Trung">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="	https://cdn.youmed.vn/photos/d9bdabb7-7afb-419a-8533-db34a775e504.jpg?width=100&aspect_ratio=1:1" alt="BS.CK2 Nguyễn Thị Thu Hà" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Nguyễn Thị Thu Hà" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">BS.CK2 Nguyễn Thị Thu Hà</h3>
-              </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Nhi Khoa</p>
-              <p class="text-sm font-semibold text-slider mgt-4">14 năm kinh nghiệm</p class=>
-            </div>
-          </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Nguyễn Thị Thu Hà">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="	https://cdn.youmed.vn/photos/09f68f6c-131b-45ed-97d6-afdc89fa51e3.jpg?width=100&aspect_ratio=1:1" alt="BS.CK2 Võ Đức Hiếu" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Võ Đức Hiếu" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">BS.CK2 BS.CK2 Võ Đức Hiếu</h3>
-              </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Ung bướu</p>
-              <p class="text-sm font-semibold text-slider mgt-4">20 năm kinh nghiệm</p class=>
-            </div>
-          </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Võ Đức Hiếu">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="https://cdn.youmed.vn/photos/68c2307d-18f8-4e97-9ef3-99fea20a286d.png?width=100&aspect_ratio=1:1" alt="TS. BS Trần Quang Nam" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Trần Quang Nam" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">TS. BS Trần Quang Nam</h3>
-              </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Nội tiết</p>
-              <p class="text-sm font-semibold text-slider mgt-4">12 năm kinh nghiệm</p class=>
-            </div>
-          </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Trần Quang Nam">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="https://cdn.youmed.vn/photos/b7125d2f-c83d-45c4-bfa9-29a6eb863653.jpg?width=100&aspect_ratio=1:1" alt="TS. BS Nguyễn Bá Thắng" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Nguyễn Bá Thắng" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">TS. BS Nguyễn Bá Thắng</h3>
-              </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Nội thần kinh</p>
-              <p class="text-sm font-semibold text-slider mgt-4">16 năm kinh nghiệm</p class=>
-            </div>
-          </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Nguyễn Bá Thắng">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="https://cdn.youmed.vn/photos/5b6e849b-9836-4a3c-8355-b75da10be70b.JPG?width=100&aspect_ratio=1:1" alt="TS. BS Trần Anh Tuấn" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Trần Anh Tuấn" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">TS. BS Trần Anh Tuấn</h3>
-              </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Nhi Khoa</p>
-              <p class="text-sm font-semibold text-slider mgt-4">8 năm kinh nghiệm</p class=>
-            </div>
-          </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Trần Anh Tuấn" style=" display: flex; justify-content: space-between;align-items: center; border-top: 1px solid ; padding: .5rem 1rem;text-decoration: none;color: #1F2937">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="https://cdn.youmed.vn/photos/9be7890a-8ae5-4168-bd73-b5996abc50ae.jpg?width=100&aspect_ratio=1:1" alt="BS.CK2 Huỳnh Phan Phúc Linh" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Huỳnh Phan Phúc Linh" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">BS.CK2 Huỳnh Phan Phúc Linh</h3>
-              </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Cơ xương khớp</p>
-              <p class="text-sm font-semibold text-slider mgt-4">11 năm kinh nghiệm</p class=>
-            </div>
-          </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Huỳnh Phan Phúc Linh">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="https://cdn.youmed.vn/photos/899be4cb-948f-4af5-b3d2-387fccb29a7d.jpg?width=100&aspect_ratio=1:1" alt="ThS. BS.CK2 Hoàng Thị Thu Huyền" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Hoàng Thị Thu Huyền" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">ThS. BS.CK2 Hoàng Thị Thu Huyền</h3>
-              </a>
-              <!-- <p class="text-sm font-semibold text-slider mgt-4">Sản phụ khoa Ung Bướu</p> -->
-              <ul class="flex items-center mgt-4" style="transform: translateX(16px);overflow:hidden;">
-                <li class="items-faculty">
-                  <h4 style="margin: 0; font-weight: 500;">Sản phụ khoa</h4>
-                </li>
-                <li style="position: relative;padding-right: 1rem;color: rgb(75 85 99);">
-                  <p class="text-sm" style="margin: 0; font-weight: 500;"">Ung Bướu</h4>
-                </li>               
-              </ul>
-              <p class=" text-sm font-semibold mgt-4" style="color: rgb(75 85 99);">15 năm kinh nghiệm</p>
-            </div>
-          </div>
-          <a href=" #" title="Đặt lịch khám với bác sĩ Hoàng Thị Thu Huyền">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="doctor-info">
-          <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="https://cdn.youmed.vn/photos/52d20282-a8cb-44a1-af5c-654f6846f8a7.jpg?width=100&aspect_ratio=1:1" alt="BS.CK2 Lý Thái Lộc" />
-            </a>
-            <div class="flex flex-col text-center">
-              <a href="#" title="Đặt lịch khám với bác sĩ Lý Thái Lộc" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1rem;line-height: 1.5rem;margin: 0;">BS.CK2 Lý Thái Lộc</h3>
-              </a>
-              <p class="text-sm font-semibold text-slider mgt-4">Vô Sinh hiếm muộn</p>
-              <p class="text-sm font-semibold text-slider mgt-4">17 năm kinh nghiệm</p class=>
-            </div>
-          </div>
-          <a href="#" title="Đặt lịch khám với bác sĩ Lý Thái Lộc">
-            <span class="font-sm font-semibold" style="white-space: nowrap;">Đặt lịch khám</span>
-            <svg width="10" ; height="10" ; viewBox="0 0 10 10" ; aria-hidden="true" ; style="display: block;margin-left: 0.5rem;">
-              <g fill-rule="evenodd">
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 0 5 h 8" class="opacity-0 hover-opacity"></path>
-                <path stroke-width="2" stroke="currentColor" fill="none" d="M 1 1 l 4 4 l -4 4"></path>
-              </g>
-            </svg>
-          </a>
-        </div>
+        <% }) %>
       </div>
 
     </div>

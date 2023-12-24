@@ -196,7 +196,7 @@ li {
   display: flex;
   position: relative;
   margin: 0 1rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
   gap: 1rem;
   overflow-x: auto;
@@ -205,16 +205,6 @@ li {
 
 .doctor-info {
   margin-right: 1rem;
-}
-
-.nav-doctor,
-.nav-specialist {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  gap: 1rem;
 }
 
 .doctor-info,
@@ -264,41 +254,9 @@ li {
   background-color: rgb(25 117 220);
 }
 
-.nav-doctor h2 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0;
-  line-height: 1.75rem;
-  display: block;
-}
-
-.nav-doctor p {
-  font-size: 0.875rem;
-  display: block;
-  margin: 0;
-  line-height: 1.25rem;
-}
-
-.nav-doctor a {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0.375rem 0.75rem;
-  border-radius: 9999px;
-  color: rgb(255, 255, 255);
-  background: rgb(25 117 220);
-}
-
-.nav-doctor a:hover {
-  background-color: rgb(30 58 138);
-  opacity: 1;
-}
-
-.nav-doctor a:hover .tranlate-x {
-  transform: translateX(0.25rem);
-}
-
-.nav-doctor a:hover .hover-opacity {
+.doctor-info:hover a,
+.doctor-info:hover h3 {
+  color: rgb(40, 116, 252);
   opacity: 1;
 }
 
@@ -401,4 +359,9 @@ li {
 .items-center {
   align-items: center;
   justify-content: center;
+}
+
+.doctor-info:hover {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
