@@ -30,9 +30,7 @@ const aboutUs = catchAsync(async (req, res) => {
 
 const home = catchAsync(async (req, res) => {
   let departments = await Department.find();
-  let doctors = await Doctor.find().populate('department');
-  console.log(departments);
-  console.log(doctors);
+  let doctors = await Doctor.find().populate('department').limit(10);
   res.render('client/home', {
     user: req.user,
     doctors,

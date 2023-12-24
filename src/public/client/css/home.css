@@ -269,6 +269,11 @@ li {
   line-height: 1.25rem;
 }
 
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+}
+
 .font-semibold {
   font-weight: 600;
 }
@@ -279,6 +284,10 @@ li {
 
 .mgt-4 {
   margin: 0.25rem 0 0;
+}
+
+.mgb-10 {
+  margin: 0 0 0.75rem;
 }
 
 .text-slider {
