@@ -7,6 +7,58 @@ const updateTbl = () => {
 
 const configAllOrderTbl = () => {
   $('#allOrderTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
@@ -19,11 +71,9 @@ const configAllOrderTbl = () => {
         json.data.forEach((element, index) => {
           element.index = index + 1;
           element.time = `
-            <p>
-              ${element.shift.time} 
-              <br>
-              (${moment(element.medicalDay).format('YYYY-MM-DD')})
-            </p>
+            ${element.shift.time} (${moment(element.medicalDay).format(
+            'YYYY-MM-DD',
+          )})
           `;
           element.method = `
           <div class="div_icon">
@@ -63,6 +113,10 @@ const configAllOrderTbl = () => {
         orderable: false,
         targets: [0, 6],
       },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
+      },
     ],
     language: {
       sProcessing: 'Đang xử lý...',
@@ -86,6 +140,58 @@ const configAllOrderTbl = () => {
 
 const configNotApproveOrderTbl = () => {
   $('#notApproveOrderTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
@@ -98,11 +204,9 @@ const configNotApproveOrderTbl = () => {
         json.data.forEach((element, index) => {
           element.index = index + 1;
           element.time = `
-            <p>
-              ${element.shift.time} 
-              <br>
-              (${moment(element.medicalDay).format('YYYY-MM-DD')})
-            </p>
+            ${element.shift.time} (${moment(element.medicalDay).format(
+            'YYYY-MM-DD',
+          )})
           `;
           element.method = `
           <div class="div_icon">
@@ -144,6 +248,10 @@ const configNotApproveOrderTbl = () => {
         orderable: false,
         targets: [0, 6],
       },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
+      },
     ],
     language: {
       sProcessing: 'Đang xử lý...',
@@ -167,6 +275,58 @@ const configNotApproveOrderTbl = () => {
 
 const configApproveOrderTbl = () => {
   $('#approveOrderTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
@@ -179,11 +339,9 @@ const configApproveOrderTbl = () => {
         json.data.forEach((element, index) => {
           element.index = index + 1;
           element.time = `
-            <p>
-              ${element.shift.time} 
-              <br>
-              (${moment(element.medicalDay).format('YYYY-MM-DD')})
-            </p>
+            ${element.shift.time} (${moment(element.medicalDay).format(
+            'YYYY-MM-DD',
+          )})
           `;
           element.method = `
           <div class="div_icon">
@@ -222,6 +380,10 @@ const configApproveOrderTbl = () => {
       {
         orderable: false,
         targets: [0, 6],
+      },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
       },
     ],
     language: {
@@ -246,6 +408,58 @@ const configApproveOrderTbl = () => {
 
 const configUnApproveOrderTbl = () => {
   $('#unApproveOrderTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
@@ -258,11 +472,9 @@ const configUnApproveOrderTbl = () => {
         json.data.forEach((element, index) => {
           element.index = index + 1;
           element.time = `
-            <p>
-              ${element.shift.time} 
-              <br>
-              (${moment(element.medicalDay).format('YYYY-MM-DD')})
-            </p>
+            ${element.shift.time} (${moment(element.medicalDay).format(
+            'YYYY-MM-DD',
+          )}) 
           `;
           element.method = `
           <div class="div_icon">
@@ -301,6 +513,10 @@ const configUnApproveOrderTbl = () => {
       {
         orderable: false,
         targets: [0, 6],
+      },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
       },
     ],
     language: {
