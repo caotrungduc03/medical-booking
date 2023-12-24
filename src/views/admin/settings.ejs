@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/admin/head') %>
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+  <div class="wrapper">
+    <div id="loader"></div>
+
+    <%- include('../partials/admin/header') %>
+
+    <%- include('../partials/admin/sidebar') %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <div class="container-full">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="d-flex align-items-center">
+            <div class="mr-auto">
+              <h3>Cài đặt</h3>
+              <div class="d-inline-block align-items-center">
+                <nav>
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="/admin"><i class="mdi mdi-home-outline"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Cài đặt</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+          <div class="box">
+            <div class="row align-items-end">
+              <div class="col-xl-12 col-12">
+                <div class="box-header with-border">
+                  <h4 class="box-title">Một số cài đặt</h4>
+                </div>
+                <div class="box-body">
+                  <div>
+                    <input type="checkbox" id="saveSession">
+                    <label for="saveSession">Lưu tên đăng nhập</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /.content -->
+      </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <%- include('../partials/admin/footer') %>
+
+  </div>
+
+  <!-- Page Content overlay -->
+
+  <%- include('../partials/admin/script') %>
+  <script>
+    const isSaveSession = localStorage.getItem('isSaveSession');
+    if (isSaveSession === 'true') $('#saveSession').prop('checked', true);
+
+    $('#saveSession').on('change', function(e) {
+      const isSaveSession = $('#saveSession').is(':checked');
+      localStorage.setItem('isSaveSession', isSaveSession === true)
+      if (isSaveSession) {
+        localStorage.setItem('email', '<%= user.email %>');
+      } else {
+        localStorage.setItem('email', null);
+      }
+    })
+  </script>
+</body>
+
+</html>

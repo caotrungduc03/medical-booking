@@ -107,6 +107,7 @@ const handleEnterPassword = (passwordInput, eyeBtn) => {
 
 const handleSaveSession = (email) => {
   const isSaveSession = $('#loginForm #basic_checkbox_1').is(':checked');
+  localStorage.setItem('isSaveSession', isSaveSession === true);
   if (isSaveSession) {
     localStorage.setItem('email', email);
   } else {
