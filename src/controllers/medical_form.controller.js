@@ -185,22 +185,30 @@ const getAllMedicalForms = catchAsync(async (req, res) => {
 
 const updateMedicalFormStatus = async (req, res) => {
   const { medicalFormId } = req.params;
-  const { status } = req.body;
+  const { status, deniedReason } = req.body;
 
-  const medicalForm = await MedicalForm.findById(medicalFormId);
+  const medicalForm = await MedicalForm.findById(medicalFormId)
+    .populate('doctor')
+    .populate('shift');
 
   if (!medicalForm) {
     throw new ApiError(404, 'Đơn khám không tồn tại');
   }
 
-  Object.assign(medicalForm, { status });
+  Object.assign(medicalForm, { status, deniedReason });
   await medicalForm.save();
 
   sendApprovalConfirmation({
     to: medicalForm.email,
     fullName: medicalForm.fullName,
-    medicalTime: new Date(),
-    medicalOrder: Math.floor(Math.random() * 100),
+    medicalTime:
+      medicalForm.shift.time +
+      ', ' +
+      moment(medicalForm.shift.date).format('DD/MM/YYYY'),
+    medicalOrder: medicalForm.shift.slot,
+    place: medicalForm.shift.place,
+    doctorName: medicalForm.doctor.name,
+    deniedReason: medicalForm.deniedReason,
     isApproved: status === 1,
   });
 

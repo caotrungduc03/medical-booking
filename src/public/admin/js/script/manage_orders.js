@@ -596,7 +596,7 @@ const handleChangeStatus = () => {
 
     swal({
       title: 'Bạn có chắc chắn ?',
-      text: `Đơn khám đủ điều khiện`,
+      text: `Đơn khám đủ điều kiện`,
       icon: 'warning',
       buttons: ['Hủy', 'Cập nhật'],
       dangerMode: true,
@@ -636,22 +636,32 @@ const handleChangeStatus = () => {
     const tabId = getCurrentTabId();
     order = $(`${tabId} table`).DataTable().row($(this).parents('tr')).data();
 
+    const span = document.createElement('span');
+    span.innerHTML = `
+      <div class="" style="display: flex; align-items: center; justify-content: space-between">
+        <label style="margin: 0"><b>Lý do: </b></label> 
+        <textarea id="deniedReason" style="width: 88%" type="text"  placeholder="Không phù hợp" class="form-control" required="" data-validation-required-message="Trường này là bắt buộc"></textarea>
+      </div>
+    `;
+
     swal({
-      title: 'Bạn có chắc chắn ?',
-      text: `Đơn khám chưa đủ điều khiện`,
+      title: 'Đơn khám chưa đủ điều kiện',
+      content: span,
       icon: 'warning',
       buttons: ['Hủy', 'Cập nhật'],
       dangerMode: true,
     })
       .then(async (willDelete) => {
         if (willDelete) {
+          const deniedReason = $('#deniedReason').val();
+
           const result = await (
             await fetch(`/api/v1/medical-forms/status/${order.id}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ status: 2 }),
+              body: JSON.stringify({ status: 2, deniedReason }),
             })
           ).json();
           if (result.code === 200) {
