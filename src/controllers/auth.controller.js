@@ -5,8 +5,11 @@ const ApiError = require('../utils/ApiError');
 const { User, Role } = require('../models');
 const pick = require('../utils/pick');
 const response = require('../utils/response');
-const { sendVerificationEmail } = require('../utils/mail');
-const { generateToken } = require('../utils/token');
+const {
+  sendVerificationEmail,
+  sendForgotPasswordEmail,
+} = require('../utils/mail');
+const { generateToken, verifyToken } = require('../utils/token');
 
 const register = catchAsync(async (req, res) => {
   const { confirmPassword, ...remainingData } = req.body;
@@ -84,8 +87,46 @@ const logout = catchAsync(async (req, res, next) => {
   res.status(200).json(response(200, 'Thành công'));
 });
 
+const forgotPassword = catchAsync(async (req, res, next) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(400, 'Email không tồn tại');
+  }
+
+  const fullName = user.lastName + ' ' + user.firstName;
+
+  const token = await generateToken(user);
+  sendForgotPasswordEmail(user.email, fullName, token);
+
+  res.status(200).json(response(200, 'Thành công'));
+});
+
+const resetPassword = catchAsync(async (req, res, next) => {
+  const { token, password, confirmPassword } = req.body;
+
+  if (password !== confirmPassword) {
+    throw new ApiError(400, 'Xác nhận mật khẩu không trùng khớp!');
+  }
+
+  const payload = await verifyToken(token);
+
+  if (!payload || !payload.userId) {
+    throw new ApiError(500, 'Xác thực thất bại');
+  }
+
+  const user = await User.findById(payload.userId);
+  user.password = password;
+  user.save();
+
+  res.status(200).json(response(200, 'Thành công'));
+});
+
 module.exports = {
   register,
   login,
   logout,
+  forgotPassword,
+  resetPassword,
 };

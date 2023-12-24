@@ -11,7 +11,7 @@ const login = catchAsync(async (req, res) => {
 });
 
 const forgotPassword = catchAsync(async (req, res) => {
-  res.render('client/forgotPassword');
+  res.render('client/forgot_password');
 });
 const form = catchAsync(async (req, res) => {
   const departments = await Department.find();
@@ -55,6 +55,10 @@ const verifyEmail = catchAsync(async (req, res) => {
   res.render('client/verify_email', { url, isSuccess });
 });
 
+const resetPassword = catchAsync(async (req, res) => {
+  res.render('client/reset_password');
+});
+
 module.exports = {
   register,
   login,
@@ -65,4 +69,5 @@ module.exports = {
   notFound,
   permissionDenied,
   verifyEmail,
+  resetPassword,
 };

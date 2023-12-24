@@ -14,6 +14,7 @@ viewClientRouter.get(
   viewClientController.aboutUs,
 );
 viewClientRouter.get('/verify-email', viewClientController.verifyEmail);
+viewClientRouter.get('/reset-password', viewClientController.resetPassword);
 viewClientRouter.get(
   '/permission-denied',
   viewClientController.permissionDenied,

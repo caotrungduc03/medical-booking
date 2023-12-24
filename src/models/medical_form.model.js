@@ -95,6 +95,11 @@ const medicalFormSchema = new Schema(
       trim: true,
       // required: true,
     },
+    deniedReason: {
+      type: String,
+      trim: true,
+      default: '',
+    },
   },
   {
     timestamps: true,

@@ -54,7 +54,7 @@ viewAdminRouter.get(
 viewAdminRouter.get(
   '/manage-shifts',
   authMiddleware,
-  roleMiddleware(['admin']),
+  roleMiddleware(['nhan-vien-to-chuc']),
   viewAdminController.manageShifts,
 );
 viewAdminRouter.get('/', authMiddleware, viewAdminController.dashboard);

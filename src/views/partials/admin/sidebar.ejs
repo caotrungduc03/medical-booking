@@ -59,6 +59,15 @@
         </a>
       </li>
       <% } %>
+      <% if(ROLES?.find(role => role === 'nhan-vien-to-chuc' )) { %>
+      <li class="<%= path === '/manage-shifts' ? 'active' : ':' %>">
+        <a href="/admin/manage-shifts">
+          <i class="ti-notepad"><span class="path1"></span><span class="path2"></span></i>
+          <span>Quản lý ca làm việc</span>
+          <span class="pull-right-container"> </span>
+        </a>
+      </li>
+      <% } %>
       <% if(ROLES?.find(role => role === 'admin' )) { %>
       <li class="treeview">
         <a href="#">
@@ -106,13 +115,6 @@
             <a href="/admin/manage-doctors">
               <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
               <span>Quản lý bác sĩ</span>
-              <span class="pull-right-container"> </span>
-            </a>
-          </li>
-          <li class="<%= path === '/manage-shifts' ? 'active' : ':' %>">
-            <a href="/admin/manage-shifts">
-              <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
-              <span>Quản lý ca làm việc</span>
               <span class="pull-right-container"> </span>
             </a>
           </li>

@@ -41,7 +41,16 @@ const sendVerificationEmail = (to, fullName, token = '') => {
 };
 
 const sendApprovalConfirmation = (body) => {
-  const { to, fullName, medicalTime, medicalOrder, isApproved } = body;
+  const {
+    to,
+    fullName,
+    medicalTime,
+    medicalOrder,
+    place,
+    doctorName,
+    deniedReason,
+    isApproved,
+  } = body;
   const subject = 'Xác nhận Phê duyệt Đơn Khám Bệnh';
   let text;
   if (isApproved) {
@@ -50,15 +59,31 @@ const sendApprovalConfirmation = (body) => {
     Đơn khám bệnh của bạn đã được chấp nhận.
     Thời gian khám: ${medicalTime}
     Số thứ tự: ${medicalOrder}
-    Vui lòng đến đúng giờ theo địa chỉ đã đăng ký.
+    Địa điểm: ${place}
+    Bác sĩ phụ trách: ${doctorName}
+    Vui lòng đến đúng giờ theo đơn khám đã đăng ký.
   `;
   } else {
     text = `
     Xin chào ${fullName},
     Rất tiếc, đơn khám bệnh của bạn đã không được chấp nhận.
+    Vì lý do: ${deniedReason || ''}
     Vui lòng xem xét lại đơn khám và gửi lại khi đã sửa đổi.
   `;
   }
+
+  sendEmail(to, subject, text);
+};
+
+const sendForgotPasswordEmail = (to, fullName, token = '') => {
+  const subject = 'Xác thực quên mật khấu';
+  // replace this url with the link to the email verification page of your front-end app
+  const baseURL = process.env.BASE_URL;
+  const text = `
+    Xin chào ${fullName},
+    Để đặt lại mật khẩu tài khoản của bạn, hãy nhấp vào liên kết này: ${baseURL}/reset-password?token=${token}
+    Nếu bạn không thực hiện thao tác này, vui lòng bỏ qua email này.
+  `;
 
   sendEmail(to, subject, text);
 };
@@ -67,4 +92,5 @@ module.exports = {
   sendEmail,
   sendVerificationEmail,
   sendApprovalConfirmation,
+  sendForgotPasswordEmail,
 };

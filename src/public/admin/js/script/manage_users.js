@@ -77,7 +77,6 @@ const configUnlockUserTbl = () => {
               <p>SĐT: ${element.phone || 'Chưa cập nhật'}</p>
             </div>
           `;
-          element.address = element.address || 'Chưa cập nhật';
           element.method = `
           <div class="div_icon">
             <a href="#" id="btn-update" title="Sửa" data-toggle="modal" data-target="#updateUserModal" class="mr-1"><i class="ti-pencil-alt"></i></a>
@@ -94,7 +93,11 @@ const configUnlockUserTbl = () => {
       { data: 'fullName', width: '*' },
       { data: 'cardId', width: '12%' },
       { data: 'contact', width: '20%' },
-      { data: 'address', width: '20%' },
+      {
+        data: 'address',
+        width: '20%',
+        render: (value) => value || 'Chưa cập nhật',
+      },
       {
         data: 'lastLogin',
         width: '16%',
@@ -211,7 +214,6 @@ const configLockUserTbl = () => {
               <p>SĐT: ${element.phone || 'Chưa cập nhật'}</p>
             </div>
           `;
-          element.address = element.address || 'Chưa cập nhật';
           element.method = `
           <div class="div_icon">
             <span id="btn-unlock" class="model_img mr-1" title="Mở khoá"><i class="ti-unlock"></i></span>
@@ -228,7 +230,11 @@ const configLockUserTbl = () => {
       { data: 'fullName', width: '*' },
       { data: 'cardId', width: '12%' },
       { data: 'contact', width: '20%' },
-      { data: 'address', width: '20%' },
+      {
+        data: 'address',
+        width: '20%',
+        render: (value) => value || 'Chưa cập nhật',
+      },
       {
         data: 'lastLogin',
         width: '16%',
