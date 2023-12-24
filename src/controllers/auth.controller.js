@@ -57,6 +57,9 @@ const login = catchAsync(async (req, res, next) => {
     throw new ApiError(400, 'Email hoặc mật khẩu nhập sai');
   }
 
+  user.lastLogin = Date.now();
+  await user.save();
+
   const accessToken = jwt.sign(
     {
       userId: user.id,

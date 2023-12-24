@@ -142,7 +142,7 @@ const updateMedicalFormByUser = catchAsync(async (req, res) => {
 });
 
 const getAllMedicalForms = catchAsync(async (req, res) => {
-  const medicalForms = await MedicalForm.find();
+  const medicalForms = await MedicalForm.find().populate('medicalDepartment');
 
   res.status(200).json(response(200, 'Thành công', medicalForms));
 });

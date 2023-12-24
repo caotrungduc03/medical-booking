@@ -5,6 +5,58 @@ const updateTbl = () => {
 
 const configUnlockUserTbl = () => {
   $('#unlockUserTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
@@ -38,12 +90,20 @@ const configUnlockUserTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
       { data: 'cardId', width: '12%' },
       { data: 'contact', width: '20%' },
       { data: 'address', width: '20%' },
-      { data: 'method', className: 'text-center', width: '15%' },
+      {
+        data: 'lastLogin',
+        width: '16%',
+        render: (value) => {
+          if (!value) return 'Chưa bao giờ';
+          return moment(value).format('DD-MM-YYYY');
+        },
+      },
+      { data: 'method', className: 'text-center', width: '8%' },
     ],
     columnDefs: [
       {
@@ -53,6 +113,10 @@ const configUnlockUserTbl = () => {
       {
         orderable: false,
         targets: [0, 3],
+      },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
       },
     ],
     language: {
@@ -77,6 +141,58 @@ const configUnlockUserTbl = () => {
 
 const configLockUserTbl = () => {
   $('#lockUserTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
@@ -108,12 +224,20 @@ const configLockUserTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
       { data: 'cardId', width: '12%' },
       { data: 'contact', width: '20%' },
       { data: 'address', width: '20%' },
-      { data: 'method', className: 'text-center', width: '15%' },
+      {
+        data: 'lastLogin',
+        width: '16%',
+        render: (value) => {
+          if (!value) return 'Chưa bao giờ';
+          return moment(value).format('DD-MM-YYYY');
+        },
+      },
+      { data: 'method', className: 'text-center', width: '8%' },
     ],
     columnDefs: [
       {
@@ -123,6 +247,10 @@ const configLockUserTbl = () => {
       {
         orderable: false,
         targets: [0, 3],
+      },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
       },
     ],
     language: {

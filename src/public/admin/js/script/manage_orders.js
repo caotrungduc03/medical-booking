@@ -7,23 +7,73 @@ const updateTbl = () => {
 
 const configAllOrderTbl = () => {
   $('#allOrderTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?status=0&status=1&status=2',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=0&status=1&status=2',
       dataSrc: function (json) {
         $('#allOrderNav span').html(`(${json.data.length})`);
 
         json.data.forEach((element, index) => {
           element.index = index + 1;
           element.time = `
-            <p>
-              ${element.medicalHour} 
-              <br>
-              (${moment(element.medicalDay).format('YYYY-MM-DD')})
-            </p>
+            ${element.shift.time} (${moment(element.medicalDay).format(
+            'YYYY-MM-DD',
+          )})
           `;
           element.method = `
           <div class="div_icon">
@@ -44,7 +94,13 @@ const configAllOrderTbl = () => {
         width: '12%',
         render: (value) => moment(value).format('YYYY-MM-DD'),
       },
-      { data: 'medicalDepartment', width: '20%' },
+      {
+        data: 'medicalDepartment',
+        width: '20%',
+        render: (item) => {
+          return item.name;
+        },
+      },
       { data: 'time', width: '12%' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
@@ -56,6 +112,10 @@ const configAllOrderTbl = () => {
       {
         orderable: false,
         targets: [0, 6],
+      },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
       },
     ],
     language: {
@@ -80,23 +140,73 @@ const configAllOrderTbl = () => {
 
 const configNotApproveOrderTbl = () => {
   $('#notApproveOrderTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?status=0',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=0',
       dataSrc: function (json) {
         $('#notApproveOrderNav span').html(`(${json.data.length})`);
 
         json.data.forEach((element, index) => {
           element.index = index + 1;
           element.time = `
-            <p>
-              ${element.medicalHour} 
-              <br>
-              (${moment(element.medicalDay).format('YYYY-MM-DD')})
-            </p>
+            ${element.shift.time} (${moment(element.medicalDay).format(
+            'YYYY-MM-DD',
+          )})
           `;
           element.method = `
           <div class="div_icon">
@@ -119,7 +229,13 @@ const configNotApproveOrderTbl = () => {
         width: '12%',
         render: (value) => moment(value).format('YYYY-MM-DD'),
       },
-      { data: 'medicalDepartment', width: '20%' },
+      {
+        data: 'medicalDepartment',
+        width: '20%',
+        render: (item) => {
+          return item.name;
+        },
+      },
       { data: 'time', width: '12%' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
@@ -131,6 +247,10 @@ const configNotApproveOrderTbl = () => {
       {
         orderable: false,
         targets: [0, 6],
+      },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
       },
     ],
     language: {
@@ -155,23 +275,73 @@ const configNotApproveOrderTbl = () => {
 
 const configApproveOrderTbl = () => {
   $('#approveOrderTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?status=1',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=1',
       dataSrc: function (json) {
         $('#approveOrderNav span').html(`(${json.data.length})`);
 
         json.data.forEach((element, index) => {
           element.index = index + 1;
           element.time = `
-            <p>
-              ${element.medicalHour} 
-              <br>
-              (${moment(element.medicalDay).format('YYYY-MM-DD')})
-            </p>
+            ${element.shift.time} (${moment(element.medicalDay).format(
+            'YYYY-MM-DD',
+          )})
           `;
           element.method = `
           <div class="div_icon">
@@ -192,7 +362,13 @@ const configApproveOrderTbl = () => {
         width: '12%',
         render: (value) => moment(value).format('YYYY-MM-DD'),
       },
-      { data: 'medicalDepartment', width: '20%' },
+      {
+        data: 'medicalDepartment',
+        width: '20%',
+        render: (item) => {
+          return item.name;
+        },
+      },
       { data: 'time', width: '12%' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
@@ -204,6 +380,10 @@ const configApproveOrderTbl = () => {
       {
         orderable: false,
         targets: [0, 6],
+      },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
       },
     ],
     language: {
@@ -228,23 +408,73 @@ const configApproveOrderTbl = () => {
 
 const configUnApproveOrderTbl = () => {
   $('#unApproveOrderTbl').dataTable({
+    dom: 'Blfrtip',
+    buttons: [
+      // 'copy',
+      // 'csv',
+      {
+        text: '<i class="fa fa-file-excel-o"></i> Xuất excel',
+        exportOptions: {
+          modifier: {
+            page: 'current',
+          },
+          columns: '.export-col',
+        },
+        extend: 'excelHtml5',
+        filename:
+          'Danh_sach_nguoi_dung_khong_khoa_' +
+          new Date().getDate() +
+          '_' +
+          (new Date().getMonth() + 1) +
+          '_' +
+          new Date().getFullYear(),
+        title: '',
+        action: newexportaction,
+        customize: function (xlsx) {
+          var sheet = xlsx.xl.worksheets['sheet1.xml'];
+          var lastCol = sheet.getElementsByTagName('col').length - 1;
+          var colRange = createCellPos(lastCol) + '1';
+          //Has to be done this way to avoid creation of unwanted namespace atributes.
+          var afSerializer = new XMLSerializer();
+          var xmlString = afSerializer.serializeToString(sheet);
+          var parser = new DOMParser();
+          var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+          var xlsxFilter = xmlDoc.createElementNS(
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+            'autoFilter',
+          );
+          var filterAttr = xmlDoc.createAttribute('ref');
+          filterAttr.value = 'A1:' + colRange;
+          xlsxFilter.setAttributeNode(filterAttr);
+          sheet.getElementsByTagName('worksheet')[0].appendChild(xlsxFilter);
+        },
+        // message:
+        //   'Any message for header inside the file. I am not able to put message in next row in excel file but you can use \n' +
+        //   'test' +
+        //   '1',
+        render: function (data, type, full, meta) {
+          return data;
+        },
+        // },
+      },
+      // 'pdf',
+      // 'print',
+    ],
     autoWidth: false,
     processing: true,
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?status=2',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=2',
       dataSrc: function (json) {
         $('#unApproveOrderNav span').html(`(${json.data.length})`);
 
         json.data.forEach((element, index) => {
           element.index = index + 1;
           element.time = `
-            <p>
-              ${element.medicalHour} 
-              <br>
-              (${moment(element.medicalDay).format('YYYY-MM-DD')})
-            </p>
+            ${element.shift.time} (${moment(element.medicalDay).format(
+            'YYYY-MM-DD',
+          )}) 
           `;
           element.method = `
           <div class="div_icon">
@@ -265,7 +495,13 @@ const configUnApproveOrderTbl = () => {
         width: '12%',
         render: (value) => moment(value).format('YYYY-MM-DD'),
       },
-      { data: 'medicalDepartment', width: '20%' },
+      {
+        data: 'medicalDepartment',
+        width: '20%',
+        render: (item) => {
+          return item.name;
+        },
+      },
       { data: 'time', width: '12%' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
@@ -277,6 +513,10 @@ const configUnApproveOrderTbl = () => {
       {
         orderable: false,
         targets: [0, 6],
+      },
+      {
+        className: 'export-col',
+        targets: [0, 1, 2, 3, 4, 5],
       },
     ],
     language: {
@@ -326,6 +566,12 @@ const handleDetail = () => {
         $(`${formId} [name='${field.name}']`)
           .val(moment(order[field.name]).format('YYYY-MM-DD'))
           .change();
+      } else if (field.name === 'medicalDepartment') {
+        $(`${formId} [name='medicalDepartment']`).val(
+          order.medicalDepartment.name,
+        );
+      } else if (field.name === 'medicalHour') {
+        $(`${formId} [name='medicalHour']`).val(order.shift.time);
       } else {
         $(`${formId} [name='${field.name}']`).val(order[field.name]).change();
       }

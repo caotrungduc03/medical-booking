@@ -31,13 +31,13 @@ viewAdminRouter.get(
 viewAdminRouter.get(
   '/statistic',
   authMiddleware,
-  roleMiddleware(['nhan-vien-phe-duyet']),
+  roleMiddleware(['nhan-vien-kiem-duyet']),
   viewAdminController.statistic,
 );
 viewAdminRouter.get(
   '/manage-orders',
   authMiddleware,
-  roleMiddleware(['nhan-vien-phe-duyet']),
+  roleMiddleware(['nhan-vien-kiem-duyet']),
   viewAdminController.manageOrders,
 );
 viewAdminRouter.get(
