@@ -75,8 +75,22 @@ const sendApprovalConfirmation = (body) => {
   sendEmail(to, subject, text);
 };
 
+const sendForgotPasswordEmail = (to, fullName, token = '') => {
+  const subject = 'Xác thực quên mật khấu';
+  // replace this url with the link to the email verification page of your front-end app
+  const baseURL = process.env.BASE_URL;
+  const text = `
+    Xin chào ${fullName},
+    Để đặt lại mật khẩu tài khoản của bạn, hãy nhấp vào liên kết này: ${baseURL}/reset-password?token=${token}
+    Nếu bạn không thực hiện thao tác này, vui lòng bỏ qua email này.
+  `;
+
+  sendEmail(to, subject, text);
+};
+
 module.exports = {
   sendEmail,
   sendVerificationEmail,
   sendApprovalConfirmation,
+  sendForgotPasswordEmail,
 };
