@@ -1,3 +1,6 @@
+let allOrderTbl, notApproveOrderTbl, approveOrderTbl, unApproveOrderTbl;
+let currentTbl;
+
 const updateTbl = () => {
   $('#allOrderTbl').DataTable().ajax.reload();
   $('#notApproveOrderTbl').DataTable().ajax.reload();
@@ -6,7 +9,7 @@ const updateTbl = () => {
 };
 
 const configAllOrderTbl = () => {
-  $('#allOrderTbl').dataTable({
+  allOrderTbl = $('#allOrderTbl').dataTable({
     dom: 'Blfrtip',
     buttons: [
       // 'copy',
@@ -140,7 +143,7 @@ const configAllOrderTbl = () => {
 };
 
 const configNotApproveOrderTbl = () => {
-  $('#notApproveOrderTbl').dataTable({
+  notApproveOrderTbl = $('#notApproveOrderTbl').dataTable({
     dom: 'Blfrtip',
     buttons: [
       // 'copy',
@@ -276,7 +279,7 @@ const configNotApproveOrderTbl = () => {
 };
 
 const configApproveOrderTbl = () => {
-  $('#approveOrderTbl').dataTable({
+  approveOrderTbl = $('#approveOrderTbl').dataTable({
     dom: 'Blfrtip',
     buttons: [
       // 'copy',
@@ -410,7 +413,7 @@ const configApproveOrderTbl = () => {
 };
 
 const configUnApproveOrderTbl = () => {
-  $('#unApproveOrderTbl').dataTable({
+  unApproveOrderTbl = $('#unApproveOrderTbl').dataTable({
     dom: 'Blfrtip',
     buttons: [
       // 'copy',
@@ -672,6 +675,40 @@ const handleChangeStatus = () => {
   });
 };
 
+const handleCheckCurrentTbl = () => {
+  const elementId = $('.tab-pane.fade.active.show table').attr('id');
+  if (elementId === 'allOrderTbl') currentTbl = allOrderTbl;
+  else if (elementId === 'notApproveOrderTbl') currentTbl = notApproveOrderTbl;
+  else if (elementId === 'approveOrderTbl') currentTbl = approveOrderTbl;
+  else if (elementId === 'unApproveOrderTbl') currentTbl = unApproveOrderTbl;
+};
+
+const handleFilter = () => {
+  $('#btn-filter').on('click', (e) => {
+    handleCheckCurrentTbl();
+
+    const departmentValue = $('.departmentFilter').val();
+    const dateValue = $('.dateFilter').val();
+    currentTbl
+      .api()
+      .column(0)
+      .search(departmentValue)
+      .column(1)
+      .search(dateValue)
+      .draw();
+  });
+};
+
+const handleClearFilter = () => {
+  $('#btn-clear').on('click', (e) => {
+    handleCheckCurrentTbl();
+
+    $('.departmentFilter').val('').change();
+    $('.birthdayFilter').val('');
+    currentTbl.api().column(0).search('').column(1).search('').draw();
+  });
+};
+
 $(document).ready(function () {
   configAllOrderTbl();
   configNotApproveOrderTbl();
@@ -679,4 +716,6 @@ $(document).ready(function () {
   configUnApproveOrderTbl();
   handleDetail();
   handleChangeStatus();
+  handleFilter();
+  handleClearFilter();
 });

@@ -41,7 +41,13 @@ const configAllDepartmentTbl = () => {
       {
         data: 'leader',
         width: '20%',
-        render: (item) => item.name,
+        render: (item) => {
+          if (!item) return 'Chưa có';
+          return `<div>
+            <div class="text-primary"><small><b>${item.doctorCode}</b></small></div>
+            <span>${item.name}</span>
+          </div>`;
+        },
       },
       { data: 'method', className: 'text-center', width: '15%' },
     ],
