@@ -293,6 +293,7 @@ const configUnApproveOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
+      { data: 'deniedReason', width: '12%', render: (value) => value || '' },
       { data: 'method', className: 'text-center', width: '12%' },
     ],
     columnDefs: [
@@ -302,7 +303,7 @@ const configUnApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
     ],
     language: {

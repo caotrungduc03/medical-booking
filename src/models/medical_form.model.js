@@ -98,6 +98,7 @@ const medicalFormSchema = new Schema(
     deniedReason: {
       type: String,
       trim: true,
+      default: '',
     },
   },
   {

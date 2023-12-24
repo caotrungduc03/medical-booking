@@ -510,6 +510,7 @@ const configUnApproveOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
+      { data: 'deniedReason', width: '12%' },
       { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
@@ -519,11 +520,11 @@ const configUnApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 7],
+        targets: [0, 8],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5, 6],
+        targets: [0, 1, 2, 3, 4, 5, 6, 7],
       },
     ],
     language: {
