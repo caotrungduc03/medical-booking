@@ -1,3 +1,4 @@
+const moment = require('moment');
 const { MedicalForm, Shift } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const response = require('../utils/response');
@@ -17,9 +18,27 @@ const getMedicalForms = catchAsync(async (req, res) => {
     }
   }
 
-  if (query.search) {
+  if (query.search?.['value']) {
     let searchValue = query.search['value'];
     filter.fullName = { $regex: searchValue, $options: 'i' };
+  }
+
+  if (query.columns?.[0].search?.['value']) {
+    const departmentValue = query.columns[0]?.search['value'];
+    filter.medicalDepartment = departmentValue;
+  }
+
+  if (query.columns?.[1].search?.['value']) {
+    const dateValue = query.columns[1]?.search['value'];
+    const date = moment(dateValue);
+    const shifts = await Shift.find({
+      date: {
+        $gte: date.startOf('day').toDate(),
+        $lte: date.endOf('day').toDate(),
+      },
+    });
+    const shiftIds = shifts.map((shift) => shift.id);
+    filter.shift = { $in: shiftIds };
   }
 
   let columnIndex;
@@ -142,7 +161,24 @@ const updateMedicalFormByUser = catchAsync(async (req, res) => {
 });
 
 const getAllMedicalForms = catchAsync(async (req, res) => {
-  const medicalForms = await MedicalForm.find().populate('medicalDepartment');
+  const query = req.query;
+  const filter = {};
+  if (query.date) {
+    const dateValue = query.date;
+    const date = moment(dateValue);
+    const shifts = await Shift.find({
+      date: {
+        $gte: date.startOf('day').toDate(),
+        $lte: date.endOf('day').toDate(),
+      },
+    });
+    const shiftIds = shifts.map((shift) => shift.id);
+    filter.shift = { $in: shiftIds };
+  }
+
+  const medicalForms = await MedicalForm.find(filter).populate(
+    'medicalDepartment',
+  );
 
   res.status(200).json(response(200, 'Thành công', medicalForms));
 });

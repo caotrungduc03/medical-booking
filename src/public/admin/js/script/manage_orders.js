@@ -1,3 +1,6 @@
+let allOrderTbl, notApproveOrderTbl, approveOrderTbl, unApproveOrderTbl;
+let currentTbl;
+
 const updateTbl = () => {
   $('#allOrderTbl').DataTable().ajax.reload();
   $('#notApproveOrderTbl').DataTable().ajax.reload();
@@ -6,7 +9,7 @@ const updateTbl = () => {
 };
 
 const configAllOrderTbl = () => {
-  $('#allOrderTbl').dataTable({
+  allOrderTbl = $('#allOrderTbl').dataTable({
     dom: 'Blfrtip',
     buttons: [
       // 'copy',
@@ -86,8 +89,9 @@ const configAllOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '10%' },
       { data: 'gender', width: '10%' },
       {
         data: 'birthday',
@@ -102,7 +106,7 @@ const configAllOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
       {
@@ -111,11 +115,11 @@ const configAllOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 5, 6],
       },
     ],
     language: {
@@ -139,7 +143,7 @@ const configAllOrderTbl = () => {
 };
 
 const configNotApproveOrderTbl = () => {
-  $('#notApproveOrderTbl').dataTable({
+  notApproveOrderTbl = $('#notApproveOrderTbl').dataTable({
     dom: 'Blfrtip',
     buttons: [
       // 'copy',
@@ -221,8 +225,9 @@ const configNotApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '10%' },
       { data: 'gender', width: '10%' },
       {
         data: 'birthday',
@@ -237,7 +242,7 @@ const configNotApproveOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
       {
@@ -246,11 +251,11 @@ const configNotApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 6],
       },
     ],
     language: {
@@ -274,7 +279,7 @@ const configNotApproveOrderTbl = () => {
 };
 
 const configApproveOrderTbl = () => {
-  $('#approveOrderTbl').dataTable({
+  approveOrderTbl = $('#approveOrderTbl').dataTable({
     dom: 'Blfrtip',
     buttons: [
       // 'copy',
@@ -354,8 +359,9 @@ const configApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '10%' },
       { data: 'gender', width: '10%' },
       {
         data: 'birthday',
@@ -370,7 +376,7 @@ const configApproveOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
       {
@@ -379,11 +385,11 @@ const configApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 5, 6],
       },
     ],
     language: {
@@ -407,7 +413,7 @@ const configApproveOrderTbl = () => {
 };
 
 const configUnApproveOrderTbl = () => {
-  $('#unApproveOrderTbl').dataTable({
+  unApproveOrderTbl = $('#unApproveOrderTbl').dataTable({
     dom: 'Blfrtip',
     buttons: [
       // 'copy',
@@ -487,8 +493,9 @@ const configUnApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: 'index', width: '4%' },
       { data: 'fullName', width: '*' },
+      { data: 'cardId', width: '10%' },
       { data: 'gender', width: '10%' },
       {
         data: 'birthday',
@@ -503,7 +510,7 @@ const configUnApproveOrderTbl = () => {
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'method', className: 'text-center', width: '10%' },
     ],
     columnDefs: [
       {
@@ -512,11 +519,11 @@ const configUnApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 6],
+        targets: [0, 7],
       },
       {
         className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5],
+        targets: [0, 1, 2, 3, 4, 5, 6],
       },
     ],
     language: {
@@ -668,6 +675,40 @@ const handleChangeStatus = () => {
   });
 };
 
+const handleCheckCurrentTbl = () => {
+  const elementId = $('.tab-pane.fade.active.show table').attr('id');
+  if (elementId === 'allOrderTbl') currentTbl = allOrderTbl;
+  else if (elementId === 'notApproveOrderTbl') currentTbl = notApproveOrderTbl;
+  else if (elementId === 'approveOrderTbl') currentTbl = approveOrderTbl;
+  else if (elementId === 'unApproveOrderTbl') currentTbl = unApproveOrderTbl;
+};
+
+const handleFilter = () => {
+  $('#btn-filter').on('click', (e) => {
+    handleCheckCurrentTbl();
+
+    const departmentValue = $('.departmentFilter').val();
+    const dateValue = $('.dateFilter').val();
+    currentTbl
+      .api()
+      .column(0)
+      .search(departmentValue)
+      .column(1)
+      .search(dateValue)
+      .draw();
+  });
+};
+
+const handleClearFilter = () => {
+  $('#btn-clear').on('click', (e) => {
+    handleCheckCurrentTbl();
+
+    $('.departmentFilter').val('').change();
+    $('.dateFilter').val('');
+    currentTbl.api().column(0).search('').column(1).search('').draw();
+  });
+};
+
 $(document).ready(function () {
   configAllOrderTbl();
   configNotApproveOrderTbl();
@@ -675,4 +716,6 @@ $(document).ready(function () {
   configUnApproveOrderTbl();
   handleDetail();
   handleChangeStatus();
+  handleFilter();
+  handleClearFilter();
 });

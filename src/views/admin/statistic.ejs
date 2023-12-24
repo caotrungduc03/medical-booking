@@ -43,8 +43,48 @@
                 <div class="box-header with-border">
                   <h4 class="box-title">Biểu đồ thống kê số lượng đơn khám mỗi khoa</h4>
                 </div>
+                <div class="box-body pb-0">
+                  <div class="row">
+                    <div class="col-lg-3 col-12">
+                      <div class="form-group">
+                        <label>Ngày khám bệnh</label>
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                          </div>
+                          <input type="date" class="form-control pull-left dateFilter" />
+                        </div>
+                        <!-- /.input group -->
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-12 d-flex flex-wrap" style="gap: 0 8px;">
+                      <button style="margin-top: 28px; height: 33.5px; display: flex; align-items: center" class="waves-effect waves-light btn btn-primary mb-5" id="btn-filter">
+                        <i style="margin-right: 3px" class="fa fa-filter" aria-hidden="true"></i> Chọn lọc
+                      </button>
+                    </div>
+                  </div>
+                </div>
                 <div class="box-body">
-                    <canvas id="chartMedicalForm"></canvas>
+                  <div class="row">
+                    <div class="col-12 col-lg-6">
+                      <canvas id="allOrderChart"></canvas>
+                      <h5 class="mt-2 text-primary text-center font-italic">Biểu đồ đơn khám đã đặt</h5>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                      <canvas id="notOrderChart"></canvas>
+                      <h5 class="mt-2 text-primary text-center font-italic">Biểu đồ đơn khám chưa xét</h5>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 40px;">
+                    <div class="col-12 col-lg-6">
+                      <canvas id="approveOrderChart"></canvas>
+                      <h5 class="mt-2 text-primary text-center font-italic">Biểu đồ đơn khám đủ điều kiện</h5>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                      <canvas id="unApproveOrderChart"></canvas>
+                      <h5 class="mt-2 text-primary text-center font-italic">Biểu đồ đơn khám không đủ điều kiện</h5>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
