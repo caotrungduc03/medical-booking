@@ -12,10 +12,10 @@
   justify-content: center;
 }
 .wrapper {
-  width: 80%;
+  width: 90%;
   margin: 80px 0 40px 0;
-  border: 5px solid rgba(20, 20, 255, 0.5);
-  border-radius: 20px;
+  /* border: 5px solid rgba(20, 20, 255, 0.5);
+  border-radius: 20px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,8 +24,9 @@
   width: 100%;
   padding: 20px;
 }
-.form-box-register h2 {
+.form_title {
   font-size: 50px;
+  margin-bottom: 20px;
   color: rgb(20, 20, 255);
   text-align: center;
 }
@@ -34,10 +35,15 @@
   display: flex;
   justify-content: space-around;
 }
-.form-mb-5 {
-  width: 40%;
+.form-mb-1 {
+  width: 30%;
   margin-bottom: 12px;
 }
+.form-mb-2 {
+  width: 90%;
+  margin-bottom: 12px;
+}
+
 .form-label {
   display: block;
   font-weight: 500;
@@ -65,7 +71,6 @@
 }
 .input-box-2 {
   width: 90%;
-  float: left;
   margin-bottom: 12px;
 }
 .text-danger {
