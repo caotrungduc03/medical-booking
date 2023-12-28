@@ -85,11 +85,11 @@
               <input class="form-input" type="file" name="cccd" id=" cccd" required />
             </div>
             <div class="form-mb-1">
-              <label class="form-label" for="insuranceId">Số BHYT <span class="text-danger">*</span></label>
+              <label class="form-label" for="insuranceId">Số BHYT</label>
               <input class="form-input" type="text" name=" insuranceId" id=" insuranceId" />
             </div>
             <div class="form-mb-1">
-              <label class="form-label" for="bhyt">Ảnh BHYT <span class="text-danger">*</span></label>
+              <label class="form-label" for="bhyt">Ảnh BHYT</label>
               <input class="form-input" type="file" name=" bhyt" id=" bhyt" />
             </div>
           </div>
@@ -100,19 +100,19 @@
             </div>
           </div>
           <div class="row">
-            <div class="input-box-2">
+            <div class="form-mb-2">
               <label class="form-label">Lý do khám <span class="text-danger">*</span></label class="form-label">
               <textarea class="form-input" type="text" name="reason" required></textarea>
             </div>
           </div>
           <div class="row">
-            <div class="input-box-2">
+            <div class="form-mb-2">
               <label class="form-label">Ghi chú</label>
               <textarea class="form-input" type="text" name="note"></textarea>
             </div>
           </div>
           <div class="row">
-            <button class="form-btn" type="submit">Đăng ký</button>
+            <button class="form-btn" type="submit">Đặt khám</button>
           </div>
         </form>
       </div>
@@ -160,6 +160,16 @@
           alert('Đặt lịch hẹn thành công');
           setTimeout(() => window.location.reload(), 1000);
         }
+        // if (result.code === 201) {
+        //   swal('Tạo thành công', {
+        //     icon: 'success',
+        //   });
+        //   setTimeout(() => window.location.reload(), 1000);
+        // } else {
+        //   swal(result.message, {
+        //     icon: 'error',
+        //   });
+        // }
       } catch (error) {
         console.log(error);
       }
