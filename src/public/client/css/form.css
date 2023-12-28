@@ -12,17 +12,15 @@
   justify-content: center;
 }
 .wrapper {
-  width: 90%;
+  width: 100%;
   margin: 80px 0 40px 0;
-  /* border: 5px solid rgba(20, 20, 255, 0.5);
-  border-radius: 20px; */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .form-box-register {
   width: 100%;
-  padding: 20px;
+  padding: 0px 5%;
 }
 .form_title {
   font-size: 50px;
@@ -36,12 +34,14 @@
   justify-content: space-around;
 }
 .form-mb-1 {
-  width: 30%;
+  width: 33.33%;
   margin-bottom: 12px;
+  padding: 0px 15px;
 }
 .form-mb-2 {
-  width: 90%;
+  width: 100%;
   margin-bottom: 12px;
+  padding: 0px 15px;
 }
 
 .form-label {
@@ -50,14 +50,12 @@
   font-size: 16px;
   color: #07074d;
   margin-bottom: 12px;
-  margin-left: 12px;
 }
 .form-input,
 .form-select {
   width: 100%;
   padding: 6px 20px;
-  border-radius: 6px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #000000;
   background: white;
   font-weight: 500;
   font-size: 16px;
