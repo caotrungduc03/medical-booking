@@ -43,6 +43,10 @@
   margin-bottom: 12px;
   padding: 0px 15px;
 }
+.form-mb-3 {
+  width: 22%;
+  margin-bottom: 12px;
+}
 
 .form-label {
   display: block;

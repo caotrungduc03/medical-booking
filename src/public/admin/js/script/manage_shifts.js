@@ -78,6 +78,15 @@ const configAllShiftTbl = () => {
   });
 };
 
+const resetForm = (formId) => {
+  const formFields = $(formId).serializeArray();
+  formFields.forEach((field) => {
+    if (field.name !== '_csrf') {
+      $(`${formId} [name='${field.name}']`).val('').change();
+    }
+  });
+};
+
 const handleAddShift = () => {
   const modalId = `#addShiftModal`;
   const formId = `#addShiftForm`;
@@ -105,7 +114,7 @@ const handleAddShift = () => {
           icon: 'success',
         });
         $(modalId).modal('hide');
-        $(formId)[0].reset();
+        resetForm(formId);
         updateTbl();
       } else {
         swal(result.message, {
@@ -211,7 +220,7 @@ const handleUpdateShift = () => {
           icon: 'success',
         });
         $(modalId).modal('hide');
-        $(formId)[0].reset();
+        resetForm(formId);
         updateTbl();
       } else {
         swal(result.message, {
