@@ -4,13 +4,12 @@ const { authMiddleware, roleMiddleware } = require('../../middlewares');
 
 const departmentRouter = express.Router();
 
+departmentRouter.get('/', departmentController.getDepartments);
+
 departmentRouter.use(authMiddleware);
 departmentRouter.use(roleMiddleware(['admin']));
 
-departmentRouter
-  .route('/')
-  .get(departmentController.getDepartments)
-  .post(departmentController.createDepartment);
+departmentRouter.post('/', departmentController.createDepartment);
 
 departmentRouter
   .route('/:departmentId')
