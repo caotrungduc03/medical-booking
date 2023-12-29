@@ -131,6 +131,15 @@ const handleEnterRoleName = (formId) => {
   });
 };
 
+const resetForm = (formId) => {
+  const formFields = $(formId).serializeArray();
+  formFields.forEach((field) => {
+    if (field.name !== '_csrf') {
+      $(`${formId} [name='${field.name}']`).val('').change();
+    }
+  });
+};
+
 const handleAddRole = (id) => {
   const modalId = `#${id}Modal`;
   const formId = `#${id}Form`;
@@ -158,7 +167,7 @@ const handleAddRole = (id) => {
           icon: 'success',
         });
         $(modalId).modal('hide');
-        $(formId)[0].reset();
+        resetForm(formId);
         updateTbl();
       } else {
         swal(result.message, {
@@ -299,7 +308,7 @@ const handleUpdateRole = () => {
           icon: 'success',
         });
         $(modalId).modal('hide');
-        $(formId)[0].reset();
+        resetForm(formId);
         updateTbl();
       } else {
         swal(result.message, {
