@@ -279,9 +279,12 @@ const configLockUserTbl = () => {
   });
 };
 
-const handleEnterUserName = (formId) => {
-  $(`${formId} #roleName`).on('input', function () {
-    $(`${formId} #roleIndex`).val(convertToSlug(this.value.trim()));
+const resetForm = (formId) => {
+  const formFields = $(formId).serializeArray();
+  formFields.forEach((field) => {
+    if (field.name !== '_csrf') {
+      $(`${formId} [name='${field.name}']`).val('').change();
+    }
   });
 };
 
@@ -329,7 +332,7 @@ const handleAddUser = (id) => {
           icon: 'success',
         });
         $(modalId).modal('hide');
-        $(formId)[0].reset();
+        resetForm(formId);
         updateTbl();
       } else {
         swal(result.message, {
@@ -500,7 +503,7 @@ const handleUpdateUser = () => {
           icon: 'success',
         });
         $(modalId).modal('hide');
-        $(formId)[0].reset();
+        resetForm(formId);
         updateTbl();
       } else {
         swal(result.message, {
@@ -516,8 +519,6 @@ const handleUpdateUser = () => {
 $(document).ready(function () {
   configUnlockUserTbl();
   configLockUserTbl();
-  handleEnterUserName('#addUserForm');
-  handleEnterUserName('#updateUserForm');
   handleAddUser('addUser');
   handleChangeLock('#unlockUserTbl', '#btn-lock');
   handleChangeLock('#lockUserTbl', '#btn-unlock');

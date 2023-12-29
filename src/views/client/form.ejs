@@ -51,46 +51,46 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-mb-1">
-              <label class="form-label">Khoa <span class="text-danger">*</span></label>
+            <div class="form-mb-3">
+              <label class="form-label">Chuyên khoa <span class="text-danger">*</span></label>
               <select class="form-select" name="medicalDepartment" id="medicalDepartment" required>
                 <option value="" selected>-- Chọn --</option>
                 <% departments.forEach(d => { %>
-                <option><%= d.name %></option>
+                <option value="<%= d.id %>"><%= d.name %></option>
                 <% }) %>
               </select>
             </div>
-            <div class="form-mb-1">
-              <label class="form-label">Ngày khám <span class="text-danger">*</span></label class="form-label">
-              <input class="form-input" type="date" name="medicalDay" id="medicalDay" required>
+            <div class="form-mb-3">
+              <label class="form-label">Tên bác sĩ<span class="text-danger">*</span></label class="form-label">
+              <select class="form-select" name="doctor" id="doctor" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+              </select>
             </div>
-            <div class="form-mb-1">
+            <div class="form-mb-3">
+              <label class="form-label">Ngày khám <span class="text-danger">*</span></label class="form-label">
+              <select class="form-select" name="medicalDay" id="medicalDay" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+              </select>
+            </div>
+            <div class="form-mb-3">
               <label class="form-label">Giờ khám <span class="text-danger">*</span></label class="form-label">
               <select class="form-select" name="medicalHour" id="medicalHour" style="width: 100%;" required>
                 <option value="" selected>-- Chọn --</option>
-                <option>7h30 - 8h30</option>
-                <option>8h30 - 9h30</option>
-                <option>9h30 - 10h30</option>
-                <option>10h30 - 11h30</option>
-                <option>13h30 - 14h30</option>
-                <option>14h30 - 15h30</option>
-                <option>15h30 - 16h30</option>
-                <option>16h30 - 17h30</option>
               </select>
             </div>
           </div>
           <div class="row">
             <div class="form-mb-1">
               <label class="form-label" for="cccd">Ảnh CMDN/CCCD <span class="text-danger">*</span></label>
-              <input class="form-input" type="file" name="cccd" id=" cccd" required />
+              <input class="form-input" type="file" name="cccd" id="cccd" required />
             </div>
             <div class="form-mb-1">
-              <label class="form-label" for="insuranceId">Số BHYT</label>
-              <input class="form-input" type="text" name=" insuranceId" id=" insuranceId" />
+              <label class="form-label" for="insuranceId">Số BHYT <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="insuranceId" id="insuranceId" />
             </div>
             <div class="form-mb-1">
-              <label class="form-label" for="bhyt">Ảnh BHYT</label>
-              <input class="form-input" type="file" name=" bhyt" id=" bhyt" />
+              <label class="form-label" for="bhyt">Ảnh BHYT <span class="text-danger">*</span></label>
+              <input class="form-input" type="file" name="bhyt" id="bhyt" />
             </div>
           </div>
           <div class="row">
@@ -102,7 +102,7 @@
           <div class="row">
             <div class="form-mb-2">
               <label class="form-label">Lý do khám <span class="text-danger">*</span></label class="form-label">
-              <textarea class="form-input" type="text" name="reason" required></textarea>
+              <textarea class="form-input" type="text" name="reason" id="reason" required></textarea>
             </div>
           </div>
           <div class="row">
@@ -119,46 +119,134 @@
     </div>
   </div>
 
+  <%- include('../partials/client/footer') %>
+
   <script>
-    const fetchData = async () => {
-      const result = await (await fetch('/api/v1/users')).json()
-      console.log(result);
+    let doctors = [];
+    let shifts = [];
+    const medicalDepartment = document.querySelector('#medicalDepartment');
+    const doctor = document.querySelector('#doctor');
+    const medicalDay = document.querySelector('#medicalDay');
+    const medicalHour = document.querySelector('#medicalHour');
+    const form = document.querySelector('form');
+    let doctorID;
+
+
+    const fetchDoctors = async () => {
+      try {
+        let result = await (
+          await fetch(`/api/v1/doctors?limit=1000`)
+        ).json();
+
+        if (result.code === 200) {
+          doctors = result.data;
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
 
-    const form = document.querySelector('form');
+    const fetchShifts = async () => {
+      try {
+        let result = await (
+          await fetch(`/api/v1/shifts?limit=1000`)
+        ).json();
+        if (result.code === 200) {
+          shifts = result.data;
+
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    medicalDepartment.addEventListener('change', async function(e) {
+      const departmentID = e.target.value;
+      let str = '<option value="" selected>-- Chọn --</option>';
+      doctors.forEach(
+        (doctor) => {
+          if (doctor.department === departmentID) {
+            str += `<option value="${doctor.id}">${doctor.name}</option>`;
+          }
+        }
+      );
+      doctor.innerHTML = str;
+    })
+
+    doctor.addEventListener('change', async function(e) {
+      doctorID = e.target.value;
+
+      let shiftFilters = shifts.filter((shift) => shift.doctor === doctorID);
+      let medicalDays = shiftFilters.map((shift) => {
+        const date = new Date(shift.date);
+        return date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
+      })
+      medicalDays = [...new Set(medicalDays)];
+
+      let str = '<option value="" selected>-- Chọn --</option>';
+      medicalDays.forEach(
+        (md) => {
+          str += `<option>${md}</option>`;
+        }
+      );
+      medicalDay.innerHTML = str;
+    })
+
+    medicalDay.addEventListener('change', async function(e) {
+      const medicalDayValue = e.target.value;
+
+      let shiftFilters = [];
+      shifts.forEach((shift) => {
+        const date = new Date(shift.date);
+        const dateFormat = date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
+        if (shift.doctor === doctorID && medicalDayValue === dateFormat) {
+          shiftFilters.push(shift);
+        }
+      });
+
+      let str = '<option value="" selected>-- Chọn --</option>';
+      shiftFilters.forEach(
+        (shift) =>
+        (str += `<option value="${shift.id}">${shift.time} (${shift.slot}/${shift.maxSlot})</option>`),
+      );
+
+      medicalHour.innerHTML = str;
+    })
+
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      const data = {};
-      data.fullName = document.getElementById('fullName').value;
-      data.gender = document.getElementById('gender').value;
-      data.address = document.getElementById('address').value;
-      data.birthday = document.getElementById('birthday').value;
-      data.phone = document.getElementById('phone').value;
-      data.email = document.getElementById('email').value;
-      data.cardId = document.getElementById('cardId').value;
-      data.medicalDepartment = document.getElementById('medicalDepartment').value;
-      data.medicalDay = document.getElementById('medicalDay').value;
-      data.medicalHour = document.getElementById('medicalHour').value;
+      const data = new FormData();
 
-      // console.log("Du lieu gui len: ", document.getElementById('medicalDay'));
-      // data["name"] = name.value;
+      data.append('fullName', document.getElementById('fullName').value);
+      data.append('gender', document.getElementById('gender').value);
+      data.append('address', document.getElementById('address').value);
+      data.append('birthday', document.getElementById('birthday').value);
+      data.append('phone', document.getElementById('phone').value);
+      data.append('email', document.getElementById('email').value);
+      data.append('cardId', document.getElementById('cardId').value);
+      data.append('insuranceId', document.getElementById('insuranceId').value);
+      data.append('medicalDepartment', document.getElementById('medicalDepartment').value);
+      data.append('doctor', document.getElementById('doctor').value);
+      data.append('shift', document.getElementById('medicalHour').value);
+      data.append('reason', document.getElementById('reason').value);
 
-      // console.log("Du lieu gui len: ", data);
+      // Assuming 'cccd' and 'bhyt' are file input elements
+      const documentCCCDs = document.getElementById('cccd');
+      const documentBHYTs = document.getElementById('bhyt');
+
+      data.append('cccd', documentCCCDs.files?.[0]);
+      data.append('bhyt', documentBHYTs.files?.[0]);
 
       try {
         let result = await (
           await fetch(`/api/v1/medical-forms`, {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
+            body: data,
           })
         ).json();
         if (result.code === 201) {
           alert('Đặt lịch hẹn thành công');
-          setTimeout(() => window.location.reload(), 1000);
+          // setTimeout(() => window.location.reload(), 1000);
         }
         // if (result.code === 201) {
         //   swal('Tạo thành công', {
@@ -174,8 +262,12 @@
         console.log(error);
       }
     })
+
+    window.onload = function() {
+      fetchDoctors();
+      fetchShifts();
+    }
   </script>
-  <%- include('../partials/client/footer') %>
 </body>
 
 </html>
