@@ -34,7 +34,7 @@ const configAllDoctorTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '4%' },
+      { data: null, defaultContent: '', width: '4%' },
       {
         data: 'avatar',
         width: '10%',
@@ -51,6 +51,7 @@ const configAllDoctorTbl = () => {
       },
       { data: 'departmentName', width: '16%' },
       { data: 'method', className: 'text-center', width: '8%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -61,7 +62,17 @@ const configAllDoctorTbl = () => {
         orderable: false,
         targets: [0, 1, 2, 4, 6, 7],
       },
+      {
+        visible: false,
+        targets: 8,
+      },
     ],
+    order: [[8, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',

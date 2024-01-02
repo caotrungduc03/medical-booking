@@ -1,5 +1,5 @@
 const moment = require('moment');
-const { MedicalForm, Shift } = require('../models');
+const { MedicalForm, Shift, Patient, Count } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const response = require('../utils/response');
 const pick = require('../utils/pick');
@@ -72,14 +72,29 @@ const createMedicalForm = catchAsync(async (req, res) => {
   let cccd;
   let bhyt = '';
 
-  if (files.cccd) {
+  if (files.cccd?.[0]) {
     cccd = files.cccd[0].path;
-  } else {
-    throw new ApiError(400, 'Vui lòng gửi file ảnh CMND/CCCD');
   }
 
   if (files.bhyt?.[0]) {
     bhyt = files.bhyt[0].path;
+  }
+
+  if (data.patientCode) {
+    const patient = await Patient.findOne({ patientCode: data.patientCode });
+    if (!patient) {
+      throw new ApiError(404, 'Mã bệnh nhân không tồn tại');
+    }
+    data.patient = patient._id;
+    data.fullName = patient.fullName;
+    data.email = patient.email;
+    data.phone = patient.phone;
+    cccd = patient.cccd;
+    bhyt = patient.bhyt;
+  }
+
+  if (!cccd) {
+    throw new ApiError(400, 'Vui lòng gửi file ảnh CMND/CCCD');
   }
 
   const shift = await Shift.findById(data.shift);
@@ -189,10 +204,36 @@ const updateMedicalFormStatus = async (req, res) => {
 
   const medicalForm = await MedicalForm.findById(medicalFormId)
     .populate('doctor')
-    .populate('shift');
+    .populate('shift')
+    .populate('patient');
 
   if (!medicalForm) {
     throw new ApiError(404, 'Đơn khám không tồn tại');
+  }
+
+  let patientCode = medicalForm.patient?.patientCode;
+
+  if (!patientCode && status === 1) {
+    const BNObj = { model: 'patient', type: 'patientCode' };
+    const count = await Count.findOneAndUpdate(
+      BNObj,
+      { $setOnInsert: BNObj },
+      { upsert: true },
+    );
+    patientCode = 'BN.' + count.number.toString().padStart(6, '0');
+    const patient = await Patient.create({
+      patientCode,
+      fullName: medicalForm.fullName,
+      email: medicalForm.email,
+      phone: medicalForm.phone,
+      cccd: medicalForm.cccd,
+      bhyt: medicalForm.bhyt,
+    });
+    count.count_number++;
+    await count.save();
+    Object.assign(medicalForm, { patient: patient._id });
+    patientCode = patient.patientCode;
+    console.log(patient);
   }
 
   Object.assign(medicalForm, { status, deniedReason });
@@ -200,6 +241,7 @@ const updateMedicalFormStatus = async (req, res) => {
 
   sendApprovalConfirmation({
     to: medicalForm.email,
+    patientCode,
     fullName: medicalForm.fullName,
     medicalTime:
       medicalForm.shift.time +

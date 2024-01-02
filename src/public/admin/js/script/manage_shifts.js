@@ -13,8 +13,7 @@ const configAllShiftTbl = () => {
       dataSrc: function (json) {
         $('#allShiftNav').html(`<span>Tất cả (${json.data.length})</span>`);
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
           element.groupDoctorName = `
             <div>
               <div class="text-primary"><small><b>${element.doctor?.doctorCode}</b></small></div>
@@ -34,7 +33,7 @@ const configAllShiftTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '4%' },
+      { data: null, defaultContent: '', width: '4%' },
       { data: 'groupDoctorName', width: '*' },
       {
         data: 'date',
@@ -47,6 +46,7 @@ const configAllShiftTbl = () => {
       { data: 'place', width: '24%' },
       { data: 'currentSlot', width: '10%' },
       { data: 'method', className: 'text-center', width: '8%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -57,7 +57,18 @@ const configAllShiftTbl = () => {
         orderable: false,
         targets: [0, 1, 4, 6],
       },
+      {
+        visible: false,
+        searchable: false,
+        targets: 7,
+      },
     ],
+    order: [[7, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',

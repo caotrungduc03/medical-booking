@@ -1,17 +1,17 @@
 let shifts = [];
 
-const orderMedicalForm = () => {
-  $('#orderMedicalForm').on('submit', async function (e) {
+const orderMedicalForm = (id) => {
+  $(id).on('submit', async function (e) {
     e.preventDefault();
     const data = new FormData();
     const formFields = $(this).serializeArray();
-    const documentCCCDs = $(`input[id="cccd"]`);
-    const documentBHYTs = $(`input[id="bhyt"]`);
+    const documentCCCDs = $(`${id} input[id="cccd"]`);
+    const documentBHYTs = $(`${id} input[id="bhyt"]`);
     formFields.forEach((field) => {
       data.append([field.name], field.value);
     });
-    data.append('cccd', documentCCCDs[0].files[0]);
-    data.append('bhyt', documentBHYTs[0].files[0]);
+    data.append('cccd', documentCCCDs[0]?.files[0]);
+    data.append('bhyt', documentBHYTs[0]?.files[0]);
     try {
       notiSuccess('Đã gửi yêu cầu, chờ hệ thống xử lý');
       let result = await (
@@ -54,17 +54,17 @@ const handleGetShifts = async (doctorId) => {
   }
 };
 
-const handleDoctorSelect2Filter = (departmentId) => {
-  doctorSelect2Filter('#orderMedicalForm #doctor-select2', {
+const handleDoctorSelect2Filter = (id, departmentId) => {
+  doctorSelect2Filter(`${id} #doctor-select2`, {
     department: departmentId || 'null',
   });
 };
 
-const handleOperationSequence = () => {
-  $('#medicalDepartment').on('change', function (e) {
-    handleDoctorSelect2Filter(e.target.value);
+const handleOperationSequence = (id) => {
+  $(`${id} #medicalDepartment`).on('change', function (e) {
+    handleDoctorSelect2Filter(id, e.target.value);
   });
-  $('#doctor-select2').on('change', async function (e) {
+  $(`${id} #doctor-select2`).on('change', async function (e) {
     await handleGetShifts(e.target.value);
 
     let medicalDays = shifts.map((shift) =>
@@ -75,9 +75,9 @@ const handleOperationSequence = () => {
     [...new Set(medicalDays)].forEach(
       (shift) => (str += `<option>${shift}</option>`),
     );
-    $('#medicalDay').html(str);
+    $(`${id} #medicalDay`).html(str);
   });
-  $('#medicalDay').on('change', function (e) {
+  $(`${id} #medicalDay`).on('change', function (e) {
     const medicalDayValue = e.target.value;
     let filterShifts = shifts.filter(
       (shift) => moment(shift.date).format('DD-MM-YYYY') === medicalDayValue,
@@ -88,12 +88,15 @@ const handleOperationSequence = () => {
       (shift) =>
         (str += `<option value="${shift.id}">${shift.time} (${shift.slot}/${shift.maxSlot})</option>`),
     );
-    $('#medicalHour').html(str);
+    $(`${id} #medicalHour`).html(str);
   });
 };
 
 $(document).ready(function () {
-  orderMedicalForm();
-  handleDoctorSelect2Filter();
-  handleOperationSequence();
+  orderMedicalForm('#orderNormalForm');
+  orderMedicalForm('#orderPatientCodeForm');
+  handleDoctorSelect2Filter('#orderNormalForm');
+  handleDoctorSelect2Filter('#orderPatientCodeForm');
+  handleOperationSequence('#orderNormalForm');
+  handleOperationSequence('#orderPatientCodeForm');
 });

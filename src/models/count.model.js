@@ -32,23 +32,13 @@ const Count = mongoose.model('Count', countSchema);
   const CKObj = { model: 'department', type: 'departmentCode' };
   const BSObj = { model: 'doctor', type: 'doctorCode' };
   const CLVObj = { model: 'shift', type: 'shiftCode' };
+  const BNObj = { model: 'patient', type: 'patientCode' };
 
   await Promise.all([
-    await Count.findOneAndUpdate(
-      CKObj,
-      { $setOnInsert: CKObj },
-      { upsert: true },
-    ),
-    await Count.findOneAndUpdate(
-      BSObj,
-      { $setOnInsert: BSObj },
-      { upsert: true },
-    ),
-    await Count.findOneAndUpdate(
-      CLVObj,
-      { $setOnInsert: CLVObj },
-      { upsert: true },
-    ),
+    Count.findOneAndUpdate(CKObj, { $setOnInsert: CKObj }, { upsert: true }),
+    Count.findOneAndUpdate(BSObj, { $setOnInsert: BSObj }, { upsert: true }),
+    Count.findOneAndUpdate(CLVObj, { $setOnInsert: CLVObj }, { upsert: true }),
+    Count.findOneAndUpdate(BNObj, { $setOnInsert: BNObj }, { upsert: true }),
   ]);
 })();
 

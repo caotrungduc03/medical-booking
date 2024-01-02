@@ -50,6 +50,7 @@ const configAllDepartmentTbl = () => {
         },
       },
       { data: 'method', className: 'text-center', width: '15%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -60,7 +61,17 @@ const configAllDepartmentTbl = () => {
         orderable: false,
         targets: [0, 3],
       },
+      {
+        visible: false,
+        targets: 5,
+      },
     ],
+    order: [[5, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',

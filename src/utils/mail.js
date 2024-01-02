@@ -43,6 +43,7 @@ const sendVerificationEmail = (to, fullName, token = '') => {
 const sendApprovalConfirmation = (body) => {
   const {
     to,
+    patientCode,
     fullName,
     medicalTime,
     medicalOrder,
@@ -57,6 +58,7 @@ const sendApprovalConfirmation = (body) => {
     text = `
     Xin chào ${fullName},
     Đơn khám bệnh của bạn đã được chấp nhận.
+    Mã bệnh nhân: ${patientCode}
     Thời gian khám: ${medicalTime}
     Số thứ tự: ${medicalOrder}
     Địa điểm: ${place}
