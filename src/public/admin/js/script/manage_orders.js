@@ -67,16 +67,25 @@ const configAllOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=0&status=1&status=2',
+      url: '/api/v1/medical-forms/me?populate=medicalDepartment,shift,doctor,patient&status=0&status=1&status=2',
       dataSrc: function (json) {
         $('#allOrderNav span').html(`(${json.data.length})`);
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
+          element.name = `
+            <div>
+              <small style="color: #0052cc;">
+              <b>${element.patient?.patientCode || ''}</b>
+              </small>
+              <p>${element.fullName}</p>
+            </div>
+          `;
           element.time = `
-            ${element.shift.time} (${moment(element.medicalDay).format(
-            'YYYY-MM-DD',
-          )})
+            <div>
+              ${element.shift.time} 
+              <br>
+              (${moment(element.medicalDay).format('DD-MM-YYYY')})
+            </div>
           `;
           element.method = `
           <div class="div_icon">
@@ -89,15 +98,8 @@ const configAllOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '4%' },
-      { data: 'fullName', width: '*' },
-      { data: 'cardId', width: '10%' },
-      { data: 'gender', width: '10%' },
-      {
-        data: 'birthday',
-        width: '12%',
-        render: (value) => moment(value).format('YYYY-MM-DD'),
-      },
+      { data: null, defaultContent: '', width: '4%' },
+      { data: 'name', width: '*' },
       {
         data: 'medicalDepartment',
         width: '20%',
@@ -105,8 +107,21 @@ const configAllOrderTbl = () => {
           return item.name;
         },
       },
-      { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '10%' },
+      {
+        data: 'doctor',
+        width: '16%',
+        render: (item) => {
+          return item.name;
+        },
+      },
+      { data: 'time', width: '16%' },
+      {
+        data: 'createdAd',
+        width: '12%',
+        render: (value) => moment(value).format('DD-MM-YYYY'),
+      },
+      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -115,13 +130,19 @@ const configAllOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 7],
+        targets: [0, 6],
       },
       {
-        className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5, 6],
+        visible: false,
+        targets: 7,
       },
     ],
+    order: [[7, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',
@@ -201,16 +222,25 @@ const configNotApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=0',
+      url: '/api/v1/medical-forms/me?populate=medicalDepartment,shift,doctor,patient&status=0',
       dataSrc: function (json) {
         $('#notApproveOrderNav span').html(`(${json.data.length})`);
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
+          element.name = `
+            <div>
+              <small style="color: #0052cc;">
+              <b>${element.patient?.patientCode || ''}</b>
+              </small>
+              <p>${element.fullName}</p>
+            </div>
+          `;
           element.time = `
-            ${element.shift.time} (${moment(element.medicalDay).format(
-            'YYYY-MM-DD',
-          )})
+            <div>
+              ${element.shift.time} 
+              <br>
+              (${moment(element.medicalDay).format('DD-MM-YYYY')})
+            </div>
           `;
           element.method = `
           <div class="div_icon">
@@ -225,15 +255,8 @@ const configNotApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '4%' },
-      { data: 'fullName', width: '*' },
-      { data: 'cardId', width: '10%' },
-      { data: 'gender', width: '10%' },
-      {
-        data: 'birthday',
-        width: '12%',
-        render: (value) => moment(value).format('YYYY-MM-DD'),
-      },
+      { data: null, defaultContent: '', width: '4%' },
+      { data: 'name', width: '*' },
       {
         data: 'medicalDepartment',
         width: '20%',
@@ -241,8 +264,21 @@ const configNotApproveOrderTbl = () => {
           return item.name;
         },
       },
-      { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '10%' },
+      {
+        data: 'doctor',
+        width: '16%',
+        render: (item) => {
+          return item.name;
+        },
+      },
+      { data: 'time', width: '16%' },
+      {
+        data: 'createdAd',
+        width: '12%',
+        render: (value) => moment(value).format('DD-MM-YYYY'),
+      },
+      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -251,13 +287,19 @@ const configNotApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 7],
+        targets: [0, 6],
       },
       {
-        className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 6],
+        visible: false,
+        targets: 7,
       },
     ],
+    order: [[7, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',
@@ -337,16 +379,25 @@ const configApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=1',
+      url: '/api/v1/medical-forms/me?populate=medicalDepartment,shift,doctor,patient&status=1',
       dataSrc: function (json) {
         $('#approveOrderNav span').html(`(${json.data.length})`);
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
+          element.name = `
+            <div>
+              <small style="color: #0052cc;">
+              <b>${element.patient?.patientCode || ''}</b>
+              </small>
+              <p>${element.fullName}</p>
+            </div>
+          `;
           element.time = `
-            ${element.shift.time} (${moment(element.medicalDay).format(
-            'YYYY-MM-DD',
-          )})
+            <div>
+              ${element.shift.time} 
+              <br>
+              (${moment(element.medicalDay).format('DD-MM-YYYY')})
+            </div>
           `;
           element.method = `
           <div class="div_icon">
@@ -359,15 +410,8 @@ const configApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '4%' },
-      { data: 'fullName', width: '*' },
-      { data: 'cardId', width: '10%' },
-      { data: 'gender', width: '10%' },
-      {
-        data: 'birthday',
-        width: '12%',
-        render: (value) => moment(value).format('YYYY-MM-DD'),
-      },
+      { data: null, defaultContent: '', width: '4%' },
+      { data: 'name', width: '*' },
       {
         data: 'medicalDepartment',
         width: '20%',
@@ -375,8 +419,21 @@ const configApproveOrderTbl = () => {
           return item.name;
         },
       },
-      { data: 'time', width: '12%' },
-      { data: 'method', className: 'text-center', width: '10%' },
+      {
+        data: 'doctor',
+        width: '16%',
+        render: (item) => {
+          return item.name;
+        },
+      },
+      { data: 'time', width: '16%' },
+      {
+        data: 'createdAd',
+        width: '12%',
+        render: (value) => moment(value).format('DD-MM-YYYY'),
+      },
+      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -385,13 +442,19 @@ const configApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 7],
+        targets: [0, 6],
       },
       {
-        className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5, 6],
+        visible: false,
+        targets: 7,
       },
     ],
+    order: [[7, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',
@@ -471,16 +534,25 @@ const configUnApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms?populate=medicalDepartment,shift&status=2',
+      url: '/api/v1/medical-forms/me?populate=medicalDepartment,shift,doctor,patient&status=2',
       dataSrc: function (json) {
         $('#unApproveOrderNav span').html(`(${json.data.length})`);
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
+          element.name = `
+            <div>
+              <small style="color: #0052cc;">
+              <b>${element.patient?.patientCode || ''}</b>
+              </small>
+              <p>${element.fullName}</p>
+            </div>
+          `;
           element.time = `
-            ${element.shift.time} (${moment(element.medicalDay).format(
-            'YYYY-MM-DD',
-          )}) 
+            <div>
+              ${element.shift.time} 
+              <br>
+              (${moment(element.medicalDay).format('DD-MM-YYYY')})
+            </div>
           `;
           element.method = `
           <div class="div_icon">
@@ -493,25 +565,31 @@ const configUnApproveOrderTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '4%' },
-      { data: 'fullName', width: '*' },
-      { data: 'cardId', width: '10%' },
-      { data: 'gender', width: '10%' },
-      {
-        data: 'birthday',
-        width: '12%',
-        render: (value) => moment(value).format('YYYY-MM-DD'),
-      },
+      { data: null, defaultContent: '', width: '4%' },
+      { data: 'name', width: '*' },
       {
         data: 'medicalDepartment',
-        width: '20%',
+        width: '12%',
+        render: (item) => {
+          return item.name;
+        },
+      },
+      {
+        data: 'doctor',
+        width: '12%',
         render: (item) => {
           return item.name;
         },
       },
       { data: 'time', width: '12%' },
-      { data: 'deniedReason', width: '12%' },
-      { data: 'method', className: 'text-center', width: '10%' },
+      {
+        data: 'createdAd',
+        width: '12%',
+        render: (value) => moment(value).format('DD-MM-YYYY'),
+      },
+      { data: 'deniedReason', width: '12%', render: (value) => value || '' },
+      { data: 'method', className: 'text-center', width: '12%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -520,13 +598,19 @@ const configUnApproveOrderTbl = () => {
       },
       {
         orderable: false,
-        targets: [0, 8],
+        targets: [0, 7],
       },
       {
-        className: 'export-col',
-        targets: [0, 1, 2, 3, 4, 5, 6, 7],
+        visible: false,
+        targets: 8,
       },
     ],
+    order: [[8, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',

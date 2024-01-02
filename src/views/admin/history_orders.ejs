@@ -76,10 +76,10 @@
                             <tr>
                               <th>STT</th>
                               <th>Họ và tên</th>
-                              <th>Giới tính</th>
-                              <th>Ngày sinh</th>
                               <th>Chuyên khoa khám</th>
-                              <th>Thời gian</th>
+                              <th>Bác sĩ khám</th>
+                              <th>Thời gian khám</th>
+                              <th>Ngày tạo</th>
                               <th>Chức năng</th>
                             </tr>
                           </thead>
@@ -94,10 +94,10 @@
                             <tr>
                               <th>STT</th>
                               <th>Họ và tên</th>
-                              <th>Giới tính</th>
-                              <th>Ngày sinh</th>
                               <th>Chuyên khoa khám</th>
-                              <th>Thời gian</th>
+                              <th>Bác sĩ khám</th>
+                              <th>Thời gian khám</th>
+                              <th>Ngày tạo</th>
                               <th>Chức năng</th>
                             </tr>
                           </thead>
@@ -112,10 +112,10 @@
                             <tr>
                               <th>STT</th>
                               <th>Họ và tên</th>
-                              <th>Giới tính</th>
-                              <th>Ngày sinh</th>
                               <th>Chuyên khoa khám</th>
-                              <th>Thời gian</th>
+                              <th>Bác sĩ khám</th>
+                              <th>Thời gian khám</th>
+                              <th>Ngày tạo</th>
                               <th>Chức năng</th>
                             </tr>
                           </thead>
@@ -130,10 +130,10 @@
                             <tr>
                               <th>STT</th>
                               <th>Họ và tên</th>
-                              <th>Giới tính</th>
-                              <th>Ngày sinh</th>
                               <th>Chuyên khoa khám</th>
-                              <th>Thời gian</th>
+                              <th>Bác sĩ khám</th>
+                              <th>Thời gian khám</th>
+                              <th>Ngày tạo</th>
                               <th>Lý do từ chối</th>
                               <th>Chức năng</th>
                             </tr>
@@ -177,35 +177,6 @@
                 </div>
               </div>
               <div class="form-group col-12 col-lg-4">
-                <label for="gender">Giới tính</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ti-text"></i></span>
-                  </div>
-                  <input type="text" class="form-control" name="gender" readonly />
-                </div>
-              </div>
-              <div class="form-group col-12 col-lg-4">
-                <label for="birthday">Ngày sinh</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                  </div>
-                  <input type="date" class="form-control" name="birthday" readonly />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-12 col-lg-4">
-                <label for="cardId">Số CMND/CCCD</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ti-id-badge"></i></span>
-                  </div>
-                  <input type="text" class="form-control" name="cardId" readonly />
-                </div>
-              </div>
-              <div class="form-group col-12 col-lg-4">
                 <label for="email">Email</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -225,27 +196,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="form-group col-12 col-lg-4">
-                <label for="insuranceId">Số BHYT</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ti-id-badge"></i></span>
-                  </div>
-                  <input type="text" class="form-control" name="insuranceId" readonly />
-                </div>
-              </div>
-              <div class="form-group col-12 col-lg-8">
-                <label for="address">Địa chỉ hiện tại</label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ti-text"></i></span>
-                  </div>
-                  <input type="text" class="form-control" name="address" readonly />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-12 col-lg-4">
+              <div class="form-group col-12 col-lg-6">
                 <label for="medicalDepartment">Chuyên khoa khám</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -254,7 +205,7 @@
                   <input type="text" class="form-control" name="medicalDepartment" readonly />
                 </div>
               </div>
-              <div class="form-group col-12 col-lg-4">
+              <div class="form-group col-12 col-lg-6">
                 <label for="medicalDay">Ngày khám</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -263,7 +214,18 @@
                   <input type="date" class="form-control" name="medicalDay" readonly />
                 </div>
               </div>
-              <div class="form-group col-12 col-lg-4">
+            </div>
+            <div class="row">
+              <div class="form-group col-12 col-lg-6">
+                <label for="doctor">Bác sĩ khám</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ti-text"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="doctor" readonly />
+                </div>
+              </div>
+              <div class="form-group col-12 col-lg-6">
                 <label for="medicalHour">Giờ khám</label>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -276,10 +238,6 @@
             <div class="form-group">
               <label for="address">Lý do khám</label>
               <textarea class="form-control" name="reason" readonly></textarea>
-            </div>
-            <div class="form-group">
-              <label for="address">Ghi chú</label>
-              <textarea class="form-control" name="note" readonly></textarea>
             </div>
             <div class="row">
               <div class="form-group col-6">
