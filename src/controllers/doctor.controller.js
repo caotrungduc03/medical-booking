@@ -61,7 +61,7 @@ const createDoctor = catchAsync(async (req, res) => {
     count = new Count(countObj);
   }
 
-  data.doctorCode = 'CK.' + count.number.toString().padStart(6, '0');
+  data.doctorCode = 'BS.' + count.number.toString().padStart(6, '0');
 
   if (files.avatar?.[0]) {
     data.avatar = files.avatar[0].path;

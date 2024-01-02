@@ -55,7 +55,10 @@ const handleGetShifts = async (doctorId) => {
 };
 
 const handleDoctorSelect2Filter = (departmentId) => {
-  doctorSelect2Filter('#orderMedicalForm #doctor-select2', {
+  doctorSelect2Filter('#orderNormalForm #doctor-select2', {
+    department: departmentId || 'null',
+  });
+  doctorSelect2Filter('#orderPatientCodeForm #doctor-select2', {
     department: departmentId || 'null',
   });
 };

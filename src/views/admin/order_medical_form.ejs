@@ -43,158 +43,186 @@
                 <div class="box-header with-border">
                   <h4 class="box-title">Biểu mẫu đặt lịch khám bệnh</h4>
                 </div>
-                <form id="orderMedicalForm">
-                  <input type="hidden" name="user" value="<%= user.id %>" />
-                  <div class="box-body">
-                    <div class="row">
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="fullName">Họ và tên <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-text"></i></span>
+                <div class="box-body">
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs customtab2" role="tablist">
+                    <li class="nav-item">
+                      <a id="allOrderNav" class="nav-link active" data-toggle="tab" href="#orderNormal" role="tab">
+                        Đặt khám thông thường <span></span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a id="notApproveOrderNav" class="nav-link" data-toggle="tab" href="#orderPatientCode" role="tab">
+                        Đặt khám theo mã bệnh nhân <span></span>
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane fade active show" id="orderNormal" role="tabpanel">
+                      <div class="pt-15">
+                        <form id="orderNormalForm">
+                          <input type="hidden" name="user" value="<%= user.id %>" />
+                          <div class="box-body">
+                            <div class="row">
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="fullName">Họ và tên <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-text"></i></span>
+                                  </div>
+                                  <input type="text" class="form-control" name="fullName" value="<%= user.fullName %>" required />
+                                </div>
+                              </div>
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="email">Email <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-email"></i></span>
+                                  </div>
+                                  <input type="text" class="form-control" name="email" value="<%= user.email %>" required />
+                                </div>
+                              </div>
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="phone">Số điện thoại</label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                  </div>
+                                  <input type="text" class="form-control" name="phone" value="<%= user.phone %>" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="cccd">Ảnh CMDN/CCCD <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-image"></i></span>
+                                  </div>
+                                  <input type="file" class="form-control" id="cccd" required />
+                                </div>
+                              </div>
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="bhyt">Ảnh BHYT</label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-image"></i></span>
+                                  </div>
+                                  <input type="file" class="form-control" id="bhyt" />
+                                </div>
+                              </div>
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="medicalDepartment">Chuyên khoa khám <span class="text-danger">*</span></label>
+                                <select class="form-control select2input" id="medicalDepartment" name="medicalDepartment" style="width: 100%;" required>
+                                  <option value="" selected>-- Chọn --</option>
+                                  <% departments.forEach(d => { %>
+                                  <option value="<%= d.id %>"><%= d.name %></option>
+                                  <% }) %>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="form-group col-12 col-lg-4">
+                                <label>Tên bác sĩ <span class="text-danger">*</span></label>
+                                <div class="input-group" style="height: 34px">
+                                  <select style="width: 100%" id="doctor-select2" name="doctor" required></select>
+                                </div>
+                              </div>
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="medicalDay">Ngày khám bệnh<span class="text-danger">*</span></label>
+                                <select class="form-control select2input" id="medicalDay" style="width: 100%;" required>
+                                  <option value="" selected>-- Chọn --</option>
+                                </select>
+                              </div>
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="medicalHour">Ca khám bệnh<span class="text-danger">*</span></label>
+                                <select class="form-control select2input" id="medicalHour" name="shift" style="width: 100%;" required>
+                                  <option value="" selected>-- Chọn --</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="address">Lý do khám <span class="text-danger">*</span></label>
+                              <textarea class="form-control" name="reason" required></textarea>
+                            </div>
                           </div>
-                          <input type="text" class="form-control" name="fullName" value="<%= user.fullName %>" required />
-                        </div>
-                      </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="gender">Giới tính <span class="text-danger">*</span></label>
-                        <div class="input-group" style="height: 34px">
-                          <select class="form-control select2input" id="gender" name="gender" value="<%= user.gender %>" style="background-color: white; width: 100%" required>
-                            <option value="Khác" selected>Khác</option>
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="birthday">Ngày sinh <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                          <div class="box-footer d-flex justify-content-center">
+                            <a href="/admin" class="btn btn-rounded btn-warning btn-outline mr-2">
+                              <i class="ti-trash"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-rounded btn-primary btn-outline">
+                              <i class="ti-save-alt"></i> Đặt lịch khám bệnh
+                            </button>
                           </div>
-                          <input type="date" class="form-control" name="birthday" value="<%= user.birthdayFormat %>" required />
-                        </div>
+                        </form>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="cardId">Số CMND/CCCD <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-id-badge"></i></span>
+                    <div class="tab-pane fade" id="orderPatientCode" role="tabpanel">
+                      <div class="pt-15">
+                        <form id="orderPatientCodeForm">
+                          <input type="hidden" name="user" value="<%= user.id %>" />
+                          <div class="box-body">
+                            <div class="row">
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="patientCode">Mã bệnh nhân <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ti-text"></i></span>
+                                  </div>
+                                  <input type="text" class="form-control" name="patientCode" required />
+                                </div>
+                              </div>
+                              <div class="form-group col-12 col-lg-4">
+                                <label for="medicalDepartment">Chuyên khoa khám <span class="text-danger">*</span></label>
+                                <select class="form-control select2input" id="medicalDepartment" name="medicalDepartment" style="width: 100%;" required>
+                                  <option value="" selected>-- Chọn --</option>
+                                  <% departments.forEach(d => { %>
+                                  <option value="<%= d.id %>"><%= d.name %></option>
+                                  <% }) %>
+                                </select>
+                              </div>
+                              <div class="form-group col-12 col-lg-4">
+                                <label>Tên bác sĩ <span class="text-danger">*</span></label>
+                                <div class="input-group" style="height: 34px">
+                                  <select style="width: 100%" id="doctor-select2" name="doctor" required></select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="form-group col-12 col-lg-6">
+                                <label for="medicalDay">Ngày khám bệnh<span class="text-danger">*</span></label>
+                                <select class="form-control select2input" id="medicalDay" style="width: 100%;" required>
+                                  <option value="" selected>-- Chọn --</option>
+                                </select>
+                              </div>
+                              <div class="form-group col-12 col-lg-6">
+                                <label for="medicalHour">Ca khám bệnh<span class="text-danger">*</span></label>
+                                <select class="form-control select2input" id="medicalHour" name="shift" style="width: 100%;" required>
+                                  <option value="" selected>-- Chọn --</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label for="address">Lý do khám <span class="text-danger">*</span></label>
+                              <textarea class="form-control" name="reason" required></textarea>
+                            </div>
                           </div>
-                          <input type="text" class="form-control" name="cardId" value="<%= user.cardId %>" required />
-                        </div>
-                      </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="email">Email <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-email"></i></span>
+                          <div class="box-footer d-flex justify-content-center">
+                            <a href="/admin" class="btn btn-rounded btn-warning btn-outline mr-2">
+                              <i class="ti-trash"></i> Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-rounded btn-primary btn-outline">
+                              <i class="ti-save-alt"></i> Đặt lịch khám bệnh
+                            </button>
                           </div>
-                          <input type="text" class="form-control" name="email" value="<%= user.email %>" required />
-                        </div>
+                        </form>
                       </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="phone">Số điện thoại</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fa fa-phone"></i></span>
-                          </div>
-                          <input type="text" class="form-control" name="phone" value="<%= user.phone %>" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="cccd">Ảnh CMDN/CCCD <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-image"></i></span>
-                          </div>
-                          <input type="file" class="form-control" id="cccd" required />
-                        </div>
-                      </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="insuranceId">Số BHYT</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-id-badge"></i></span>
-                          </div>
-                          <input type="text" class="form-control" name="insuranceId" />
-                        </div>
-                      </div>
-                      <div class="form-group col-12 col-lg-4">
-                        <label for="bhyt">Ảnh BHYT</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="ti-image"></i></span>
-                          </div>
-                          <input type="file" class="form-control" id="bhyt" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="address">Địa chỉ hiện tại <span class="text-danger">*</span></label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="ti-text"></i></span>
-                        </div>
-                        <input type="text" class="form-control" name="address" value="<%= user.address %>" required />
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-12 col-lg-6">
-                        <label for="medicalDepartment">Chuyên khoa khám <span class="text-danger">*</span></label>
-                        <select class="form-control select2input" id="medicalDepartment" name="medicalDepartment" style="width: 100%;" required>
-                          <option value="" selected>-- Chọn --</option>
-                          <% departments.forEach(d => { %>
-                          <option value="<%= d.id %>"><%= d.name %></option>
-                          <% }) %>
-                        </select>
-                      </div>
-                      <div class="form-group  col-12 col-lg-6">
-                        <label>Tên bác sĩ <span class="text-danger">*</span></label>
-                        <div class="input-group" style="height: 34px">
-                          <select style="width: 100%" id="doctor-select2" name="doctor" required></select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="form-group col-12 col-lg-6">
-                        <label for="medicalDay">Ngày khám bệnh<span class="text-danger">*</span></label>
-                        <select class="form-control select2input" id="medicalDay" style="width: 100%;" required>
-                          <option value="" selected>-- Chọn --</option>
-                        </select>
-                      </div>
-                      <div class="form-group col-12 col-lg-6">
-                        <label for="medicalHour">Ca khám bệnh<span class="text-danger">*</span></label>
-                        <select class="form-control select2input" id="medicalHour" name="shift" style="width: 100%;" required>
-                          <option value="" selected>-- Chọn --</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="address">Lý do khám <span class="text-danger">*</span></label>
-                      <textarea class="form-control" name="reason" required></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label for="address">Ghi chú</label>
-                      <textarea class="form-control" name="note"></textarea>
                     </div>
                   </div>
-                  <div class="box-footer d-flex justify-content-center">
-                    <a href="/admin" class="btn btn-rounded btn-warning btn-outline mr-2">
-                      <i class="ti-trash"></i> Quay lại
-                    </a>
-                    <button type="submit" class="btn btn-rounded btn-primary btn-outline">
-                      <i class="ti-save-alt"></i> Đặt lịch khám bệnh
-                    </button>
-                  </div>
-                </form>
+                </div>
               </div>
             </div>
-          </div>
         </section>
         <!-- /.content -->
       </div>
@@ -210,9 +238,6 @@
   <%- include('../partials/admin/script') %>
 
   <script src="/static/admin/js/script/order_medical_form.js"></script>
-  <script>
-    $('#gender').val('<%= user.gender %>').change()
-  </script>
 </body>
 
 </html>
