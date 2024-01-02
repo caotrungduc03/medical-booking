@@ -18,6 +18,47 @@ const mongoURI =
   try {
     await mongoose.connect(mongoURI);
     console.log('Connect database successfully!');
+
+    // Initialize DB
+    let [roleKH, roleAdmin] = await Promise.all([
+      mongoose.model('Role').findOneAndUpdate(
+        { roleIndex: 'khach-hang' },
+        {
+          $setOnInsert: {
+            roleName: 'Khách hàng',
+            roleIndex: 'khach-hang',
+          },
+        },
+        { upsert: true },
+      ),
+      mongoose.model('Role').findOneAndUpdate(
+        { roleIndex: 'admin' },
+        {
+          $setOnInsert: {
+            roleName: 'Admin',
+            roleIndex: 'admin',
+          },
+        },
+        { upsert: true },
+      ),
+    ]);
+    let adminAccount = await mongoose
+      .model('User')
+      .findOne({ email: 'admin@gmail.com' });
+    if (!adminAccount) {
+      const User = mongoose.model('User');
+      adminAccount = new User({
+        lastName: 'Quản trị',
+        firstName: 'hệ thống',
+        email: 'admin@gmail.com',
+        cardId: '0000000000',
+        isEmailVerified: true,
+        roles: [roleKH._id, roleAdmin._id],
+      });
+      adminAccount.password = 'admin123';
+      adminAccount.save();
+    }
+    console.log('Admin email:', adminAccount.email);
   } catch (error) {
     console.log(error);
   }

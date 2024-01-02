@@ -34,21 +34,9 @@ const Count = mongoose.model('Count', countSchema);
   const CLVObj = { model: 'shift', type: 'shiftCode' };
 
   await Promise.all([
-    await Count.findOneAndUpdate(
-      CKObj,
-      { $setOnInsert: CKObj },
-      { upsert: true },
-    ),
-    await Count.findOneAndUpdate(
-      BSObj,
-      { $setOnInsert: BSObj },
-      { upsert: true },
-    ),
-    await Count.findOneAndUpdate(
-      CLVObj,
-      { $setOnInsert: CLVObj },
-      { upsert: true },
-    ),
+    Count.findOneAndUpdate(CKObj, { $setOnInsert: CKObj }, { upsert: true }),
+    Count.findOneAndUpdate(BSObj, { $setOnInsert: BSObj }, { upsert: true }),
+    Count.findOneAndUpdate(CLVObj, { $setOnInsert: CLVObj }, { upsert: true }),
   ]);
 })();
 
