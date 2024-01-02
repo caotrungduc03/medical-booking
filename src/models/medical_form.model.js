@@ -12,21 +12,15 @@ const medicalFormSchema = new Schema(
       ref: 'User',
       default: null,
     },
+    patient: {
+      type: Schema.Types.ObjectId,
+      ref: 'Patient',
+      default: null,
+    },
     fullName: {
       type: String,
       required: true,
       trim: true,
-    },
-    gender: {
-      type: String,
-      trim: true,
-      enum: ['Nam', 'Nữ'],
-      required: true,
-    },
-    cardId: {
-      type: String,
-      trim: true,
-      required: true,
     },
     email: {
       type: String,
@@ -38,19 +32,9 @@ const medicalFormSchema = new Schema(
         }
       },
     },
-    birthday: {
-      type: Date,
-      trim: true,
-      required: true,
-    },
     phone: {
       type: String,
       trim: true,
-    },
-    address: {
-      type: String,
-      trim: true,
-      required: true,
     },
     medicalDepartment: {
       type: Schema.Types.ObjectId,
@@ -72,10 +56,6 @@ const medicalFormSchema = new Schema(
       trim: true,
       required: true,
     },
-    note: {
-      type: String,
-      trim: true,
-    },
     status: {
       type: Number,
       default: 0,
@@ -84,11 +64,6 @@ const medicalFormSchema = new Schema(
       type: String,
       trim: true,
       required: true,
-    },
-    insuranceId: {
-      type: String,
-      trim: true,
-      default: '',
     },
     bhyt: {
       type: String,

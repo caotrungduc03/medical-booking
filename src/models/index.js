@@ -7,4 +7,5 @@ module.exports = {
   Token: require('./token.model'),
   Doctor: require('./doctor.model'),
   Shift: require('./shift.model'),
+  Patient: require('./patient.model'),
 };
