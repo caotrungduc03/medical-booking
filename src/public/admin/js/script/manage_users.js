@@ -68,8 +68,7 @@ const configUnlockUserTbl = () => {
           `<span>Không khoá (${json.data.length})</span>`,
         );
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
           element.fullName = element.lastName + ' ' + element.firstName;
           element.contact = `
             <div>
@@ -89,7 +88,7 @@ const configUnlockUserTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '4%' },
+      { data: null, defaultContent: '', width: '4%' },
       { data: 'fullName', width: '*' },
       { data: 'cardId', width: '12%' },
       { data: 'contact', width: '20%' },
@@ -107,6 +106,7 @@ const configUnlockUserTbl = () => {
         },
       },
       { data: 'method', className: 'text-center', width: '8%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -121,7 +121,17 @@ const configUnlockUserTbl = () => {
         className: 'export-col',
         targets: [0, 1, 2, 3, 4, 5],
       },
+      {
+        visible: false,
+        targets: 7,
+      },
     ],
+    order: [[7, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',
@@ -205,8 +215,7 @@ const configLockUserTbl = () => {
       dataSrc: function (json) {
         $('#lockUserNav').html(`<span>Khoá (${json.data.length})</span>`);
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
           element.fullName = element.lastName + ' ' + element.firstName;
           element.contact = `
             <div>
@@ -226,7 +235,7 @@ const configLockUserTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '4%' },
+      { data: null, defaultContent: '', width: '4%' },
       { data: 'fullName', width: '*' },
       { data: 'cardId', width: '12%' },
       { data: 'contact', width: '20%' },
@@ -244,6 +253,7 @@ const configLockUserTbl = () => {
         },
       },
       { data: 'method', className: 'text-center', width: '8%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -258,7 +268,18 @@ const configLockUserTbl = () => {
         className: 'export-col',
         targets: [0, 1, 2, 3, 4, 5],
       },
+      {
+        visible: false,
+        searchable: false,
+        targets: 7,
+      },
     ],
+    order: [[7, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',

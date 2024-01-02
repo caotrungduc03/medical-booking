@@ -16,8 +16,7 @@ const configUnlockRoleTbl = () => {
           `<span>Không khoá (${json.data.length})</span>`,
         );
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
           element.method = `
           <div class="div_icon">
             <a href="#" id="btn-update" title="Sửa" data-toggle="modal" data-target="#updateRoleModal" class="mr-1"><i class="ti-pencil-alt"></i></a>
@@ -30,10 +29,11 @@ const configUnlockRoleTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: null, defaultContent: '', width: '4%' },
       { data: 'roleName', width: '*' },
       { data: 'roleIndex', width: '30%' },
       { data: 'method', className: 'text-center', width: '15%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -44,7 +44,17 @@ const configUnlockRoleTbl = () => {
         orderable: false,
         targets: [0, 3],
       },
+      {
+        visible: false,
+        targets: 4,
+      },
     ],
+    order: [[4, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',
@@ -76,8 +86,7 @@ const configLockRoleTbl = () => {
       dataSrc: function (json) {
         $('#lockRoleNav').html(`<span>Khoá (${json.data.length})</span>`);
 
-        json.data.forEach((element, index) => {
-          element.index = index + 1;
+        json.data.forEach((element) => {
           element.method = `
           <div class="div_icon">
             <span id="btn-unlock" class="model_img mr-1" title="Mở khoá"><i class="ti-unlock"></i></span>
@@ -90,10 +99,11 @@ const configLockRoleTbl = () => {
       },
     },
     columns: [
-      { data: 'index', width: '10%' },
+      { data: null, defaultContent: '', width: '4%' },
       { data: 'roleName', width: '*' },
       { data: 'roleIndex', width: '30%' },
       { data: 'method', className: 'text-center', width: '15%' },
+      { data: 'createdAt' },
     ],
     columnDefs: [
       {
@@ -104,7 +114,17 @@ const configLockRoleTbl = () => {
         orderable: false,
         targets: [0, 3],
       },
+      {
+        visible: false,
+        targets: 4,
+      },
     ],
+    order: [[4, 'desc']],
+    fnRowCallback: function (nRow, aData, iDisplayIndex) {
+      var oSettings = this.fnSettings();
+      $('td:first', nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+      return nRow;
+    },
     language: {
       sProcessing: 'Đang xử lý...',
       sLengthMenu: 'Chọn số bản ghi hiển thị trên một trang _MENU_',
