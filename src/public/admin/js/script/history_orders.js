@@ -127,7 +127,7 @@ const configNotApproveOrderTbl = () => {
           element.name = `
             <div>
               <small style="color: #0052cc;">
-                element.patient?.patientCode || ''}</b>
+                <b>${element.patient?.patientCode || ''}</b>
               </small>
               <p>${element.fullName}</p>
             </div>
