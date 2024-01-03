@@ -20,7 +20,6 @@ const patientSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
       trim: true,
       validate(value) {
         if (!value.match(/[a-z0-9]+@[a-z]+\.[a-z]{2,3}/)) {
