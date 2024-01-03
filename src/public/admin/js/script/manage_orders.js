@@ -67,7 +67,7 @@ const configAllOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms/me?populate=medicalDepartment,shift,doctor,patient&status=0&status=1&status=2',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift,doctor,patient&status=0&status=1&status=2',
       dataSrc: function (json) {
         $('#allOrderNav span').html(`(${json.data.length})`);
 
@@ -222,7 +222,7 @@ const configNotApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms/me?populate=medicalDepartment,shift,doctor,patient&status=0',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift,doctor,patient&status=0',
       dataSrc: function (json) {
         $('#notApproveOrderNav span').html(`(${json.data.length})`);
 
@@ -379,7 +379,7 @@ const configApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms/me?populate=medicalDepartment,shift,doctor,patient&status=1',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift,doctor,patient&status=1',
       dataSrc: function (json) {
         $('#approveOrderNav span').html(`(${json.data.length})`);
 
@@ -534,7 +534,7 @@ const configUnApproveOrderTbl = () => {
     serverSide: true,
     ajax: {
       type: 'GET',
-      url: '/api/v1/medical-forms/me?populate=medicalDepartment,shift,doctor,patient&status=2',
+      url: '/api/v1/medical-forms?populate=medicalDepartment,shift,doctor,patient&status=2',
       dataSrc: function (json) {
         $('#unApproveOrderNav span').html(`(${json.data.length})`);
 
