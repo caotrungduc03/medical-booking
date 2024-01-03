@@ -237,7 +237,6 @@ const updateMedicalFormStatus = async (req, res) => {
     await count.save();
     Object.assign(medicalForm, { patient: patient._id });
     patientCode = patient.patientCode;
-    console.log(patient);
   }
 
   Object.assign(medicalForm, { status, deniedReason });
