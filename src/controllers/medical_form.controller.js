@@ -102,6 +102,10 @@ const createMedicalForm = catchAsync(async (req, res) => {
     throw new ApiError(404, 'Ca khám bệnh không tìm thấy');
   }
 
+  if (shift.slot === shift.maxSlot) {
+    throw new ApiError(400, 'Ca khám đã đầy, vui lòng chọn ca khám khác');
+  }
+
   await MedicalForm.create({
     ...data,
     cccd,
