@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký khám</title>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="/static/client/css/unassign_form.css">
+  <link rel="stylesheet" href="/static/client/css/partials.css">
+</head>
+
+<body>
+  <%- include('../partials/client/header') %>
+  <div class="container appCard">
+    <div class="wrapper">
+      <div class="form-box-register">
+        <h2 class="form_title">Đặt lịch khám theo mã bệnh nhân</h2>
+        <form action="#">
+          <div class="">
+            <div class="form-mb-1">
+              <label class="form-label">Mã bệnh nhân <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="patientCode" id="patientCode" placeholder="VD: BN.00000x" required />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-mb-1">
+              <label class="form-label">Chuyên khoa <span class="text-danger">*</span></label>
+              <select class="form-select" name="medicalDepartment" id="medicalDepartment" required>
+                <option value="" selected>-- Chọn --</option>
+                <% departments.forEach(d => { %>
+                <option value="<%= d.id %>"><%= d.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label">Tên bác sĩ<span class="text-danger">*</span></label class="form-label">
+              <select class="form-select" name="doctor" id="doctor" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-mb-1">
+              <label class="form-label">Ngày khám <span class="text-danger">*</span></label class="form-label">
+              <select class="form-select" name="medicalDay" id="medicalDay" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+              </select>
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label">Giờ khám <span class="text-danger">*</span></label class="form-label">
+              <select class="form-select" name="medicalHour" id="medicalHour" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+              </select>
+            </div>
+          </div>
+          <div class="">
+            <div class="form-mb-2">
+              <label class="form-label">Lý do khám <span class="text-danger">*</span></label class="form-label">
+              <textarea class="form-input" type="text" name="reason" id="reason" required></textarea>
+            </div>
+          </div>
+          <div class="row-btn">
+            <button class="form-btn" type="submit">Đặt khám</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <%- include('../partials/client/footer') %>
+</body>
+<script>
+  let doctors = [];
+  let shifts = [];
+  const medicalDepartment = document.querySelector('#medicalDepartment');
+  const doctor = document.querySelector('#doctor');
+  const medicalDay = document.querySelector('#medicalDay');
+  const medicalHour = document.querySelector('#medicalHour');
+  const form = document.querySelector('form');
+  let doctorID;
+
+
+  const fetchDoctors = async () => {
+    try {
+      let result = await (
+        await fetch(`/api/v1/doctors?limit=1000`)
+      ).json();
+
+      if (result.code === 200) {
+        doctors = result.data;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const fetchShifts = async () => {
+    try {
+      let result = await (
+        await fetch(`/api/v1/shifts?limit=1000`)
+      ).json();
+      if (result.code === 200) {
+        shifts = result.data;
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  medicalDepartment.addEventListener('change', async function(e) {
+    const departmentID = e.target.value;
+    let str = '<option value="" selected>-- Chọn --</option>';
+    doctors.forEach(
+      (doctor) => {
+        if (doctor.department === departmentID) {
+          str += `<option value="${doctor.id}">${doctor.name}</option>`;
+        }
+      }
+    );
+    doctor.innerHTML = str;
+  })
+
+  doctor.addEventListener('change', async function(e) {
+    doctorID = e.target.value;
+
+    let shiftFilters = shifts.filter((shift) => shift.doctor === doctorID);
+    let medicalDays = shiftFilters.map((shift) => {
+      const date = new Date(shift.date);
+      return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+    })
+    medicalDays = [...new Set(medicalDays)];
+
+    let str = '<option value="" selected>-- Chọn --</option>';
+    medicalDays.forEach(
+      (md) => {
+        str += `<option>${md}</option>`;
+      }
+    );
+    medicalDay.innerHTML = str;
+  })
+
+  medicalDay.addEventListener('change', async function(e) {
+    const medicalDayValue = e.target.value;
+
+    let shiftFilters = [];
+    shifts.forEach((shift) => {
+      const date = new Date(shift.date);
+      const dateFormat = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+      if (shift.doctor === doctorID && medicalDayValue === dateFormat) {
+        shiftFilters.push(shift);
+      }
+    });
+
+    let str = '<option value="" selected>-- Chọn --</option>';
+    shiftFilters.forEach(
+      (shift) =>
+      (str += `<option value="${shift.id}">${shift.time} (${shift.slot}/${shift.maxSlot})</option>`),
+    );
+
+    medicalHour.innerHTML = str;
+  })
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const data = new FormData();
+
+    data.append('patientCode', document.getElementById('patientCode').value);
+    data.append('medicalDepartment', document.getElementById('medicalDepartment').value);
+    data.append('doctor', document.getElementById('doctor').value);
+    data.append('shift', document.getElementById('medicalHour').value);
+    data.append('reason', document.getElementById('reason').value);
+
+    try {
+      let result = await (
+        await fetch(`/api/v1/medical-forms`, {
+          method: 'POST',
+          body: data,
+        })
+      ).json();
+      if (result.code === 201) {
+        alert('Đặt lịch hẹn thành công');
+        setTimeout(() => window.location.reload(), 1000);
+      }
+      // if (result.code === 201) {
+      //   swal('Tạo thành công', {
+      //     icon: 'success',
+      //   });
+      //   setTimeout(() => window.location.reload(), 1000);
+      // } else {
+      //   swal(result.message, {
+      //     icon: 'error',
+      //   });
+      // }
+    } catch (error) {
+      console.log(error);
+    }
+  })
+
+  window.onload = function() {
+    fetchDoctors();
+    fetchShifts();
+  }
+</script>
+
+</html>

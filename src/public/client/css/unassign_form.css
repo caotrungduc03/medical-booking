@@ -10,6 +10,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .wrapper {
   width: 100%;
@@ -31,17 +32,23 @@
 .row {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
-.row input,
-select,
-textarea {
-  border-radius: 5px;
+.row-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-mb-mbn {
+  width: 60%;
+  margin-bottom: 12px;
+  padding: 0px 15px;
 }
 
 .form-mb-1 {
-  width: 33.3%;
+  width: 50%;
   margin-bottom: 12px;
   padding: 0px 15px;
 }
@@ -49,6 +56,14 @@ textarea {
   width: 100%;
   margin-bottom: 12px;
   padding: 0px 15px;
+}
+.form-mb-4 {
+  width: 39%;
+  margin-bottom: 12px;
+}
+.form-mb-3 {
+  width: 22%;
+  margin-bottom: 12px;
 }
 
 .form-label {
@@ -72,24 +87,16 @@ textarea {
 }
 .form-input:focus {
   border-color: #6a64f1;
-  /* box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05); */
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+.input-box-2 {
+  width: 90%;
+  margin-bottom: 12px;
 }
 .text-danger {
   color: red;
 }
 .form-btn {
-  width: 30%;
-  height: 45px;
-  border: 2px solid rgb(20, 20, 255);
-  margin-top: 12px;
-  background: rgb(255, 255, 255);
-  outline: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 30px;
-  color: rgb(20, 20, 255);
-}
-.form-btn:hover {
   width: 30%;
   height: 45px;
   margin-top: 12px;

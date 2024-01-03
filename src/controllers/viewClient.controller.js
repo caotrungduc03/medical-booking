@@ -22,6 +22,15 @@ const form = catchAsync(async (req, res) => {
   });
 });
 
+const unassign_form = catchAsync(async (req, res) => {
+  const departments = await Department.find();
+
+  res.render('client/unassign_form', {
+    departments,
+    user: req.user,
+  });
+});
+
 const aboutUs = catchAsync(async (req, res) => {
   res.render('client/aboutUs', {
     user: req.user,
@@ -68,6 +77,7 @@ module.exports = {
   login,
   forgotPassword,
   form,
+  unassign_form,
   aboutUs,
   home,
   notFound,
