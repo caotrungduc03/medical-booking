@@ -39,8 +39,18 @@ const aboutUs = catchAsync(async (req, res) => {
 
 const home = catchAsync(async (req, res) => {
   let departments = await Department.find();
-  let doctors = await Doctor.find().populate('department').limit(10);
+  let doctors = await Doctor.find().populate('department');
   res.render('client/home', {
+    user: req.user,
+    doctors,
+    departments,
+  });
+});
+
+const doctorSchedule = catchAsync(async (req, res) => {
+  let departments = await Department.find();
+  let doctors = await Doctor.find().populate('department');
+  res.render('client/doctor_schedule', {
     user: req.user,
     doctors,
     departments,
@@ -84,4 +94,5 @@ module.exports = {
   permissionDenied,
   verifyEmail,
   resetPassword,
+  doctorSchedule,
 };

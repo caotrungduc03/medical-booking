@@ -36,30 +36,39 @@
     <h2 class="subdesc_text_1">Đặt lịch khám trực tuyến</h2>
     <p class="subdesc_text_2"> Tìm Bác sĩ chính xác - Đặt lịch khám dễ dàng </p>
   </div>
-
   <section id="booking-doctor">
     <div style="max-width: 80rem; margin: 0 auto 60px; position: relative;">
-
-      <h3 style="padding:0 16px; font-size:1.5rem; margin-top: 2rem;margin-bottom: 1rem;">Đội ngũ bác sĩ hàng đầu</h3>
-      <div class="doctor-items">
+      <% departments.forEach(dp => { %>
+      <h3 style="padding: 0 16px; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem;">Khoa <%= dp.name %></h3>
+      <div class="doctor-items" style="margin-bottom: 30px;">
         <% doctors.forEach(d => { %>
+        <% if (dp.name === d.department.name) { %>
         <div class="doctor-info">
           <div class="items-info">
-            <a href="#" class="avatar">
-              <img src="<%=d.avatar %>" />
+            <a href="/doctor-schedule/<%=d.id %>" class="avatar">
+              <img src="<%= d.avatar %>" />
             </a>
             <div class="flex flex-col text-center">
-              <a class=" mgb-10" href="#" title="Đặt lịch khám với bác sĩ <%=d.name %>" style="color: black">
-                <h3 style="font-weight: 600;font-size: 1.5rem;line-height: 1.75rem;margin: 0;"><%=d.name %></h3>
+              <a class="mgb-10" href="#" title="Đặt lịch khám với bác sĩ <%= d.name %>" style="color: black">
+                <h3 style="font-weight: 600; font-size: 1.5rem; line-height: 1.75rem; margin: 0;"><%= d.name %></h3>
               </a>
-              <p class="text-xl font-semibold text-slider mgb-10"><%=d.department.name %></p>
-              <p class="text-xl font-semibold text-slider "><%=d.experience %> năm kinh nghiệm</p>
+              <p class="text-xl font-semibold text-slider mb10"><%= d.experience %> năm kinh nghiệm</p>
             </div>
           </div>
+          <a class="flex mgt-8" style="padding: .5rem 1rem; " style="align-items: center; justify-content:space-between" href="">
+            <span class="font-semibold text-sm">Đặt khám ngay</span>
+            <svg width="10" height="10" viewBox="0 0 10 10" style="margin-left:0.5rem">
+              <g>
+                <path stroke-width="2" stroke=currentColor d="M0 5h8" fill="none" class="opacity-0 opacity-100"></path>
+                <path stroke-width="2" stroke=currentColor d="M1 1l4 4-4 4" fill="none" class="translate-x-1"></path>
+              </g>
+            </svg>
+          </a>
         </div>
+        <% } %>
         <% }) %>
       </div>
-
+      <% }) %>
     </div>
   </section>
 
