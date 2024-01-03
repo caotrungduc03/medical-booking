@@ -9,6 +9,11 @@ viewClientRouter.get('/login', viewClientController.login);
 viewClientRouter.get('/forgot-password', viewClientController.forgotPassword);
 viewClientRouter.get('/form', checkCookieMiddleware, viewClientController.form);
 viewClientRouter.get(
+  '/unassign_form',
+  checkCookieMiddleware,
+  viewClientController.unassign_form,
+);
+viewClientRouter.get(
   '/about-us',
   checkCookieMiddleware,
   viewClientController.aboutUs,

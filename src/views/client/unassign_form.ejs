@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký khám</title>
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="/static/client/css/form.css">
+  <link rel="stylesheet" href="/static/client/css/partials.css">
+</head>
+
+<body>
+  <%- include('../partials/client/header') %>
+  <div class="container appCard">
+    <div class="wrapper">
+      <div class="form-box-register">
+        <h2 class="form_title">Đặt lịch khám</h2>
+        <form action="#">
+          <div class="row">
+            <div class="form-mb-1">
+              <label class="form-label">Mã bệnh nhân <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="code" id="code" placeholder="VD: Lê Thị Hoa(30/07) lth3007" required />
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="fullName" id="fullName" placeholder="VD: Nguyễn Văn A" required />
+            </div>
+
+            <div class="form-mb-1">
+              <label class="form-label">Ngày sinh <span class="text-danger">*</span></label>
+              <input class="form-input" type="date" name="birthday" id="birthday" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-mb-1">
+              <label class=" form-label">Giới tính <span class="text-danger">*</span></label>
+              <select class="form-select" name="gender" id="gender" required>
+                <option value="" selected>Khác</option>
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+              </select>
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label">Điện thoại <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="phone" id="phone" placeholder="VD: 0123456789" required>
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label">Số CMND / CCCD <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="cardId" id="cardId" placeholder="VD: 123456789123" required>
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label">Email <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="email" id="email" placeholder="VD: abc@example.com" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-mb-3">
+              <label class="form-label">Chuyên khoa <span class="text-danger">*</span></label>
+              <select class="form-select" name="medicalDepartment" id="medicalDepartment" required>
+                <option value="" selected>-- Chọn --</option>
+                <% departments.forEach(d => { %>
+                <option value="<%= d.id %>"><%= d.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="form-mb-3">
+              <label class="form-label">Tên bác sĩ<span class="text-danger">*</span></label class="form-label">
+              <select class="form-select" name="doctor" id="doctor" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+              </select>
+            </div>
+            <div class="form-mb-3">
+              <label class="form-label">Ngày khám <span class="text-danger">*</span></label class="form-label">
+              <select class="form-select" name="medicalDay" id="medicalDay" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+              </select>
+            </div>
+            <div class="form-mb-3">
+              <label class="form-label">Giờ khám <span class="text-danger">*</span></label class="form-label">
+              <select class="form-select" name="medicalHour" id="medicalHour" style="width: 100%;" required>
+                <option value="" selected>-- Chọn --</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-mb-1">
+              <label class="form-label" for="cccd">Ảnh CMDN/CCCD <span class="text-danger">*</span></label>
+              <input class="form-input" type="file" name="cccd" id="cccd" required />
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label" for="insuranceId">Số BHYT <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="insuranceId" id="insuranceId" />
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label" for="bhyt">Ảnh BHYT <span class="text-danger">*</span></label>
+              <input class="form-input" type="file" name="bhyt" id="bhyt" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-mb-2">
+              <label class="form-label">Địa chỉ <span class="text-danger">*</span></label>
+              <input class="form-input" type="text" name="address" id="address" placeholder="VD: Số 1 Tràng Tiền Hoàn Kiếm Hà Nội" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-mb-2">
+              <label class="form-label">Lý do khám <span class="text-danger">*</span></label class="form-label">
+              <textarea class="form-input" type="text" name="reason" id="reason" required></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-mb-2">
+              <label class="form-label">Ghi chú</label>
+              <textarea class="form-input" type="text" name="note"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <button class="form-btn" type="submit">Đặt khám</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <%- include('../partials/client/footer') %>
+</body>
+
+</html>
