@@ -4,11 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" href="/static/client/images/favicon.ico">
   <title>Đặt lịch khám</title>
 
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="/static/client/css/partials.css">
   <link rel="stylesheet" href="/static/client/css/form.css">
+
 </head>
 
 <body>
@@ -24,34 +27,26 @@
               <input class="form-input" type="text" name="fullName" id="fullName" placeholder="VD: Nguyễn Văn A" required />
             </div>
             <div class="form-mb-1">
-              <label class=" form-label">Giới tính <span class="text-danger">*</span></label>
-              <select class="form-select" name="gender" id="gender" required>
-                <option value="" selected>Khác</option>
-                <option value="Nam">Nam</option>
-                <option value="Nữ">Nữ</option>
-              </select>
-            </div>
-            <div class="form-mb-1">
-              <label class="form-label">Ngày sinh <span class="text-danger">*</span></label>
-              <input class="form-input" type="date" name="birthday" id="birthday" required>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-mb-1">
-              <label class="form-label">Điện thoại <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" name="phone" id="phone" placeholder="VD: 0123456789" required>
-            </div>
-            <div class="form-mb-1">
-              <label class="form-label">Số CMND / CCCD <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" name="cardId" id="cardId" placeholder="VD: 123456789123" required>
-            </div>
-            <div class="form-mb-1">
               <label class="form-label">Email <span class="text-danger">*</span></label>
               <input class="form-input" type="text" name="email" id="email" placeholder="VD: abc@example.com" required>
             </div>
+            <div class="form-mb-1">
+              <label class="form-label">Điện thoại</label>
+              <input class="form-input" type="text" name="phone" id="phone" placeholder="VD: 0123456789">
+            </div>
           </div>
+
           <div class="row">
-            <div class="form-mb-3">
+            <div class="form-mb-1">
+              <label class="form-label" for="cccd">Ảnh CMDN/CCCD <span class="text-danger">*</span></label>
+              <input class="form-input" type="file" name="cccd" id="cccd" required />
+              <img src="" id="CCCDimg" alt="Preview Image" style="max-width: 300px; max-height: 300px;">
+            </div>
+            <div class="form-mb-1">
+              <label class="form-label" for="bhyt">Ảnh BHYT</label>
+              <input class="form-input" type="file" name="bhyt" id="bhyt" />
+            </div>
+            <div class="form-mb-1">
               <label class="form-label">Chuyên khoa <span class="text-danger">*</span></label>
               <select class="form-select" name="medicalDepartment" id="medicalDepartment" required>
                 <option value="" selected>-- Chọn --</option>
@@ -60,19 +55,21 @@
                 <% }) %>
               </select>
             </div>
-            <div class="form-mb-3">
+          </div>
+          <div class="row">
+            <div class="form-mb-1">
               <label class="form-label">Tên bác sĩ<span class="text-danger">*</span></label class="form-label">
               <select class="form-select" name="doctor" id="doctor" style="width: 100%;" required>
                 <option value="" selected>-- Chọn --</option>
               </select>
             </div>
-            <div class="form-mb-3">
+            <div class="form-mb-1">
               <label class="form-label">Ngày khám <span class="text-danger">*</span></label class="form-label">
               <select class="form-select" name="medicalDay" id="medicalDay" style="width: 100%;" required>
                 <option value="" selected>-- Chọn --</option>
               </select>
             </div>
-            <div class="form-mb-3">
+            <div class="form-mb-1">
               <label class="form-label">Giờ khám <span class="text-danger">*</span></label class="form-label">
               <select class="form-select" name="medicalHour" id="medicalHour" style="width: 100%;" required>
                 <option value="" selected>-- Chọn --</option>
@@ -80,35 +77,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-mb-1">
-              <label class="form-label" for="cccd">Ảnh CMDN/CCCD <span class="text-danger">*</span></label>
-              <input class="form-input" type="file" name="cccd" id="cccd" required />
-            </div>
-            <div class="form-mb-1">
-              <label class="form-label" for="insuranceId">Số BHYT <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" name="insuranceId" id="insuranceId" />
-            </div>
-            <div class="form-mb-1">
-              <label class="form-label" for="bhyt">Ảnh BHYT <span class="text-danger">*</span></label>
-              <input class="form-input" type="file" name="bhyt" id="bhyt" />
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-mb-2">
-              <label class="form-label">Địa chỉ <span class="text-danger">*</span></label>
-              <input class="form-input" type="text" name="address" id="address" placeholder="VD: Số 1 Tràng Tiền Hoàn Kiếm Hà Nội" required>
-            </div>
-          </div>
-          <div class="row">
             <div class="form-mb-2">
               <label class="form-label">Lý do khám <span class="text-danger">*</span></label class="form-label">
               <textarea class="form-input" type="text" name="reason" id="reason" required></textarea>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-mb-2">
-              <label class="form-label">Ghi chú</label>
-              <textarea class="form-input" type="text" name="note"></textarea>
             </div>
           </div>
           <div class="row">
@@ -178,7 +149,7 @@
       let shiftFilters = shifts.filter((shift) => shift.doctor === doctorID);
       let medicalDays = shiftFilters.map((shift) => {
         const date = new Date(shift.date);
-        return date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
+        return date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
       })
       medicalDays = [...new Set(medicalDays)];
 
@@ -197,7 +168,7 @@
       let shiftFilters = [];
       shifts.forEach((shift) => {
         const date = new Date(shift.date);
-        const dateFormat = date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear();
+        const dateFormat = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         if (shift.doctor === doctorID && medicalDayValue === dateFormat) {
           shiftFilters.push(shift);
         }
@@ -218,13 +189,8 @@
       const data = new FormData();
 
       data.append('fullName', document.getElementById('fullName').value);
-      data.append('gender', document.getElementById('gender').value);
-      data.append('address', document.getElementById('address').value);
-      data.append('birthday', document.getElementById('birthday').value);
       data.append('phone', document.getElementById('phone').value);
       data.append('email', document.getElementById('email').value);
-      data.append('cardId', document.getElementById('cardId').value);
-      data.append('insuranceId', document.getElementById('insuranceId').value);
       data.append('medicalDepartment', document.getElementById('medicalDepartment').value);
       data.append('doctor', document.getElementById('doctor').value);
       data.append('shift', document.getElementById('medicalHour').value);
@@ -246,18 +212,8 @@
         ).json();
         if (result.code === 201) {
           alert('Đặt lịch hẹn thành công');
-          // setTimeout(() => window.location.reload(), 1000);
+          setTimeout(() => window.location.reload(), 1000);
         }
-        // if (result.code === 201) {
-        //   swal('Tạo thành công', {
-        //     icon: 'success',
-        //   });
-        //   setTimeout(() => window.location.reload(), 1000);
-        // } else {
-        //   swal(result.message, {
-        //     icon: 'error',
-        //   });
-        // }
       } catch (error) {
         console.log(error);
       }
