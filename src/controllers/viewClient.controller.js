@@ -1,4 +1,4 @@
-const { Department, User, Doctor } = require('../models');
+const { Department, User, Doctor, Shift } = require('../models');
 const catchAsync = require('../utils/catchAsync');
 const { verifyToken } = require('../utils/token');
 
@@ -48,12 +48,32 @@ const home = catchAsync(async (req, res) => {
 });
 
 const doctorSchedule = catchAsync(async (req, res) => {
-  let departments = await Department.find();
+  const { id } = req.params;
   let doctors = await Doctor.find().populate('department');
+  let shifts = await Shift.find({ doctor: id });
+  const schedule = {};
+  const today = new Date();
+
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    const formattedDate = date.toLocaleString().slice(0, 10);
+    schedule[formattedDate] = [];
+  }
+
+  for (let shift of shifts) {
+    const date = new Date(shift.date);
+    const formattedDate = date.toLocaleString().slice(0, 10);
+    schedule[formattedDate] = schedule[formattedDate]
+      ? [...schedule[formattedDate], shift.time]
+      : [shift.time];
+  }
+
+  console.log(schedule);
+
   res.render('client/doctor_schedule', {
     user: req.user,
     doctors,
-    departments,
   });
 });
 
