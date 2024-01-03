@@ -19,7 +19,7 @@
         <h2 class="form_title">Đặt lịch khám theo mã bệnh nhân</h2>
         <form action="#">
           <div class="">
-            <div class="form-mb-mbn">
+            <div class="form-mb-1">
               <label class="form-label">Mã bệnh nhân <span class="text-danger">*</span></label>
               <input class="form-input" type="text" name="patientCode" id="patientCode" placeholder="VD: BN.00000x" required />
             </div>
@@ -182,11 +182,7 @@
       ).json();
       if (result.code === 201) {
         alert('Đặt lịch hẹn thành công');
-        swal('Tạo thành công', {
-          icon: 'success',
-        });
-        $(modalId).modal('hide');
-        resetForm(formId);
+        setTimeout(() => window.location.reload(), 1000);
       }
       // if (result.code === 201) {
       //   swal('Tạo thành công', {
