@@ -18,6 +18,10 @@ viewClientRouter.get(
   checkCookieMiddleware,
   viewClientController.aboutUs,
 );
+viewClientRouter.get(
+  '/doctor-schedule/:id',
+  viewClientController.doctorSchedule,
+);
 viewClientRouter.get('/verify-email', viewClientController.verifyEmail);
 viewClientRouter.get('/reset-password', viewClientController.resetPassword);
 viewClientRouter.get(
