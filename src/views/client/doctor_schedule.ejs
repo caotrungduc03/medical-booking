@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/static/client/images/favicon.ico">
   <title>Lịch Khám Bác Sĩ</title>
   <link rel="stylesheet" href="/static/client/css/partials.css">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,118 +21,68 @@
       <div class="bg-white flex flex-col md:flex-row items-stretch relative lg:rounded-t-xl">
         <div class="p-4 pb-0 md:p-6 text-center">
           <div class="relative aspect-square rounded-full overflow-hidden mx-auto w-40 h-40 md:w-44 md:h-44 bg-slate-200">
-            <img class="object-cover absolute inset-0" src="https://cdn.youmed.vn/photos/6482af81-ab7d-4587-b011-8a9bad38a1e9.png" alt="">
+            <img class="object-cover absolute inset-0" src="<%= doctor.avatar %>" />
           </div>
         </div>
         <div class="flex flex-col justify-center flex-1 p-4 md:pl-0 gap-1">
-          <h1 class="text-lg text-center md:text-left md:text-xl">Bác Sĩ Nguyễn Đức Cường</h1>
+          <h1 class="text-lg text-center md:text-left md:text-xl">Bác Sĩ <%= doctor.name %></h1>
           <div class="flex items-center justify-center md:justify-start divide-x mb-2">
             <div class="font-semibold items-center pr-2 text-blue-500">Bác Sĩ</div>
-            <div class="pl-1"><strong>24</strong> năm kinh nghiệm</div>
+            <div class="pl-1"><strong><%= doctor.experience %></strong> năm kinh nghiệm</div>
           </div>
           <div class="flex flex-col md:flex-row md:items-end md:gap-3">
             <h2 class="text-gray-600 text-sm doctorinfo-label">Chuyên khoa</h2>
             <div class="space-x-2">
               <h3 class="inline-block">
-                <a class="font-medium text-blue-500 mr-1" href="">Nhi Khoa</a>
+                <a class="font-medium text-blue-500 mr-1" href=""><%= doctor.department.name %></a>
               </h3>
             </div>
           </div>
         </div>
       </div>
-      <div class="relative px-8 md:px-5 mb-2 doctor-time">
+      <div class="relative px-8 md:px-5 mb-2">
         <div class="h-16 w-full">
-          <div class="flex flex-row">
-            <div class="pl-4 pr-4 flex flex-col items-center py-2 whitespace-nowrap mx-px cursor-pointer border-b-blue-500 bg-blue-50 border-b-4">
-              <p class="font-semibold">Th 4, 03-01</p>
-              <span class="text-sm text-green-500 text-gray-800">36 khung giờ</span>
+          <div class="flex flex-row overflow-auto hide-scroll-bar scroll">
+            <% for(const date in schedule) { %>
+            <div data-date="<%=date %>" class="pl-5 pr-5 flex flex-col items-center py-2 whitespace-nowrap mx-px cursor-pointer border-b-blue-500 bg-blue-50 border-b-4 doctor-time">
+              <p class="font-semibold"><%=date %></p>
+              <span class="text-sm text-green-500 text-gray-800"><%= schedule[date].length %> khung giờ</span>
             </div>
-
-            <div class="pl-4 pr-4 flex flex-col items-center py-2 whitespace-nowrap mx-px cursor-pointer border-b-blue-500 bg-blue-50 border-b-4">
-              <p class="font-semibold">Th 4, 03-01</p>
-              <span class="text-sm text-green-500 text-gray-800">36 khung giờ</span>
-            </div>
-
-            <div class="pl-4 pr-4 flex flex-col items-center py-2 whitespace-nowrap mx-px cursor-pointer border-b-blue-500 bg-blue-50 border-b-4">
-              <p class="font-semibold">Th 4, 03-01</p>
-              <span class="text-sm text-green-500 text-gray-800">36 khung giờ</span>
-            </div>
-
-            <div class="pl-4 pr-4 flex flex-col items-center py-2 whitespace-nowrap mx-px cursor-pointer border-b-blue-500 bg-blue-50 border-b-4">
-              <p class="font-semibold">Th 4, 03-01</p>
-              <span class="text-sm text-green-500 text-gray-800">36 khung giờ</span>
-            </div>
-
-            <div class="pl-4 pr-4 flex flex-col items-center py-2 whitespace-nowrap mx-px cursor-pointer border-b-blue-500 bg-blue-50 border-b-4">
-              <p class="font-semibold">Th 4, 03-01</p>
-              <span class="text-sm text-green-500 text-gray-800">36 khung giờ</span>
-            </div>
-
-            <div class="pl-4 pr-4 flex flex-col items-center py-2 whitespace-nowrap mx-px cursor-pointer border-b-blue-500 bg-blue-50 border-b-4">
-              <p class="font-semibold">Th 4, 03-01</p>
-              <span class="text-sm text-green-500 text-gray-800">36 khung giờ</span>
-            </div>
-
-            <div class="pl-4 pr-4 flex flex-col items-center py-2 whitespace-nowrap mx-px cursor-pointer border-b-blue-500 bg-blue-50 border-b-4">
-              <p class="font-semibold">Th 4, 03-01</p>
-              <span class="text-sm text-green-500 text-gray-800">36 khung giờ</span>
-            </div>
+            <% } %>
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 py-3 overflow-x-auto max-h-52 font-medium ">
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500 ">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
-        <button class="text-center border rounded-md py-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500">17:30
-          - 18:00</button>
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 py-3 overflow-x-auto max-h-52 font-medium px-5 hidden schedule-grid">
+        <script>
+          const doctorTimeButtons = document.querySelectorAll('.doctor-time');
+          doctorTimeButtons.forEach((button) => {
+            button.addEventListener('click', (event) => {
+              const today = button.dataset.date;
+              const formattedDate = new Date(today).toLocaleString('vi-VN', {
+                dateStyle: 'short'
+              });
 
-
+              const scheduleButtons = document.querySelectorAll('.schedule-grid button');
+              scheduleButtons.forEach((scheduleButton) => {
+                const scheduleDate = scheduleButton.dataset.date;
+                if (scheduleDate === formattedDate) {
+                  scheduleButton.style.display = 'inline-block';
+                } else {
+                  scheduleButton.style.display = 'none';
+                }
+              });
+            });
+          });
+        </script>
+        <% for (const date in schedule) { %>
+        <% const formattedDate = new Date(date).toLocaleString('vi-VN', { dateStyle: 'short' }); %>
+        <% for (let i = 0; i < schedule[date].length; i++) { %>
+        <button class="doctor-time text-center border rounded-md py-3 px-3 tabular-nums transition hover:text-white hover:border-white hover:bg-blue-500 mt-4" data-date="<%= formattedDate %>">
+          <%= schedule[date][i] %>
+        </button>
+        <% } %>
+        <% } %>
       </div>
-
     </main>
   </section>
 
@@ -139,8 +90,20 @@
 
 </body>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  $(document).ready(function() {
+    // Xử lý sự kiện khi bấm vào button ngày
+    $('.doctor-time').on('click', function() {
+      // Lấy ngày từ thuộc tính data-date của button
+      const date = $(this).data('date');
 
+      const dgTime = document.querySelector(".schedule-grid");
+      const button = dgTime.querySelector("button")
+      dgTime.style.display = "block";
+    });
+
+  });
 </script>
 
 </html>

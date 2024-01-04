@@ -49,7 +49,7 @@ const home = catchAsync(async (req, res) => {
 
 const doctorSchedule = catchAsync(async (req, res) => {
   const { id } = req.params;
-  let doctors = await Doctor.find().populate('department');
+  let doctor = await Doctor.findById(id).populate('department');
   let shifts = await Shift.find({ doctor: id });
   const schedule = {};
   const today = new Date();
@@ -57,25 +57,35 @@ const doctorSchedule = catchAsync(async (req, res) => {
   for (let i = 0; i < 7; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
-    const formattedDate = date.toLocaleString().slice(0, 10);
+    const formattedDate = formatDate(date);
     schedule[formattedDate] = [];
   }
-
   for (let shift of shifts) {
     const date = new Date(shift.date);
-    const formattedDate = date.toLocaleString().slice(0, 10);
+    if (isPastDate(date)) continue;
+    const formattedDate = formatDate(date);
     schedule[formattedDate] = schedule[formattedDate]
       ? [...schedule[formattedDate], shift.time]
       : [shift.time];
   }
-
-  console.log(schedule);
-
   res.render('client/doctor_schedule', {
     user: req.user,
-    doctors,
+    doctor,
+    schedule,
   });
 });
+
+function formatDate(date) {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+function isPastDate(date) {
+  const today = new Date();
+  return date < today.setHours(0, 0, 0, 0);
+}
 
 const notFound = catchAsync(async (req, res) => {
   res.render('client/not_found');
